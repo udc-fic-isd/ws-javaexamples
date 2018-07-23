@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.udc.ws.movies</groupId>
+		<artifactId>ws-movies</artifactId>
+		<version>3.2.4</version>
+	</parent>
+	<artifactId>ws-movies-client</artifactId>
+	<packaging>jar</packaging>
+	<name>WS-JavaExamples Movies Client Subsystem</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>es.udc.ws</groupId>
+			<artifactId>ws-util</artifactId>
+		</dependency>
+ 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>${jaxwsMavenPlugin}</version>
+				<executions>
+					<execution>
+						<id>wsimport-from-jdk</id>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>${tool.wsimport}</executable>
+					<wsdlDirectory>../ws-movies-service/target/generated-sources/wsdl/</wsdlDirectory>
+					<sourceDestDir>src/main/java</sourceDestDir>
+					<packageName>es.udc.ws.movies.client.service.soap.wsdl</packageName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

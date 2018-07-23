@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.udc.ws.jaxwstutorial</groupId>
+		<artifactId>ws-jaxwstutorial</artifactId>
+		<version>3.2.4</version>
+	</parent>
+	<artifactId>ws-jaxwstutorial-client</artifactId>
+	<packaging>jar</packaging>
+	<name>WS-JavaExamples JAXWSTutorial Client Subsystem</name>
+
+	<dependencies>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>${jaxwsMavenPlugin}</version>
+				<executions>
+					<execution>
+						<id>wsimport-from-jdk</id>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>${tool.wsimport}</executable>
+					<wsdlDirectory>../ws-jaxwstutorial-service/target/generated-sources/wsdl/</wsdlDirectory>
+					<sourceDestDir>src/main/java</sourceDestDir>
+					<packageName>es.udc.ws.jaxwstutorial.wsdl</packageName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

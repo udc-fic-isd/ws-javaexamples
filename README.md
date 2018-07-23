@@ -1,0 +1,118 @@
+# ws-javaexamples
+---------------------------------------------------------------------
+
+## Installing the development environment
+
+- [Instructions for Unix-like operating systems (spanish)] (/LEEME_UNIX.md).
+- [Instructions for Windows (spanish)] (/LEEME_WINDOWS.md).
+
+## Initializing the database and building the examples
+
+	mvn sql:execute install
+
+
+## Running ws-jaxwstutorial example
+---------------------------------------------------------------------
+
+`ws-jaxwstutorial` provides a web service application. `ws-jaxwstutorial` requires the database 
+server to be running.
+
+### Running ws-jaxwstutorial with Maven/Jetty.
+
+	cd ws-jaxwstutorial/ws-jaxwstutorial-service
+	mvn jetty:run
+
+
+### Running ws-jaxwstutorial with Tomcat.
+
+- Copy the `.war` file (e.g. `ws-jaxwstutorial/ws-jaxwstutorial-service/target/ws-jaxwstutorial-service.war`) 
+  to Tomcat's `webapp` directory.
+
+- Start Tomcat:
+
+	cd <<Tomcat home>>/bin
+	startup.sh
+
+- Shutdown Tomcat:
+
+	shutdown.sh
+
+### Running the ws-jaxwstutorial client application
+
+	cd ws-jaxwstutorial/ws-jaxwstutorial-client
+	# NOTE: if the service is running on Tomcat, use 8080 (Tomcat) instead of 9090 (Jetty).
+	mvn exec:java -Dexec.mainClass="es.udc.ws.jaxwstutorial.client.StockQuoteProviderClient" -Dexec.args="http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService IBM MIC"
+
+
+- Accessing to the WSDL file for ws-jaxwstutorial service (9090 for Jetty, 8080 for Tomcat)
+    - [http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService?wsdl](http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService?wsdl)
+
+
+## Running the ws-movies example
+---------------------------------------------------------------------
+
+`ws-movies` provides a web service applications. `ws-movies` requires the database 
+server to be running.
+
+### Running the ws-movies service with Maven/Jetty.
+
+	cd ws-movies/ws-movies-service
+	mvn jetty:run
+
+
+### Running the ws-movies service with Tomcat.
+
+- Copy the `.war` file (e.g. `ws-movies/ws-movies-service/target/ws-movies-service.war`) 
+  to Tomcat's `webapps` directory.
+
+- Start Tomcat:
+
+	cd <<Tomcat home>>/bin
+	startup.sh
+
+- Shutdown Tomcat:
+
+	shutdown.sh
+
+
+### Running the ws-movies client application
+
+	cd ws-movies/ws-movies-client
+
+Configure `src/main/resources/ConfigurationParameters.properties`
+  for specifying the client movie service implementation (Rest or Soap) and 
+  the port number of the web server in the endpoint address (9090 for Jetty, 8080
+  for Tomcat)
+
+- AddMovie
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-a 'Star Wars V' 2 32 'Star Wars V - The empire strikes back' 6"
+		
+- UpdateMovie
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-u 1 'Star Wars V' 2 32 'Star Wars V - The empire strikes back' 6"
+	
+- FindMovies
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-f 'Star Wars'"
+
+- BuyMovie
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-b 1 'isd-user' '1234567891011213'"
+		
+- GetMovieURL
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-g 1"
+
+- RemoveMovie
+
+	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-r 1"
+
+
+- Accessing to the WSDL file for ws-movies service (9090 for Jetty, 8080 for Tomcat)
+    - [http://localhost:9090/ws-movies-service/services/MoviesService?wsdl](http://localhost:9090/ws-movies-service/services/MoviesService?wsdl)
+
+- Accessing to ws-movies resources (9090 for Jetty, 8080 for Tomcat)
+    - movies   - GET [http://localhost:9090/ws-movies-service/movies](http://localhost:9090/ws-movies-service/movies)
+    - movie #1 - GET [http://localhost:9090/ws-movies-service/movies/1](http://localhost:9090/ws-movies-service/movies/1)
+    - sale #1  - GET [http://localhost:9090/ws-movies-service/sales/1](http://localhost:9090/ws-movies-service/sales/1)

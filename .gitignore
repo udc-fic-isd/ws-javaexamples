@@ -1,0 +1,16 @@
+# Target directories.
+target/
+
+# Eclipse configuration.
+.classpath
+.project
+.settings/
+
+# Tapestry exception report.
+build/
+
+# Visual Studio Code
+.vscode
+
+# SVN
+.svn
