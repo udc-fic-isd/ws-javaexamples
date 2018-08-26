@@ -46,8 +46,8 @@
 
 		<!-- Data source properties -->
 		<dataSource.baseUrl>jdbc:mysql://localhost/ws</dataSource.baseUrl>
-        <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid</dataSource.url>
-        <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid</testDataSource.url>
+        <dataSource.url>${dataSource.baseUrl}?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</dataSource.url>
+        <testDataSource.url>${dataSource.baseUrl}test?useSSL=false&amp;serverTimezone=Europe/Madrid&amp;allowPublicKeyRetrieval=true</testDataSource.url>
 		<dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
 
 		<!-- Plugin versions -->
