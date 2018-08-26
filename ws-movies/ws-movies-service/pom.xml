@@ -9,7 +9,10 @@
 		<version>3.2.4</version>
 	</parent>
 	<artifactId>ws-movies-service</artifactId>
-	<packaging>war</packaging>
+	<properties>
+	   <p.type>war</p.type>
+	</properties>
+	<packaging>${p.type}</packaging>
 	<name>WS-JavaExamples Movies Service Subsystem</name>
 
 	<dependencies>
