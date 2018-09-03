@@ -30,7 +30,7 @@ public class SimpleDataSource implements DataSource {
     private static String user;
     private static String password;
 
-    private synchronized void loadDriver() {
+    private synchronized void readConfiguration() {
         if (url == null) {
             try {
                 /*
@@ -48,7 +48,7 @@ public class SimpleDataSource implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        loadDriver();
+        readConfiguration();
         return DriverManager.getConnection(url, user, password);
     }
 
