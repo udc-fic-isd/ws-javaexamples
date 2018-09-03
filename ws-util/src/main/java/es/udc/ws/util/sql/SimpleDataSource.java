@@ -23,7 +23,6 @@ import javax.sql.DataSource;
  */
 public class SimpleDataSource implements DataSource {
 
-    private static final String DRIVER_CLASS_NAME_PARAMETER = "SimpleDataSource.driverClassName";
     private static final String URL_PARAMETER = "SimpleDataSource.url";
     private static final String USER_PARAMETER = "SimpleDataSource.user";
     private static final String PASSWORD_PARAMETER = "SimpleDataSource.password";
@@ -37,15 +36,10 @@ public class SimpleDataSource implements DataSource {
                 /*
                  * Read configuration parameters.
                  */
-                String driverClassName = ConfigurationParametersManager.getParameter(DRIVER_CLASS_NAME_PARAMETER);
                 url = ConfigurationParametersManager.getParameter(URL_PARAMETER);
                 user = ConfigurationParametersManager.getParameter(USER_PARAMETER);
                 password = ConfigurationParametersManager.getParameter(PASSWORD_PARAMETER);
 
-                /*
-                 * Load driver.
-                 */
-                Class.forName(driverClassName);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
