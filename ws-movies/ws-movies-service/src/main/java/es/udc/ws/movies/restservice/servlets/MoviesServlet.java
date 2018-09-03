@@ -26,7 +26,15 @@ public class MoviesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServiceMovieDto xmlmovie;
+		String path = ServletUtils.normalizePath(req.getPathInfo());
+		if (path != null && path.length() > 0) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					XmlServiceExceptionConversor.toInputValidationExceptionXml(
+							new InputValidationException("Invalid Request: " + "invalid path " + path)),
+					null);
+			return;
+		}
+    	ServiceMovieDto xmlmovie;
         try {
             xmlmovie = XmlServiceMovieDtoConversor.toServiceMovieDto(req.getInputStream());
         } catch (ParsingException ex) {

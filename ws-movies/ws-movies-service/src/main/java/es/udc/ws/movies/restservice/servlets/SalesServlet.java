@@ -26,6 +26,14 @@ public class SalesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path = ServletUtils.normalizePath(req.getPathInfo());
+		if (path != null && path.length() > 0) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					XmlServiceExceptionConversor.toInputValidationExceptionXml(
+							new InputValidationException("Invalid Request: " + "invalid path " + path)),
+					null);
+			return;
+		}
         String movieIdParameter = req.getParameter("movieId");
         if (movieIdParameter == null) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
