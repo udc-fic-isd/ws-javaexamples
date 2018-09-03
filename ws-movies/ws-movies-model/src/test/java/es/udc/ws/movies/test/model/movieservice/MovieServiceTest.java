@@ -168,14 +168,18 @@ public class MovieServiceTest {
 		Movie movie = getValidMovie();
 		Movie addedMovie = null;
 
-		addedMovie = movieService.addMovie(movie);
-		Movie foundMovie = movieService.findMovie(addedMovie.getMovieId());
+		try {
+			addedMovie = movieService.addMovie(movie);
+			Movie foundMovie = movieService.findMovie(addedMovie.getMovieId());
 
-		assertEquals(addedMovie, foundMovie);
-
-		// Clear Database
-		removeMovie(addedMovie.getMovieId());
-
+			assertEquals(addedMovie, foundMovie);
+		
+		} finally {
+			// Clear Database
+			if (addedMovie!=null) {
+				removeMovie(addedMovie.getMovieId());
+			}
+		}
 	}
 
 	@Test
