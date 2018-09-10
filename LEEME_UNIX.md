@@ -25,15 +25,15 @@
 	tar zxf ws-javaexamples-3.2.4-src.tar.gz
 
 
-## Pasos de pre-instalación de MySQL 8.0.11
+## Pasos de pre-instalación de MySQL 8.0.12
 - Instalación de MySQL como usuario root y ejecución como usuario normal
 
-	sudo chown -R root:root mysql-8.0.11-linux-glibc2.12-x86_64
+	sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
     
 > NOTE: For Mac OS X, use "root:wheel" instead of "root:root" with "chown".
 
-	sudo chmod -R 755 mysql-8.0.11-linux-glibc2.12-x86_64
-	sudo ln -s /opt/mysql-8.0.11-linux-glibc2.12-x86_64 /usr/local/mysql
+	sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
+	sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
 
 - En Ubuntu debe instalarse la librería libio1
 
@@ -57,7 +57,7 @@
 	export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
 	# MySQL.
-	MYSQL_HOME=/opt/mysql-8.0.11-linux-glibc2.12-x86_64
+	MYSQL_HOME=/opt/mysql-8.0.12-linux-glibc2.12-x86_64
 	PATH=$MYSQL_HOME/bin:$PATH
 
 	# Eclipse.
@@ -159,3 +159,77 @@
 - Establecer UTF-8 como el encoding por defecto para ficheros properties Java
     + En "Preferences>General>Content Types>Text>Java Properties File", escribir "UTF-8" y pulsar "Update"
   
+## Instalación y configuración básica de Git
+---------------------------------------------------------------------
+
+- Instalación en Linux (Ubuntu)
+
+```shell
+    sudo apt-get install git
+```
+
+- Instalación en Mac OS
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/](ftp://ftp.fic.udc.es/POJOyWS/)
+    - Doble-click en el instalador e instalar con las opciones por defecto
+
+- Configuración básica (Linux y Mac)
+
+```shell
+    git config --global user.email "your_email@udc.es"
+    git config --global user.name "Your Name"
+```
+
+> The following line illustrates how to set Sublime as the Git default editor, but you can use any other editor installed in your OS
+
+```shell
+    git config --global core.editor "subl -w"
+```
+
+- Instalación de utilidad de autocompletado para Git
+    - Descargar del ftp el script `.git-completion.bash` y guardarlo en `$HOME` con el mismo nombre
+    - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de Mac OS X utilizar el fichero `$HOME/.bash_profile`)
+
+```shell
+    # Git
+    source ~/.git-completion.bash
+    PS1='\h \W$(__git_ps1 " [%s]"): '
+```
+
+## Creación y configuración de claves SSH
+
+- Desde un terminal ejecutar:
+> Generar las claves en la ruta por defecto ($HOME/.ssh) y con los nombres 
+  por defecto
+       
+```shell
+    ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
+```
+
+- Acceder a [https://git.fic.udc.es/profile/keys](https://git.fic.udc.es/profile/keys)
+- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero 
+  `$HOME/.ssh/id_rsa.pub`
+- En el campo "Title" ponerle un nombre
+- Clic en "Add key"
+
+- Comprobar conexión SSH con el servidor de git y añadirlo a la lista de hosts 
+  conocidos 
+  
+> Contestar "yes" a "Are you sure you want to continue connecting (yes/no)?"
+    
+```shell
+    ssh -T git@git.fic.udc.es
+```
+
+
+## Instalación de una herramienta cliente gráfica para Git
+
+- Linux: En el ftp está disponible "SmartGit" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
+    - Descargar `smartgit-linux-18_1_4.tar.gz` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+    - Para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
+
+    
+- Mac OS: En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
+- Instalación en Mac OS
+    - Descargar `SourceTree_2.7.6a.zip` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+    - Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
+    

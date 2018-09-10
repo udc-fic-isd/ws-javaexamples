@@ -19,7 +19,7 @@
     - Doble-click en `jdk-8u181-windows-<xxx>.exe`. Usar las opciones por defecto.
 	 
 - Descargar e instalar en la ruta por defecto MySQL:
-    - Doble-click en `mysql-installer-community-8.0.11.0.msi`
+    - Doble-click en `mysql-installer-community-8.0.12.0.msi`
     - Aceptar la licencia   
     - Elegir "Server only" o "Custom" (para instalar Server + Workbench) y usar 
      las opciones por defecto.
@@ -126,3 +126,53 @@
   
 - Establecer UTF-8 como el encoding por defecto para ficheros properties Java
     + En "Preferences>General>Content Types>Text>Java Properties File", escribir "UTF-8" y pulsar "Update"
+
+## Instalación y configuración básica de Git
+---------------------------------------------------------------------
+
+- Instalación
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git](ftp://ftp.fic.udc.es/POJOyWS/git)
+    - Doble-click en el instalador e instalar con las opciones por defecto
+
+- Configuración básica
+    - Ejecutar git-bash (`$GIT_HOME/git-bash.exe`) y desde ese intérprete de  comandos ejecutar:
+    
+```shell
+    git config --global user.email "your_email@udc.es"
+    git config --global user.name "Your Name"
+```
+
+> The following line illustrates how to set Sublime as the Git default editor, but you can use any other editor installed in your OS
+    
+```shell
+    git config --global core.editor "'C:\Program Files\Sublime Text 3\sublime_text.exe' -w"
+```
+
+## Creación y configuración de claves SSH
+
+- Desde el intérprete de comandos git-bash ejecutar:
+> Generar las claves en la ruta por defecto ($HOME/.ssh) y con los nombres  por defecto 
+      
+```shell
+    ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
+```    
+    
+- Acceder a [https://git.fic.udc.es/profile/keys](https://git.fic.udc.es/profile/keys)
+- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero `$HOME/.ssh/id_rsa.pub`
+- En el campo "Title" ponerle un nombre
+- Clic en "Add key"
+
+- Comprobar conexión SSH con el servidor de git y añadirlo a la lista de hosts conocidos. Desde git-bash:
+  
+> Contestar "yes" a "Are you sure you want to continue connecting (yes/no)?"
+   
+```shell
+    ssh -T git@git.fic.udc.es
+```
+    
+## Instalación de una herramienta cliente gráfica para Git
+
+- En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients)
+    - Doble-click en el instalador e instalar con las opciones por defecto
+    
