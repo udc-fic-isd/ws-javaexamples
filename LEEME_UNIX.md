@@ -29,8 +29,10 @@
 ## Pasos de pre-instalación de MySQL 8.0.12
 - Instalación de MySQL como usuario root y ejecución como usuario normal
 
+```shell
     sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
-    
+```
+
 > NOTE: For Mac OS X, use "root:wheel" instead of "root:root" with "chown".
 
 ```shell
@@ -40,7 +42,9 @@
 
 - En Ubuntu debe instalarse la librería libio1
 
+```shell
     sudo apt-get install libaio1
+```
 
 ## Establecer variables de entorno
 - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de Mac OS X utilizar 
@@ -84,8 +88,9 @@
 
 - Creación del directorio de datos
 
+```shell
     mkdir $HOME/software/.MySQLData
-
+```
 
 - Crear un fichero $HOME/.my.cnf con el siguiente contenido (en lugar de \<login\>
   poner el login del usuario)
