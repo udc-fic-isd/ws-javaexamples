@@ -20,10 +20,11 @@
 - Descargar en `$HOME/software`
 
 > Disponibles en moodle
-  
+
+```shell
     cd $HOME/software
     tar zxf ws-javaexamples-3.2.4-src.tar.gz
-
+```
 
 ## Pasos de pre-instalación de MySQL 8.0.12
 - Instalación de MySQL como usuario root y ejecución como usuario normal
@@ -32,8 +33,10 @@
     
 > NOTE: For Mac OS X, use "root:wheel" instead of "root:root" with "chown".
 
+```shell
     sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
     sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
+```
 
 - En Ubuntu debe instalarse la librería libio1
 
@@ -43,6 +46,7 @@
 - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de Mac OS X utilizar 
   el fichero `$HOME/.bash_profile`)
 
+```shell
     # J2SE
     export JAVA_HOME=/opt/jdk1.8.0_181
 
@@ -62,18 +66,19 @@
 
     # Eclipse.
     PATH=/opt/eclipse:$PATH
-
+```
 
 - Cerrar todos los terminales y abrir terminales nuevos
 
 - Comprobar que el entorno ha quedado correctamente configurado comprobando 
   salidas de los siguientes comandos
-  
+
+```shell
     which java
     which mvn
     which eclipse
     which mysqld
-
+```
     
 # Configuración de MySQL ( inicialización de la zona de datos )
 
@@ -85,15 +90,18 @@
 - Crear un fichero $HOME/.my.cnf con el siguiente contenido (en lugar de \<login\>
   poner el login del usuario)
 
+```shell
     [mysqld]
     datadir=/home/<login>/software/.MySQLData
+```
 
 - Creación de zona de datos del servidor MySQL (se creará el usuario root con 
   password vacía)
-  
+
+```shell
     cd /usr/local/mysql/bin
     mysqld --initialize-insecure
-    
+```    
 
 > NOTA: En caso de producirse errores siguiendo los pasos anteriores, se 
       recomienda seguir las instrucciones que se indican en 
@@ -104,45 +112,53 @@
 
 - Arrancar MySQL
 
+```shell
     mysqld
+```
 
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
 
-    mysqladmin -u root create ws
-    mysqladmin -u root create wstest
-
+```shell
+  mysqladmin -u root create ws
+  mysqladmin -u root create wstest
+```
 
 - Creación de usuario ws con password con permisos sobre ws y wstest
 
+```shell
     mysql -u root
         CREATE USER 'ws'@'localhost' IDENTIFIED BY 'ws';
         GRANT ALL PRIVILEGES ON ws.* to 'ws'@'localhost' WITH GRANT OPTION;
         GRANT ALL PRIVILEGES ON wstest.* to 'ws'@'localhost' WITH GRANT OPTION;
         exit
+```
 
 - Comprobar acceso a BD
 
+```shell
     mysql -u ws --password=ws ws
         exit
 
     mysql -u ws --password=ws wstest
         exit
-
+```
         
 ## Inicialización de datos de ejemplo y compilación de los ejemplos
 
 - Inicialización de la base de datos y compilación de los ejemplos
 
+```shell
     cd $HOME/software/ws-javaexamples-3.2.4
     mvn sql:execute install
-
+```
     
 ## Finalizar la ejecución de la BD
 
 - Finalizar la ejecución de la BD
 
+```shell
     mysqladmin -u root shutdown
-
+```
 
 ## Configuración de eclipse
 > NOTA: El wizard "Preferences" está accesible desde el menú "Window" (menú

@@ -66,11 +66,13 @@
 - Comprobar que el entorno ha quedado correctamente configurado comprobando 
   salidas de los siguientes comandos:
   
+```shell 
 	java -version
 	mvn -version
 	mysqld --version
 	eclipse             # (pulsar en "Cancel" en la ventana que se abre)
-  
+```
+
 ## Creación de bases de datos necesarias para los ejemplos
 - Arrancar MySQL
   - Si se ha instalado como servicio seguramente se haya iniciado de forma 
@@ -85,32 +87,39 @@
 
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
 
+```shell
 	mysqladmin -u root create ws
 	mysqladmin -u root create wstest
+```
 
 - Creación de usuario ws con password con permisos sobre ws y wstest
 
+```shell
 	mysql -u root
         CREATE USER 'ws'@'localhost' IDENTIFIED BY 'ws';
 		GRANT ALL PRIVILEGES ON ws.* to 'ws'@'localhost' WITH GRANT OPTION;
 		GRANT ALL PRIVILEGES ON wstest.* to 'ws'@'localhost' WITH GRANT OPTION;
 		exit
+```
 
 - Comprobar acceso a BD
 
+```shell
 	mysql -u ws --password=ws ws
 		exit
 
 	mysql -u ws --password=ws wstest
 		exit
-	
+```
+
 ## Inicialización de datos de ejemplo y compilación de los ejemplos
 
 - Inicialización de la base de datos y compilación de los ejemplos
 
+```shell
 	cd $HOME/software/ws-javaexamples-3.2.4
 	mvn sql:execute install
-
+```
 	
 ## Configuración de eclipse
 > NOTA: El wizard "Preferences" está accesible desde el menú "Window" (menú
