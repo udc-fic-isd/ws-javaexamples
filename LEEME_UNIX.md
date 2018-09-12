@@ -40,7 +40,7 @@
     sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
 ```
 
-- En Ubuntu debe instalarse la librería libio1
+- En Ubuntu debe instalarse la librería libaio1
 
 ```shell
     sudo apt-get install libaio1
