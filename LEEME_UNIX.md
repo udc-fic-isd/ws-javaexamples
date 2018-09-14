@@ -1,10 +1,10 @@
-# Instalación / Configuración entorno ISD / 2018-2019 - Linux Mac OS
+# Instalación / Configuración entorno ISD / 2018-2019 - Linux y macOS
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW
 > Disponible desde ftp://ftp.fic.udc.es/POJOyWS/
 
-- Seleccionar la versión adecuada al operativo (Linux o Mac OS) / 
+- Seleccionar la versión adecuada al operativo (Linux macOS) / 
   arquitectura del ordenador (32 o 64 bits).
   
 - Descargar y descomprimir en `/opt` el siguiente software
@@ -26,14 +26,12 @@
     tar zxf ws-javaexamples-3.2.4-src.tar.gz
 ```
 
-## Pasos de pre-instalación de MySQL 8.0.12
+## Instalación de MySQL 8.0.12 en Linux
 - Instalación de MySQL como usuario root y ejecución como usuario normal
 
 ```shell
     sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
 ```
-
-> NOTE: For Mac OS X, use "root:wheel" instead of "root:root" with "chown".
 
 ```shell
     sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
@@ -46,17 +44,27 @@
     sudo apt-get install libaio1
 ```
 
+## Instalación de MySQL en macOS
+
+- Doble click en mysql-8.0.12-macos10.13-x86_64.dmg y elegir las opciones 
+  por defecto.
+
+- Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer 
+  starts up".
+
+- Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
+
 ## Establecer variables de entorno
-- Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de Mac OS X utilizar 
+- Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de macOS utilizar 
   el fichero `$HOME/.bash_profile`)
 
 ```shell
-    # J2SE
+    # JDK (Linux)
     export JAVA_HOME=/opt/jdk1.8.0_181
 
-    # For Mac OS X, use:
+    # Para macOS usa:
     #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
-    # For convenience.
+
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
@@ -64,7 +72,7 @@
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
-    # MySQL.
+    # MySQL (sólo en Linux).
     MYSQL_HOME=/opt/mysql-8.0.12-linux-glibc2.12-x86_64
     PATH=$MYSQL_HOME/bin:$PATH
 
@@ -84,7 +92,7 @@
     which mysqld
 ```
     
-# Configuración de MySQL ( inicialización de la zona de datos )
+# Configuración de MySQL (sólo Linux)
 
 - Creación del directorio de datos
 
@@ -115,7 +123,7 @@
 
 ## Creación de bases de datos necesarias para los ejemplos
 
-- Arrancar MySQL
+- Arrancar MySQL (sólo si el arranque no es automático)
 
 ```shell
     mysqld
@@ -159,7 +167,7 @@
     
 ## Finalizar la ejecución de la BD
 
-- Finalizar la ejecución de la BD
+- Finalizar la ejecución de la BD (sólo si el arranque no es automático)
 
 ```shell
     mysqladmin -u root shutdown
@@ -167,7 +175,7 @@
 
 ## Configuración de eclipse
 > NOTA: El wizard "Preferences" está accesible desde el menú "Window" (menú
-  "Eclipse" en Mac OS X)
+  "Eclipse" en macOS)
 
 - Utilizar Java 1.8:
     + En "Preferences>Java>Compiler" seleccionar "1.8" en "Compiler
@@ -189,11 +197,11 @@
     sudo apt-get install git
 ```
 
-- Instalación en Mac OS
+- Instalación en macOS
     - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/](ftp://ftp.fic.udc.es/POJOyWS/)
     - Doble-click en el instalador e instalar con las opciones por defecto
 
-- Configuración básica (Linux y Mac)
+- Configuración básica (Linux y macOS)
 
 ```shell
     git config --global user.email "your_email@udc.es"
@@ -208,7 +216,7 @@
 
 - Instalación de utilidad de autocompletado para Git
     - Descargar del ftp el script `.git-completion.bash` y guardarlo en `$HOME` con el mismo nombre
-    - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de Mac OS X utilizar el fichero `$HOME/.bash_profile`)
+    - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de macOS utilizar el fichero `$HOME/.bash_profile`)
 
 ```shell
     # Git
@@ -249,8 +257,8 @@
     - Para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
 
     
-- Mac OS: En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
-- Instalación en Mac OS
-    - Descargar `SourceTree_2.7.6a.zip` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+- macOS: En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
+- Instalación en macOS:
+    - Descargar `SourceTree_2.7.6a.zip` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients).
     - Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
     
