@@ -11,8 +11,7 @@
     - jdk
     - maven
     - eclipse
-    - mysql
-     
+
 - Descargar y descomprimir en `$HOME/software` el siguiente software
     - tomcat
      
@@ -25,34 +24,6 @@
     cd $HOME/software
     tar zxf ws-javaexamples-3.2.4-src.tar.gz
 ```
-
-## Instalación de MySQL 8.0.12 en Linux
-- Instalación de MySQL como usuario root y ejecución como usuario normal
-
-```shell
-    sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
-```
-
-```shell
-    sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
-    sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
-```
-
-- En Ubuntu debe instalarse la librería libaio1
-
-```shell
-    sudo apt-get install libaio1
-```
-
-## Instalación de MySQL en macOS
-
-- Doble click en mysql-8.0.12-macos10.13-x86_64.dmg y elegir las opciones 
-  por defecto.
-
-- Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer 
-  starts up".
-
-- Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
 
 ## Establecer variables de entorno
 - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de macOS utilizar 
@@ -72,10 +43,6 @@
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
-    # MySQL (sólo en Linux).
-    MYSQL_HOME=/opt/mysql-8.0.12-linux-glibc2.12-x86_64
-    PATH=$MYSQL_HOME/bin:$PATH
-
     # Eclipse.
     PATH=/opt/eclipse:$PATH
 ```
@@ -83,16 +50,54 @@
 - Cerrar todos los terminales y abrir terminales nuevos
 
 - Comprobar que el entorno ha quedado correctamente configurado comprobando 
-  salidas de los siguientes comandos
+  las salidas de los siguientes comandos
 
 ```shell
     which java
     which mvn
     which eclipse
-    which mysqld
 ```
     
-# Configuración de MySQL (sólo Linux)
+## Instalación de MySQL 8.0.12 en Linux (método recomendado)
+- Se recomienda instalarlo como paquete siguiendo las instrucciones que se 
+  indican en https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
+
+## Instalación de MySQL 8.0.12 en Linux (método alternativo)
+- En caso de no poder instalarlo como paquete se pueden seguir las 
+  instrucciones de este apartado para realizar una instalación de MySQL
+  como usuario root y ejecución como usuario normal
+
+- Descargar y descomprimir mysql en `/opt` 
+
+```shell
+    sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
+```
+
+```shell
+    sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
+    sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
+```
+
+- En Ubuntu debe instalarse la librería libaio1
+
+```shell
+    sudo apt-get install libaio1
+```
+
+- Añadir al fichero `$HOME/.bashrc` lo siguiente
+
+```shell
+    # MySQL 
+    MYSQL_HOME=/opt/mysql-8.0.12-linux-glibc2.12-x86_64
+    PATH=$MYSQL_HOME/bin:$PATH
+```
+
+- Cerrar todos los terminales y abrir terminales nuevos. Comprobar que 
+  ha quedado correctamente instalado
+
+```shell
+    which mysqld
+```
 
 - Creación del directorio de datos
 
@@ -116,10 +121,15 @@
     mysqld --initialize-insecure
 ```    
 
-> NOTA: En caso de producirse errores siguiendo los pasos anteriores, se 
-      recomienda seguir las instrucciones que se indican en 
-      http://dev.mysql.com/doc/refman/8.0/en/installing.html
+## Instalación de MySQL en macOS
 
+- Doble click en mysql-8.0.12-macos10.13-x86_64.dmg y elegir las opciones 
+  por defecto.
+
+- Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer 
+  starts up".
+
+- Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
 
 ## Creación de bases de datos necesarias para los ejemplos
 
