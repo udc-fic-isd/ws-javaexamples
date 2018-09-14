@@ -7,7 +7,6 @@
         <Arg>${dataSource.jndiName}</Arg>
         <Arg>
             <New class="org.apache.commons.dbcp2.BasicDataSource">
-                <Set name="driverClassName">${jdbcDriver.className}</Set>
                 <Set name="url"><![CDATA[${dataSource.url}]]></Set>
                 <Set name="username">${dataSource.user}</Set>
                 <Set name="password">${dataSource.password}</Set>
