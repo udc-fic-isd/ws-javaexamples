@@ -55,7 +55,6 @@
 		<mavenResourcesPlugin.version>3.1.0</mavenResourcesPlugin.version>
 		<execMavenPlugin.version>1.6.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
-		<mavenAssemblyPlugin.version>3.1.0</mavenAssemblyPlugin.version>
 		<jettyMavenPlugin>9.4.9.v20180320</jettyMavenPlugin>
 		<jaxwsMavenPlugin>2.5</jaxwsMavenPlugin>
 
@@ -280,19 +279,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<!-- ========================================================== -->
-			<!-- Assembly configuration -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${mavenAssemblyPlugin.version}</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/src.xml</descriptor>
-					</descriptors>
-				</configuration>
 			</plugin>
 
 			<!-- ========================================================== -->
