@@ -13,7 +13,7 @@
 - Descargar y descomprimir en `C:\Program Files\Java` el siguiente software
     - maven
     - eclipse
-	  - tomcat
+	- tomcat
 
 - Descargar e instalar en la ruta por defecto el JDK
     - Doble-click en `jdk-8u181-windows-<xxx>.exe`. Usar las opciones por defecto.
