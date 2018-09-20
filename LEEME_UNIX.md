@@ -139,6 +139,10 @@
     mysqld
 ```
 
+> NOTA: Si se produce un error de conexión al ejecutar los siguientes comandos
+  (`mysqladmin` o `myqsl`), probar a ejecutarlos añadiendo la opción `-p` para que
+  solicite la password del usuario root.
+
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
 
 ```shell
