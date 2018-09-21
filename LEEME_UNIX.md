@@ -231,12 +231,6 @@
 - Instalación de utilidad de autocompletado para Git
     - Seguir las instrucciones indicadas en https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion
 
-```shell
-    # Git
-    source ~/.git-completion.bash
-    PS1='\h \W$(__git_ps1 " [%s]"): '
-```
-
 ## Creación y configuración de claves SSH
 
 - Desde un terminal ejecutar:
