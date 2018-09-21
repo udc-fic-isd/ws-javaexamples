@@ -229,8 +229,7 @@
 ```
 
 - Instalación de utilidad de autocompletado para Git
-    - Descargar del ftp el script `.git-completion.bash` y guardarlo en `$HOME` con el mismo nombre
-    - Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de macOS utilizar el fichero `$HOME/.bash_profile`)
+    - Seguir las instrucciones indicadas en https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion
 
 ```shell
     # Git
