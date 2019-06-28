@@ -12,19 +12,20 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
+
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
-import es.udc.ws.movies.client.service.rest.xml.XmlClientExceptionConversor;
-import es.udc.ws.movies.client.service.rest.xml.XmlClientMovieDtoConversor;
-import es.udc.ws.movies.client.service.rest.xml.XmlClientSaleDtoConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonClientExceptionConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonClientMovieDtoConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonClientSaleDtoConversor;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
-import es.udc.ws.util.xml.exceptions.ParsingException;
+import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class RestClientMovieService implements ClientMovieService {
 
@@ -37,12 +38,12 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             HttpResponse response = Request.Post(getEndpointAddress() + "movies").
-                    bodyStream(toInputStream(movie), ContentType.create("application/xml")).
+                    bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
 
-            return XmlClientMovieDtoConversor.toClientMovieDto(response.getEntity().getContent()).getMovieId();
+            return JsonClientMovieDtoConversor.toClientMovieDto(response.getEntity().getContent()).getMovieId();
 
         } catch (InputValidationException e) {
             throw e;
@@ -59,7 +60,7 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             HttpResponse response = Request.Put(getEndpointAddress() + "movies/" + movie.getMovieId()).
-                    bodyStream(toInputStream(movie), ContentType.create("application/xml")).
+                    bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
@@ -101,7 +102,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_OK, response);
 
-            return XmlClientMovieDtoConversor.toClientMovieDtos(response.getEntity()
+            return JsonClientMovieDtoConversor.toClientMovieDtos(response.getEntity()
                     .getContent());
 
         } catch (Exception e) {
@@ -127,7 +128,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
 
-            return XmlClientSaleDtoConversor.toClientSaleDto(
+            return JsonClientSaleDtoConversor.toClientSaleDto(
                     response.getEntity().getContent()).getSaleId();
 
         } catch (InputValidationException | InstanceNotFoundException e) {
@@ -149,7 +150,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_OK, response);
 
-            return XmlClientSaleDtoConversor.toClientSaleDto(
+            return JsonClientSaleDtoConversor.toClientSaleDto(
                     response.getEntity().getContent()).getMovieUrl();
 
         } catch (InstanceNotFoundException | ClientSaleExpirationException e) {
@@ -172,12 +173,11 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ByteArrayOutputStream xmlOutputStream = new ByteArrayOutputStream();
-            XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toJsonObject(movie));
 
-            outputter.output(XmlClientMovieDtoConversor.toXml(movie), xmlOutputStream);
-
-            return new ByteArrayInputStream(xmlOutputStream.toByteArray());
+            return new ByteArrayInputStream(outputStream.toByteArray());
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -202,15 +202,15 @@ public class RestClientMovieService implements ClientMovieService {
             switch (statusCode) {
 
                 case HttpStatus.SC_NOT_FOUND:
-                    throw XmlClientExceptionConversor.fromInstanceNotFoundExceptionXml(
+                    throw JsonClientExceptionConversor.fromInstanceNotFoundException(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_BAD_REQUEST:
-                    throw XmlClientExceptionConversor.fromInputValidationExceptionXml(
+                    throw JsonClientExceptionConversor.fromInputValidationException(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_GONE:
-                    throw XmlClientExceptionConversor.fromSaleExpirationExceptionXml(
+                    throw JsonClientExceptionConversor.fromSaleExpirationException(
                             response.getEntity().getContent());
 
                 default:

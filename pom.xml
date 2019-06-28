@@ -37,6 +37,8 @@
 		<httpclient.version>4.5.6</httpclient.version>
 		<jdom2.version>2.0.6</jdom2.version>
 		<jaxws.version>2.3.0.2</jaxws.version>
+		<jackson.version>2.9.9</jackson.version>
+		
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
@@ -145,12 +147,13 @@
 				<artifactId>fluent-hc</artifactId>
 				<version>${httpclient.version}</version>
 			</dependency>
-			<!-- JDOM2 -->
+			<!-- Jackson -->
 			<dependency>
-				<groupId>org.jdom</groupId>
-				<artifactId>jdom2</artifactId>
-				<version>${jdom2.version}</version>
-			</dependency>
+    			<groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+    			<version>${jackson.version}</version>
+			</dependency>		
+			
 		</dependencies>
 	</dependencyManagement>
 

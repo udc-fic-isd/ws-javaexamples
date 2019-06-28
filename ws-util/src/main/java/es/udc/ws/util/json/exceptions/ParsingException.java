@@ -1,4 +1,4 @@
-package es.udc.ws.util.xml.exceptions;
+package es.udc.ws.util.json.exceptions;
 
 @SuppressWarnings("serial")
 public class ParsingException extends RuntimeException {

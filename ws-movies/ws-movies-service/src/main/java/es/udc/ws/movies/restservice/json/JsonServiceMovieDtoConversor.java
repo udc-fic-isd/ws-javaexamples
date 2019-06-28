@@ -1,0 +1,72 @@
+package es.udc.ws.movies.restservice.json;
+
+import java.io.InputStream;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import es.udc.ws.movies.dto.ServiceMovieDto;
+import es.udc.ws.util.json.exceptions.ParsingException;
+
+public class JsonServiceMovieDtoConversor {
+
+	public static ObjectNode toObjectNode(ServiceMovieDto movie) {
+
+		ObjectNode movieObject = JsonNodeFactory.instance.objectNode();
+
+		if (movie.getMovieId() != null) {
+			movieObject.put("movieId", movie.getMovieId());
+		}
+		movieObject.put("title", movie.getTitle()).
+		    put("runtime", movie.getRuntime()).
+			put("price", movie.getPrice()).
+			put("description", movie.getDescription());
+
+		return movieObject;
+	}
+
+	public static ArrayNode toArrayNode(List<ServiceMovieDto> movies) {
+
+		ArrayNode moviesNode = JsonNodeFactory.instance.arrayNode();
+		for (int i = 0; i < movies.size(); i++) {
+			ServiceMovieDto movieDto = movies.get(i);
+			ObjectNode movieObject = toObjectNode(movieDto);
+			moviesNode.add(movieObject);
+		}
+
+		return moviesNode;
+	}
+
+	public static ServiceMovieDto toServiceMovieDto(InputStream jsonMovie) throws ParsingException {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode rootNode = objectMapper.readTree(jsonMovie);
+			
+			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
+				throw new ParsingException("Unrecognized JSON (object expected)");
+			} else {
+				ObjectNode movieObject = (ObjectNode) rootNode;
+
+				JsonNode movieIdNode = movieObject.get("movieId");
+				Long movieId = (movieIdNode != null) ? movieIdNode.longValue() : null;
+
+				String title = movieObject.get("title").textValue().trim();
+				String description = movieObject.get("description").textValue().trim();
+				short runtime =  movieObject.get("runtime").shortValue();
+				float price = movieObject.get("price").floatValue();
+
+				return new ServiceMovieDto(movieId, title, runtime, description, price);
+			}
+		} catch (ParsingException ex) {
+			throw ex;
+		} catch (Exception e) {
+			throw new ParsingException(e);
+		}
+	}
+
+}

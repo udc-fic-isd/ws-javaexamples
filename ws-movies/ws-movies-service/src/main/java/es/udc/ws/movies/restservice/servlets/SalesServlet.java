@@ -13,9 +13,8 @@ import es.udc.ws.movies.dto.ServiceSaleDto;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
 import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.model.sale.Sale;
-import es.udc.ws.movies.restservice.xml.XmlServiceExceptionConversor;
-import es.udc.ws.movies.restservice.xml.XmlServiceMovieDtoConversor;
-import es.udc.ws.movies.restservice.xml.XmlServiceSaleDtoConversor;
+import es.udc.ws.movies.restservice.json.JsonServiceExceptionConversor;
+import es.udc.ws.movies.restservice.json.JsonServiceSaleDtoConversor;
 import es.udc.ws.movies.serviceutil.SaleToSaleDtoConversor;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -29,7 +28,7 @@ public class SalesServlet extends HttpServlet {
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path != null && path.length() > 0) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					XmlServiceExceptionConversor.toInputValidationExceptionXml(
+					JsonServiceExceptionConversor.toInputValidationException(
 							new InputValidationException("Invalid Request: " + "invalid path " + path)),
 					null);
 			return;
@@ -37,7 +36,7 @@ public class SalesServlet extends HttpServlet {
         String movieIdParameter = req.getParameter("movieId");
         if (movieIdParameter == null) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(
+            		JsonServiceExceptionConversor.toInputValidationException(
                             new InputValidationException("Invalid Request: " + "parameter 'movieId' is mandatory")),
                     null);
             return;
@@ -48,7 +47,7 @@ public class SalesServlet extends HttpServlet {
         } catch (NumberFormatException ex) {
             ServletUtils
                     .writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                            XmlServiceExceptionConversor.toInputValidationExceptionXml(new InputValidationException(
+                    		JsonServiceExceptionConversor.toInputValidationException(new InputValidationException(
                                     "Invalid Request: " + "parameter 'movieId' is invalid '" + movieIdParameter + "'")),
                             null);
 
@@ -57,7 +56,7 @@ public class SalesServlet extends HttpServlet {
         String userId = req.getParameter("userId");
         if (userId == null) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(
+            		JsonServiceExceptionConversor.toInputValidationException(
                             new InputValidationException("Invalid Request: " + "parameter 'userId' is mandatory")),
                     null);
             return;
@@ -65,7 +64,7 @@ public class SalesServlet extends HttpServlet {
         String creditCardNumber = req.getParameter("creditCardNumber");
         if (creditCardNumber == null) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(new InputValidationException(
+            		JsonServiceExceptionConversor.toInputValidationException(new InputValidationException(
                             "Invalid Request: " + "parameter 'creditCardNumber' is mandatory")),
                     null);
 
@@ -76,11 +75,11 @@ public class SalesServlet extends HttpServlet {
             sale = MovieServiceFactory.getService().buyMovie(movieId, userId, creditCardNumber);
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
-                    XmlServiceExceptionConversor.toInstanceNotFoundException(ex), null);
+            		JsonServiceExceptionConversor.toInstanceNotFoundException(ex), null);
             return;
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(ex), null);
+            		JsonServiceExceptionConversor.toInputValidationException(ex), null);
             return;
         }
         ServiceSaleDto saleDto = SaleToSaleDtoConversor.toSaleDto(sale);
@@ -91,7 +90,7 @@ public class SalesServlet extends HttpServlet {
         headers.put("Location", saleURL);
 
         ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_CREATED,
-                XmlServiceSaleDtoConversor.toResponse(saleDto), headers);
+                JsonServiceSaleDtoConversor.toJsonObject(saleDto), headers);
     }
 
     @Override
@@ -99,7 +98,7 @@ public class SalesServlet extends HttpServlet {
         String path = ServletUtils.normalizePath(req.getPathInfo());
         if (path == null || path.length() == 0) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(
+            		JsonServiceExceptionConversor.toInputValidationException(
                             new InputValidationException("Invalid Request: " + "invalid sale id")),
                     null);
             return;
@@ -110,7 +109,7 @@ public class SalesServlet extends HttpServlet {
             saleId = Long.valueOf(saleIdAsString);
         } catch (NumberFormatException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    XmlServiceExceptionConversor.toInputValidationExceptionXml(
+            		JsonServiceExceptionConversor.toInputValidationException(
                             new InputValidationException("Invalid Request: " + "invalid sale id '" + saleIdAsString)),
                     null);
             return;
@@ -120,11 +119,11 @@ public class SalesServlet extends HttpServlet {
             sale = MovieServiceFactory.getService().findSale(saleId);
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
-                    XmlServiceExceptionConversor.toInstanceNotFoundException(ex), null);
+            		JsonServiceExceptionConversor.toInstanceNotFoundException(ex), null);
             return;
         } catch (SaleExpirationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_GONE,
-                    XmlServiceExceptionConversor.toSaleExpirationException(ex, XmlServiceMovieDtoConversor.XML_NS),
+            		JsonServiceExceptionConversor.toSaleExpirationException(ex),
                     null);
 
             return;
@@ -133,7 +132,7 @@ public class SalesServlet extends HttpServlet {
         ServiceSaleDto saleDto = SaleToSaleDtoConversor.toSaleDto(sale);
 
         ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_OK,
-                XmlServiceSaleDtoConversor.toResponse(saleDto), null);
+                JsonServiceSaleDtoConversor.toJsonObject(saleDto), null);
 
     }
 }
