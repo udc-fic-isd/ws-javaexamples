@@ -8,3 +8,6 @@ target/
 .classpath
 .project
 .settings/
+
+# IntelliJ IDEA configuration.
+.idea/
