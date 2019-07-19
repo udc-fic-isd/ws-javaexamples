@@ -17,11 +17,11 @@
         <dependency>
             <groupId>es.udc.ws</groupId>
             <artifactId>ws-util</artifactId>
-        </dependency>             
+        </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>     
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
         <dependency>
             <groupId>${jdbcDriver.groupId}</groupId>
             <artifactId>${jdbcDriver.artifactId}</artifactId>
