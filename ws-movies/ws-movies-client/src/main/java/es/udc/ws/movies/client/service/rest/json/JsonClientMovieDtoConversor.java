@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
+import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonClientMovieDtoConversor {
@@ -34,7 +35,7 @@ public class JsonClientMovieDtoConversor {
 	public static ClientMovieDto toClientMovieDto(InputStream jsonMovie) throws ParsingException {
 		try {
 
-			ObjectMapper objectMapper = new ObjectMapper();
+			ObjectMapper objectMapper = ObjectMapperFactory.instance();
 			JsonNode rootNode = objectMapper.readTree(jsonMovie);
 			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
 				throw new ParsingException("Unrecognized JSON (object expected)");
@@ -51,7 +52,7 @@ public class JsonClientMovieDtoConversor {
 	public static List<ClientMovieDto> toClientMovieDtos(InputStream jsonMovies) throws ParsingException {
 		try {
 
-			ObjectMapper objectMapper = new ObjectMapper();
+			ObjectMapper objectMapper = ObjectMapperFactory.instance();
 			JsonNode rootNode = objectMapper.readTree(jsonMovies);
 			if (rootNode.getNodeType() != JsonNodeType.ARRAY) {
 				throw new ParsingException("Unrecognized JSON (array expected)");

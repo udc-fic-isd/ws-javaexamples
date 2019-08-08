@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
+import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonClientExceptionConversor {
@@ -22,7 +23,7 @@ public class JsonClientExceptionConversor {
 	            throws ParsingException {
 	        try {
 
-				ObjectMapper objectMapper = new ObjectMapper();
+	        	ObjectMapper objectMapper = ObjectMapperFactory.instance();
 				JsonNode rootNode = objectMapper.readTree(ex);
 				if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
 					throw new ParsingException("Unrecognized JSON (object expected)");
@@ -39,7 +40,7 @@ public class JsonClientExceptionConversor {
 	            throws ParsingException {
 	        try {
 
-				ObjectMapper objectMapper = new ObjectMapper();
+	        	ObjectMapper objectMapper = ObjectMapperFactory.instance();
 				JsonNode rootNode = objectMapper.readTree(ex);
 				if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
 					throw new ParsingException("Unrecognized JSON (object expected)");
@@ -59,7 +60,7 @@ public class JsonClientExceptionConversor {
 	            throws ParsingException {
 	        try {
 
-				ObjectMapper objectMapper = new ObjectMapper();
+	        	ObjectMapper objectMapper = ObjectMapperFactory.instance();
 				JsonNode rootNode = objectMapper.readTree(ex);
 				if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
 					throw new ParsingException("Unrecognized JSON (object expected)");

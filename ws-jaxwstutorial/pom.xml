@@ -6,7 +6,7 @@
     <parent>
         <groupId>es.udc.ws</groupId>
         <artifactId>ws-javaexamples</artifactId>
-        <version>3.2.4</version>
+        <version>3.3.0</version>
     </parent>
     <groupId>es.udc.ws.jaxwstutorial</groupId>
     <artifactId>ws-jaxwstutorial</artifactId>

@@ -25,6 +25,7 @@ import es.udc.ws.movies.client.service.rest.json.JsonClientSaleDtoConversor;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
+import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class RestClientMovieService implements ClientMovieService {
@@ -174,8 +175,8 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toJsonObject(movie));
+            ObjectMapper objectMapper = ObjectMapperFactory.instance();
+            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toJsonObject(movie));
 
             return new ByteArrayInputStream(outputStream.toByteArray());
 

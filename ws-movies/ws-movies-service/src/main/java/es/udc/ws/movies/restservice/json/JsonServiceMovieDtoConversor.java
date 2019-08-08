@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.udc.ws.movies.dto.ServiceMovieDto;
+import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonServiceMovieDtoConversor {
@@ -44,7 +45,7 @@ public class JsonServiceMovieDtoConversor {
 
 	public static ServiceMovieDto toServiceMovieDto(InputStream jsonMovie) throws ParsingException {
 		try {
-			ObjectMapper objectMapper = new ObjectMapper();
+			ObjectMapper objectMapper = ObjectMapperFactory.instance();
 			JsonNode rootNode = objectMapper.readTree(jsonMovie);
 			
 			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {

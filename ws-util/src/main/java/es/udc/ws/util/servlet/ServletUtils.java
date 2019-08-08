@@ -11,6 +11,8 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.udc.ws.util.json.ObjectMapperFactory;
+
 public class ServletUtils {
 
 	public static final int DEFAULT_BUFFER_SIZE = 1024 * 8;
@@ -21,8 +23,8 @@ public class ServletUtils {
 		writeResponse(response, responseCode, "application/json", headers);
 
 		if (rootNode != null) {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writer(new DefaultPrettyPrinter()).writeValue(response.getOutputStream(), rootNode);
+			ObjectMapper objectMapper = ObjectMapperFactory.instance();
+			objectMapper.writer(new DefaultPrettyPrinter()).writeValue(response.getOutputStream(), rootNode);
 		}
 	}
 

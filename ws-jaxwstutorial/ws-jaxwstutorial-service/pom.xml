@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>es.udc.ws.jaxwstutorial</groupId>
 		<artifactId>ws-jaxwstutorial</artifactId>
-		<version>3.2.4</version>
+		<version>3.3.0</version>
 	</parent>
 	<artifactId>ws-jaxwstutorial-service</artifactId>
 	<packaging>war</packaging>
