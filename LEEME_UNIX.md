@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2018-2019 - Linux y macOS
+# Instalación / Configuración entorno ISD / 2019-2020 - Linux y macOS
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW
@@ -22,7 +22,7 @@
 
 ```shell
     cd $HOME/software
-    tar zxf ws-javaexamples-3.2.4-src.tar.gz
+    tar zxf ws-javaexamples-3.3.0-src.tar.gz
 ```
 
 ## Establecer variables de entorno
@@ -39,7 +39,7 @@
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=/opt/apache-maven-3.5.4
+    MAVEN_HOME=/opt/apache-maven-3.6.1
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
@@ -175,7 +175,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-    cd $HOME/software/ws-javaexamples-3.2.4
+    cd $HOME/software/ws-javaexamples-3.3.0
     mvn sql:execute install
 ```
     
@@ -260,12 +260,11 @@
 ## Instalación de una herramienta cliente gráfica para Git
 
 - Linux: En el ftp está disponible "SmartGit" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
-    - Descargar `smartgit-linux-18_1_4.tar.gz` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+    - Descargar el instalador de smartgit de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
     - Para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
 
     
 - macOS: En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
 - Instalación en macOS:
-    - Descargar `SourceTree_2.7.6a.zip` de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients).
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients).
     - Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
-    

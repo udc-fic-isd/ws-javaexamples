@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2018-2019 - Windows
+# Instalación / Configuración entorno ISD / 2019-2020 - Windows
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW 
@@ -13,7 +13,7 @@
 - Descargar y descomprimir en `C:\Program Files\Java` el siguiente software
     - maven
     - eclipse
-	- tomcat
+    - tomcat
 
 - Descargar e instalar en la ruta por defecto el JDK
     - Doble-click en `jdk-8u181-windows-<xxx>.exe`. Usar las opciones por defecto.
@@ -46,7 +46,7 @@
     - Nombre: `JAVA_HOME`
         + Valor: `C:\Program Files\Java\jdk1.8.0_181`
     - Nombre: `MAVEN_HOME`
-        + Valor: `C:\Program Files\Java\apache-maven-3.5.4`
+        + Valor: `C:\Program Files\Java\apache-maven-3.6.1`
     - Nombre: `MAVEN_OPTS`
         + Valor: `-Xms512m -Xmx1024m`
     - Nombre: `MYSQL_HOME`
@@ -117,7 +117,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-	cd C:/software/ws-javaexamples-3.2.4
+	cd C:/software/ws-javaexamples-3.3.0
 	mvn sql:execute install
 ```
 	
