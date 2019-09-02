@@ -135,6 +135,21 @@
   
 - Establecer UTF-8 como el encoding por defecto para ficheros properties Java
     + En "Preferences>General>Content Types>Text>Java Properties File", escribir "UTF-8" y pulsar "Update"
+    
+> NOTA: Es posible que eclipse muestre errores como el siguiente en el `pom.xml` de los proyectos que utilicen el goal `wsgen`. El problema en Windows 8 y 10 es debido a que en el PATH del sistema, al instalar un JRE, se añade de primero la ruta `C:\ProgramData\Oracle\Java\javapath`. Se trata de un enlace simbólico al path del ejecutable de Java. Al estar de primero, es el que usa eclipse (el path del sistema se añade antes que el path del usuario). 
+
+```shell 
+Cannot execute: C:\Program Files\Java\jre1.8.0_181\..\bin\wsgen.exe (org.codehaus.mojo:jaxws-maven-plugin:2.4.1:wsgen:wsgen-from-jdk:process-classes)
+```
+
+> Para evitar el problema anterior  
+  - Opción 1: Añadir la ruta al JDK que queremos que se utilice antes que `C:\ProgramData\Oracle\Java\javapath` en el PATH del sistema.
+  - Opción 2: Añadir al fichero `eclipse.ini` contenido en el directorio de instalación de eclipse, la ruta al ejecutable de Java utilizado (JDK, no JRE), justo antes de la línea que especifica `--launcher.appendVmargs`.
+  
+```shell
+-vm
+C:\Program Files\Java\jdk1.8.0_181\bin\javaw.exe
+```
 
 ## Instalación y configuración básica de Git
 ---------------------------------------------------------------------
@@ -181,7 +196,7 @@
     
 ## Instalación de una herramienta cliente gráfica para Git
 
-- En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
+- En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
     - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients)
     - Doble-click en el instalador e instalar con las opciones por defecto
     

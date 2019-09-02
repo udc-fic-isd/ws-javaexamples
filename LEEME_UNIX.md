@@ -259,12 +259,12 @@
 
 ## Instalación de una herramienta cliente gráfica para Git
 
-- Linux: En el ftp está disponible "SmartGit" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
-    - Descargar el instalador de smartgit de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
-    - Para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
+- Linux: En el ftp están disponibles "GitKraken" y "SmartGit" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+    - En el caso de "SmartGit", para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
 
     
-- macOS: En el ftp está disponible "SourceTree" pero puede utilizarse cualquier otra ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
-- Instalación en macOS:
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients).
-    - Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
+- Mac OS: En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otro ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
+- Instalación en Mac OS
+    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
+    - En el caso de "SourceTree", Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
