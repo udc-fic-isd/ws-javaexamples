@@ -30,12 +30,6 @@
                 <artifactId>ws-movies-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
-	    <!-- WS-JavaExamples Movies XML Util -->
-            <dependency>
-                <groupId>es.udc.ws.movies</groupId>
-                <artifactId>ws-movies-util</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 	
