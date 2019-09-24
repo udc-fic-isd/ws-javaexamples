@@ -7,10 +7,15 @@
 - Seleccionar la versión adecuada al operativo (Linux macOS) / 
   arquitectura del ordenador (32 o 64 bits).
   
-- Descargar y descomprimir en `/opt` el siguiente software
+- [Linux] Descargar y descomprimir en `/opt` el siguiente software
     - jdk
     - maven
     - eclipse
+
+- [macOS] 
+    - Descargar maven y descomprimirlo en `/opt` .
+    - Instalar jdk y eclipse haciendo doble clic en los archivos .dmg 
+      correspondientes.
 
 - Descargar y descomprimir en `$HOME/software` el siguiente software
     - tomcat
@@ -123,7 +128,7 @@
 
 ## Instalación de MySQL en macOS
 
-- Doble click en mysql-8.0.12-macos10.13-x86_64.dmg y elegir las opciones 
+- Doble clic en el archivo .dmg correspondiente y elegir las opciones 
   por defecto.
 
 - Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer 
@@ -212,8 +217,8 @@
 ```
 
 - Instalación en macOS
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/](ftp://ftp.fic.udc.es/POJOyWS/)
-    - Doble-click en el instalador e instalar con las opciones por defecto
+    - Descargar el archivo .dmg de [ftp://ftp.fic.udc.es/POJOyWS/](ftp://ftp.fic.udc.es/POJOyWS/)
+    - Doble-clic en el archivo e instalar con las opciones por defecto
 
 - Configuración básica (Linux y macOS)
 
@@ -264,7 +269,6 @@
     - En el caso de "SmartGit", para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
 
     
-- Mac OS: En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otro ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
-- Instalación en Mac OS
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
-    - En el caso de "SourceTree", Copiar el fichero `SourceTree.app` a la carpeta `Aplicaciones`.
+- macOS: En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otro ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
+    - SourceTree: descargar el archivo .zip de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients), descomprimirlo y hacer doble clic en el archivo .dmg.
+    - GitKraken: descargar el archivo .dmg y hacer doble clic en él.
