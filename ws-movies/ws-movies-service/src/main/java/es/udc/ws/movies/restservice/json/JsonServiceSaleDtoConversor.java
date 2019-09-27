@@ -10,7 +10,7 @@ import es.udc.ws.movies.dto.ServiceSaleDto;
 
 public class JsonServiceSaleDtoConversor {
 
-	public static JsonNode toJsonObject(ServiceSaleDto sale) {		
+	public static ObjectNode toObjectNode(ServiceSaleDto sale) {		
 
 		ObjectNode saleNode = JsonNodeFactory.instance.objectNode();
 

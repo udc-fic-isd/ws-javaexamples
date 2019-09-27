@@ -17,7 +17,7 @@ import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonClientMovieDtoConversor {
-	public static JsonNode toJsonObject(ClientMovieDto movie) throws IOException {
+	public static ObjectNode toObjectNode(ClientMovieDto movie) throws IOException {
 
 		ObjectNode movieObject = JsonNodeFactory.instance.objectNode();
 

@@ -176,7 +176,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectMapper objectMapper = ObjectMapperFactory.instance();
-            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toJsonObject(movie));
+            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toObjectNode(movie));
 
             return new ByteArrayInputStream(outputStream.toByteArray());
 

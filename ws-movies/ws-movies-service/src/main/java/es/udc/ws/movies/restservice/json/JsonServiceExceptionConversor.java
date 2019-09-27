@@ -3,7 +3,6 @@ package es.udc.ws.movies.restservice.json;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -15,7 +14,7 @@ public class JsonServiceExceptionConversor {
 
     public final static String CONVERSION_PATTERN = "EEE, d MMM yyyy HH:mm:ss Z";
 
-	public static JsonNode toInputValidationException(InputValidationException ex) {
+	public static ObjectNode toInputValidationException(InputValidationException ex) {
 		
     	ObjectNode exceptionObject = JsonNodeFactory.instance.objectNode();
     	ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
@@ -27,7 +26,7 @@ public class JsonServiceExceptionConversor {
         return exceptionObject;
     }
 
-    public static JsonNode toInstanceNotFoundException(InstanceNotFoundException ex) {
+    public static ObjectNode toInstanceNotFoundException(InstanceNotFoundException ex) {
 
     	ObjectNode exceptionObject = JsonNodeFactory.instance.objectNode();
     	ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
@@ -41,7 +40,7 @@ public class JsonServiceExceptionConversor {
     }
 
    
-    public static JsonNode toSaleExpirationException(SaleExpirationException ex) {
+    public static ObjectNode toSaleExpirationException(SaleExpirationException ex) {
 
     	ObjectNode exceptionObject = JsonNodeFactory.instance.objectNode();
     	ObjectNode dataObject = JsonNodeFactory.instance.objectNode();

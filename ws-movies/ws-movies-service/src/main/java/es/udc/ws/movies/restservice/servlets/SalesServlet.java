@@ -90,7 +90,7 @@ public class SalesServlet extends HttpServlet {
         headers.put("Location", saleURL);
 
         ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_CREATED,
-                JsonServiceSaleDtoConversor.toJsonObject(saleDto), headers);
+                JsonServiceSaleDtoConversor.toObjectNode(saleDto), headers);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class SalesServlet extends HttpServlet {
         ServiceSaleDto saleDto = SaleToSaleDtoConversor.toSaleDto(sale);
 
         ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_OK,
-                JsonServiceSaleDtoConversor.toJsonObject(saleDto), null);
+                JsonServiceSaleDtoConversor.toObjectNode(saleDto), null);
 
     }
 }
