@@ -41,8 +41,6 @@ public class SoapClientMovieService implements ClientMovieService {
                     .toServiceSoapMovieDto(movie));
         } catch (SoapInputValidationException ex) {
             throw new InputValidationException(ex.getMessage());
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 
@@ -58,8 +56,6 @@ public class SoapClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(
                     ex.getFaultInfo().getInstanceId(),
                     ex.getFaultInfo().getInstanceType());
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 
@@ -92,8 +88,6 @@ public class SoapClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(
                     ex.getFaultInfo().getInstanceId(),
                     ex.getFaultInfo().getInstanceType());
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 
