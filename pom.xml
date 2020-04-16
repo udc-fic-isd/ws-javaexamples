@@ -32,7 +32,7 @@
 
 		<!-- Package versions (except those defined in "profiles" section) -->
 		<commonsDbcp.version>2.5.0</commonsDbcp.version>
-		<junit.version>5.5.0</junit.version>
+		<junit.version>5.6.2</junit.version>
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.6</httpclient.version>
 		<jaxws.version>2.3.0.2</jaxws.version>
