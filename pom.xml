@@ -32,7 +32,7 @@
 
 		<!-- Package versions (except those defined in "profiles" section) -->
 		<commonsDbcp.version>2.5.0</commonsDbcp.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>5.5.0</junit.version>
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.6</httpclient.version>
 		<jaxws.version>2.3.0.2</jaxws.version>
@@ -115,8 +115,8 @@
 			</dependency>
 			<!-- JUnit -->
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
 				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
@@ -190,6 +190,14 @@
 
 
 		<plugins>
+
+			<!-- ========================================================== -->
+			<!-- Surefire plugin -->
+			<!-- Default version does not support JUnit 5. -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
 
 			<!-- ========================================================== -->
 			<!-- Compiler configuration -->

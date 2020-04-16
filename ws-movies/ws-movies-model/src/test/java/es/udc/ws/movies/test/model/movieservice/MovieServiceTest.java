@@ -1,27 +1,9 @@
 package es.udc.ws.movies.test.model.movieservice;
 
-import static es.udc.ws.movies.model.util.ModelConstants.BASE_URL;
-import static es.udc.ws.movies.model.util.ModelConstants.MAX_PRICE;
-import static es.udc.ws.movies.model.util.ModelConstants.MAX_RUNTIME;
-import static es.udc.ws.movies.model.util.ModelConstants.MOVIE_DATA_SOURCE;
-import static es.udc.ws.movies.model.util.ModelConstants.SALE_EXPIRATION_DAYS;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieService;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
+import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.model.sale.Sale;
 import es.udc.ws.movies.model.sale.SqlSaleDao;
 import es.udc.ws.movies.model.sale.SqlSaleDaoFactory;
@@ -29,7 +11,19 @@ import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.sql.DataSourceLocator;
 import es.udc.ws.util.sql.SimpleDataSource;
-import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import static es.udc.ws.movies.model.util.ModelConstants.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class MovieServiceTest {
 
@@ -44,7 +38,7 @@ public class MovieServiceTest {
 
 	private static SqlSaleDao saleDao = null;
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 
 		/*
@@ -185,111 +179,75 @@ public class MovieServiceTest {
 	@Test
 	public void testAddInvalidMovie() {
 
-		Movie movie = getValidMovie();
-		Movie addedMovie = null;
-		boolean exceptionCatched = false;
-
-		try {
-			// Check movie title not null
+		// Check movie title not null
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setTitle(null);
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie title not empty
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie title not empty
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setTitle("");
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie runtime >= 0
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie runtime >= 0
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setRuntime((short) -1);
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie runtime <= MAX_RUNTIME
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie runtime <= MAX_RUNTIME
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setRuntime((short) (MAX_RUNTIME + 1));
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie description not null
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie description not null
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setDescription(null);
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie description not null
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie description not null
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setDescription("");
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie price >= 0
-			exceptionCatched = false;
-			movie = getValidMovie();
+		// Check movie price >= 0
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
 			movie.setPrice((short) -1);
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
-			// Check movie price <= MAX_PRICE
-			exceptionCatched = false;
-			movie = getValidMovie();
-			movie.setRuntime((short) (MAX_PRICE + 1));
-			try {
-				addedMovie = movieService.addMovie(movie);
-			} catch (InputValidationException e) {
-				exceptionCatched = true;
-			}
-			assertTrue(exceptionCatched);
-
-		} finally {
-			if (!exceptionCatched) {
-				// Clear Database
-				removeMovie(addedMovie.getMovieId());
-			}
-		}
+		// Check movie price <= MAX_PRICE
+		assertThrows(InputValidationException.class, () -> {
+			Movie movie = getValidMovie();
+			movie.setPrice((short) (MAX_PRICE + 1));
+			Movie addedMovie = movieService.addMovie(movie);
+			removeMovie(addedMovie.getMovieId());
+		});
 
 	}
 
-	@Test(expected = InstanceNotFoundException.class)
-	public void testFindNonExistentMovie() throws InstanceNotFoundException {
-
-		movieService.findMovie(NON_EXISTENT_MOVIE_ID);
-
+	@Test
+	public void testFindNonExistentMovie() {
+		assertThrows(InstanceNotFoundException.class, () -> movieService.findMovie(NON_EXISTENT_MOVIE_ID));
 	}
 
 	@Test
@@ -313,53 +271,47 @@ public class MovieServiceTest {
 
 	}
 
-	@Test(expected = InputValidationException.class)
-	public void testUpdateInvalidMovie() throws InputValidationException, InstanceNotFoundException {
+	@Test
+	public void testUpdateInvalidMovie() throws InstanceNotFoundException {
 
-		Movie movie = createMovie(getValidMovie());
+		Long movieId = createMovie(getValidMovie()).getMovieId();
 		try {
 			// Check movie title not null
-			movie = movieService.findMovie(movie.getMovieId());
+			Movie movie = movieService.findMovie(movieId);
 			movie.setTitle(null);
-			movieService.updateMovie(movie);
+			assertThrows(InputValidationException.class, () -> movieService.updateMovie(movie));
 		} finally {
 			// Clear Database
-			removeMovie(movie.getMovieId());
+			removeMovie(movieId);
 		}
 
 	}
 
-	@Test(expected = InstanceNotFoundException.class)
-	public void testUpdateNonExistentMovie() throws InputValidationException, InstanceNotFoundException {
+	@Test
+	public void testUpdateNonExistentMovie() {
 
 		Movie movie = getValidMovie();
 		movie.setMovieId(NON_EXISTENT_MOVIE_ID);
 		movie.setCreationDate(Calendar.getInstance());
-		movieService.updateMovie(movie);
+
+		assertThrows(InstanceNotFoundException.class, () -> movieService.updateMovie(movie));
 
 	}
 
-	@Test(expected = InstanceNotFoundException.class)
+	@Test
 	public void testRemoveMovie() throws InstanceNotFoundException {
 
 		Movie movie = createMovie(getValidMovie());
-		boolean exceptionCatched = false;
-		try {
-			movieService.removeMovie(movie.getMovieId());
-		} catch (InstanceNotFoundException e) {
-			exceptionCatched = true;
-		}
-		assertTrue(!exceptionCatched);
 
-		movieService.findMovie(movie.getMovieId());
+		movieService.removeMovie(movie.getMovieId());
+
+		assertThrows(InstanceNotFoundException.class, () -> movieService.findMovie(movie.getMovieId()));
 
 	}
 
-	@Test(expected = InstanceNotFoundException.class)
-	public void testRemoveNonExistentMovie() throws InstanceNotFoundException {
-
-		movieService.removeMovie(NON_EXISTENT_MOVIE_ID);
-
+	@Test
+	public void testRemoveNonExistentMovie() {
+		assertThrows(InstanceNotFoundException.class, () -> movieService.removeMovie(NON_EXISTENT_MOVIE_ID));
 	}
 
 	@Test
@@ -437,13 +389,15 @@ public class MovieServiceTest {
 
 	}
 
-	@Test(expected = InputValidationException.class)
-	public void testBuyMovieWithInvalidCreditCard() throws InputValidationException, InstanceNotFoundException {
+	@Test
+	public void testBuyMovieWithInvalidCreditCard() {
 
 		Movie movie = createMovie(getValidMovie());
 		try {
-			Sale sale = movieService.buyMovie(movie.getMovieId(), USER_ID, INVALID_CREDIT_CARD_NUMBER);
-			removeSale(sale.getSaleId());
+			assertThrows(InputValidationException.class, () -> {
+				Sale sale = movieService.buyMovie(movie.getMovieId(), USER_ID, INVALID_CREDIT_CARD_NUMBER);
+				removeSale(sale.getSaleId());
+			});
 		} finally {
 			/* Clear database. */
 			removeMovie(movie.getMovieId());
@@ -451,35 +405,35 @@ public class MovieServiceTest {
 
 	}
 
-	@Test(expected = InstanceNotFoundException.class)
-	public void testBuyNonExistentMovie() throws InputValidationException, InstanceNotFoundException {
+	@Test
+	public void testBuyNonExistentMovie() {
 
-		Sale sale = movieService.buyMovie(NON_EXISTENT_MOVIE_ID, USER_ID, VALID_CREDIT_CARD_NUMBER);
-		/* Clear database. */
-		removeSale(sale.getSaleId());
-
-	}
-
-	@Test(expected = InstanceNotFoundException.class)
-	public void testFindNonExistentSale() throws InstanceNotFoundException, SaleExpirationException {
-
-		movieService.findSale(NON_EXISTENT_SALE_ID);
+		assertThrows(InstanceNotFoundException.class, () -> {
+			Sale sale = movieService.buyMovie(NON_EXISTENT_MOVIE_ID, USER_ID, VALID_CREDIT_CARD_NUMBER);
+			removeSale(sale.getSaleId());
+		});
 
 	}
 
-	@Test(expected = SaleExpirationException.class)
+	@Test
+	public void testFindNonExistentSale() {
+		assertThrows(InstanceNotFoundException.class, () -> movieService.findSale(NON_EXISTENT_SALE_ID));
+	}
+
+	@Test
 	public void testGetExpiredMovieUrl()
-			throws InputValidationException, SaleExpirationException, InstanceNotFoundException {
+			throws InputValidationException, InstanceNotFoundException {
 
 		Movie movie = createMovie(getValidMovie());
 		Sale sale = null;
 		try {
 			sale = movieService.buyMovie(movie.getMovieId(), USER_ID, VALID_CREDIT_CARD_NUMBER);
 
+			Long saleId = sale.getSaleId();
+
 			sale.getExpirationDate().add(Calendar.DAY_OF_MONTH, -1 * (SALE_EXPIRATION_DAYS + 1));
 			updateSale(sale);
-
-			movieService.findSale(sale.getSaleId());
+			assertThrows(SaleExpirationException.class, () -> movieService.findSale(saleId));
 		} finally {
 			// Clear Database (sale if it was created and movie)
 			if (sale != null) {
