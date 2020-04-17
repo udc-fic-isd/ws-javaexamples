@@ -1,8 +1,5 @@
 package es.udc.ws.movies.restservice.json;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -47,8 +44,7 @@ public class JsonServiceExceptionConversor {
 		
     	dataObject.put("saleId", (ex.getSaleId()!=null) ? ex.getSaleId() : null);
         if (ex.getExpirationDate() != null) {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat(CONVERSION_PATTERN, Locale.ENGLISH);
-        	dataObject.put("expirationDate", dateFormatter.format(ex.getExpirationDate().getTime()));
+        	dataObject.put("expirationDate", ex.getExpirationDate().toString());
         } else {
         	dataObject.set("expirationDate", null);
         }

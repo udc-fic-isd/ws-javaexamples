@@ -1,5 +1,25 @@
 package es.udc.ws.movies.test.model.movieservice;
 
+import static es.udc.ws.movies.model.util.ModelConstants.BASE_URL;
+import static es.udc.ws.movies.model.util.ModelConstants.MAX_PRICE;
+import static es.udc.ws.movies.model.util.ModelConstants.MAX_RUNTIME;
+import static es.udc.ws.movies.model.util.ModelConstants.MOVIE_DATA_SOURCE;
+import static es.udc.ws.movies.model.util.ModelConstants.SALE_EXPIRATION_DAYS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieService;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
@@ -11,18 +31,6 @@ import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.sql.DataSourceLocator;
 import es.udc.ws.util.sql.SimpleDataSource;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
-
-import static es.udc.ws.movies.model.util.ModelConstants.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MovieServiceTest {
@@ -292,7 +300,7 @@ public class MovieServiceTest {
 
 		Movie movie = getValidMovie();
 		movie.setMovieId(NON_EXISTENT_MOVIE_ID);
-		movie.setCreationDate(Calendar.getInstance());
+		movie.setCreationDate(LocalDateTime.now());
 
 		assertThrows(InstanceNotFoundException.class, () -> movieService.updateMovie(movie));
 
@@ -355,15 +363,11 @@ public class MovieServiceTest {
 		try {
 
 			/* Buy movie. */
-			Calendar beforeExpirationDate = Calendar.getInstance();
-			beforeExpirationDate.add(Calendar.DAY_OF_MONTH, SALE_EXPIRATION_DAYS);
-			beforeExpirationDate.set(Calendar.MILLISECOND, 0);
+			LocalDateTime beforeExpirationDate = LocalDateTime.now().plusDays(SALE_EXPIRATION_DAYS).withNano(0);
 
 			sale = movieService.buyMovie(movie.getMovieId(), USER_ID, VALID_CREDIT_CARD_NUMBER);
 
-			Calendar afterExpirationDate = Calendar.getInstance();
-			afterExpirationDate.add(Calendar.DAY_OF_MONTH, SALE_EXPIRATION_DAYS);
-			afterExpirationDate.set(Calendar.MILLISECOND, 0);
+			LocalDateTime afterExpirationDate = LocalDateTime.now().plusDays(SALE_EXPIRATION_DAYS).withNano(0);
 
 			/* Find sale. */
 			Sale foundSale = movieService.findSale(sale.getSaleId());
@@ -376,7 +380,7 @@ public class MovieServiceTest {
 			assertTrue(movie.getPrice() == foundSale.getPrice());
 			assertTrue((foundSale.getExpirationDate().compareTo(beforeExpirationDate) >= 0)
 					&& (foundSale.getExpirationDate().compareTo(afterExpirationDate) <= 0));
-			assertTrue(Calendar.getInstance().after(foundSale.getSaleDate()));
+			assertTrue(LocalDateTime.now().isAfter(foundSale.getSaleDate()));
 			assertTrue(foundSale.getMovieUrl().startsWith(BASE_URL + sale.getMovieId()));
 
 		} finally {
@@ -431,7 +435,7 @@ public class MovieServiceTest {
 
 			Long saleId = sale.getSaleId();
 
-			sale.getExpirationDate().add(Calendar.DAY_OF_MONTH, -1 * (SALE_EXPIRATION_DAYS + 1));
+			sale.setExpirationDate(sale.getExpirationDate().minusDays(SALE_EXPIRATION_DAYS + 1));
 			updateSale(sale);
 			assertThrows(SaleExpirationException.class, () -> movieService.findSale(saleId));
 		} finally {

@@ -1,6 +1,6 @@
 package es.udc.ws.movies.model.movie;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class Movie {
 
@@ -9,7 +9,7 @@ public class Movie {
 	private short runtime;
 	private String description;
 	private float price;
-	private Calendar creationDate;
+	private LocalDateTime creationDate;
 
 	public Movie(String title, short runtime, String description, float price) {
 		this.title = title;
@@ -23,12 +23,9 @@ public class Movie {
 		this.movieId = movieId;
 	}
 
-	public Movie(Long movieId, String title, short runtime, String description, float price, Calendar creationDate) {
+	public Movie(Long movieId, String title, short runtime, String description, float price, LocalDateTime creationDate) {
 		this(movieId, title, runtime, description, price);
-		this.creationDate = creationDate;
-		if (creationDate != null) {
-			this.creationDate.set(Calendar.MILLISECOND, 0);
-		}
+		this.creationDate = (creationDate != null) ? creationDate.withNano(0) : null;
 	}
 
 	public Long getMovieId() {
@@ -71,15 +68,12 @@ public class Movie {
 		this.price = price;
 	}
 
-	public Calendar getCreationDate() {
+	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Calendar creationDate) {
-		this.creationDate = creationDate;
-		if (creationDate != null) {
-			this.creationDate.set(Calendar.MILLISECOND, 0);
-		}
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = (creationDate != null) ? creationDate.withNano(0) : null;
 	}
 
 	@Override
@@ -97,50 +91,37 @@ public class Movie {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Movie other = (Movie) obj;
 		if (creationDate == null) {
-			if (other.creationDate != null) {
+			if (other.creationDate != null)
 				return false;
-			}
-		} else if (!creationDate.equals(other.creationDate)) {
+		} else if (!creationDate.equals(other.creationDate))
 			return false;
-		}
 		if (description == null) {
-			if (other.description != null) {
+			if (other.description != null)
 				return false;
-			}
-		} else if (!description.equals(other.description)) {
+		} else if (!description.equals(other.description))
 			return false;
-		}
 		if (movieId == null) {
-			if (other.movieId != null) {
+			if (other.movieId != null)
 				return false;
-			}
-		} else if (!movieId.equals(other.movieId)) {
+		} else if (!movieId.equals(other.movieId))
 			return false;
-		}
-		if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price)) {
+		if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price))
 			return false;
-		}
-		if (runtime != other.runtime) {
+		if (runtime != other.runtime)
 			return false;
-		}
 		if (title == null) {
-			if (other.title != null) {
+			if (other.title != null)
 				return false;
-			}
-		} else if (!title.equals(other.title)) {
+		} else if (!title.equals(other.title))
 			return false;
-		}
 		return true;
 	}
 }

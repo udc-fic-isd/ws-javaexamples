@@ -1,7 +1,7 @@
 package es.udc.ws.movies.client.service.rest.json;
 
 import java.io.InputStream;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,10 +29,9 @@ public class JsonClientSaleDtoConversor {
 
 				Long movieId = movieObject.get("movieId").longValue();
 				String movieUrl = movieObject.get("movieUrl").textValue().trim();
-				JsonNode expirationDateNode = movieObject.get("expirationDate");
-				Calendar expirationDate = getExpirationDate(expirationDateNode);
-
-				return new ClientSaleDto(saleId, movieId, expirationDate, movieUrl);
+				String expirationDate = movieObject.get("expirationDate").textValue().trim();
+	
+				return new ClientSaleDto(saleId, movieId, LocalDateTime.parse(expirationDate), movieUrl);
 
 			}
 		} catch (ParsingException ex) {
@@ -40,24 +39,6 @@ public class JsonClientSaleDtoConversor {
 		} catch (Exception e) {
 			throw new ParsingException(e);
 		}
-	}
-
-	private static Calendar getExpirationDate(JsonNode expirationDateNode) {
-
-		if (expirationDateNode == null) {
-			return null;
-		}
-		int day = expirationDateNode.get("day").intValue();
-		int month = expirationDateNode.get("month").intValue();
-		int year = expirationDateNode.get("year").intValue();
-		Calendar releaseDate = Calendar.getInstance();
-
-		releaseDate.set(Calendar.DAY_OF_MONTH, day);
-		releaseDate.set(Calendar.MONTH, Calendar.JANUARY + month - 1);
-		releaseDate.set(Calendar.YEAR, year);
-
-		return releaseDate;
-
 	}
 
 }

@@ -7,7 +7,7 @@ public class SaleToSaleDtoConversor {
 
     public static ServiceSaleDto toSaleDto(Sale sale) {
         return new ServiceSaleDto(sale.getSaleId(), sale.getMovieId(), sale
-                .getExpirationDate(), sale.getMovieUrl());
+                .getExpirationDate().toString(), sale.getMovieUrl());
     }
 
 }

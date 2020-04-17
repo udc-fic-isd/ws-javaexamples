@@ -1,15 +1,22 @@
 package es.udc.ws.movies.client.service.soap;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import javax.xml.ws.BindingProvider;
+
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
-import es.udc.ws.movies.client.service.soap.wsdl.*;
-
+import es.udc.ws.movies.client.service.soap.wsdl.MoviesProvider;
+import es.udc.ws.movies.client.service.soap.wsdl.MoviesProviderService;
+import es.udc.ws.movies.client.service.soap.wsdl.SoapInputValidationException;
+import es.udc.ws.movies.client.service.soap.wsdl.SoapInstanceNotFoundException;
+import es.udc.ws.movies.client.service.soap.wsdl.SoapSaleExpirationException;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
-import java.util.List;
-import javax.xml.ws.BindingProvider;
 
 public class SoapClientMovieService implements ClientMovieService {
 
@@ -102,8 +109,7 @@ public class SoapClientMovieService implements ClientMovieService {
                     ex.getFaultInfo().getInstanceType());
         } catch (SoapSaleExpirationException ex) {
             throw new ClientSaleExpirationException(ex.getFaultInfo().getSaleId(),
-                    ex.getFaultInfo().getExpirationDate()
-                    .toGregorianCalendar());
+                    LocalDateTime.parse(ex.getFaultInfo().getExpirationDate(),DateTimeFormatter.ISO_DATE_TIME));
         }
     }
 

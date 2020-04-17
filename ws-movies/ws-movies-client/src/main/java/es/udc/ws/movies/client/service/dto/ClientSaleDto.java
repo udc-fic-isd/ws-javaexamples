@@ -1,18 +1,18 @@
 package es.udc.ws.movies.client.service.dto;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class ClientSaleDto {
 
     private Long saleId;
     private Long movieId;
-    private Calendar expirationDate;
+    private LocalDateTime expirationDate;
     private String movieUrl;
 
     public ClientSaleDto() {
     }    
     
-    public ClientSaleDto(Long saleId, Long movieId, Calendar expirationDate,
+    public ClientSaleDto(Long saleId, Long movieId, LocalDateTime expirationDate,
             String movieUrl) {
         this.expirationDate = expirationDate;
         this.movieId = movieId;
@@ -36,11 +36,11 @@ public class ClientSaleDto {
         this.movieId = movieId;
     }
 
-    public Calendar getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 

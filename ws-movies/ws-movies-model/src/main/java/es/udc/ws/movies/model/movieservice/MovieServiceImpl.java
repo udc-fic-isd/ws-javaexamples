@@ -1,6 +1,5 @@
 package es.udc.ws.movies.model.movieservice;
 
-import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import static es.udc.ws.movies.model.util.ModelConstants.BASE_URL;
 import static es.udc.ws.movies.model.util.ModelConstants.MAX_PRICE;
 import static es.udc.ws.movies.model.util.ModelConstants.MAX_RUNTIME;
@@ -9,7 +8,7 @@ import static es.udc.ws.movies.model.util.ModelConstants.SALE_EXPIRATION_DAYS;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +17,7 @@ import javax.sql.DataSource;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movie.SqlMovieDao;
 import es.udc.ws.movies.model.movie.SqlMovieDaoFactory;
+import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.model.sale.Sale;
 import es.udc.ws.movies.model.sale.SqlSaleDao;
 import es.udc.ws.movies.model.sale.SqlSaleDaoFactory;
@@ -55,7 +55,7 @@ public class MovieServiceImpl implements MovieService {
 	public Movie addMovie(Movie movie) throws InputValidationException {
 
 		validateMovie(movie);
-		movie.setCreationDate(Calendar.getInstance());
+		movie.setCreationDate(LocalDateTime.now());
 
 		try (Connection connection = dataSource.getConnection()) {
 
@@ -194,10 +194,9 @@ public class MovieServiceImpl implements MovieService {
 
 				/* Do work. */
 				Movie movie = movieDao.find(connection, movieId);
-				Calendar expirationDate = Calendar.getInstance();
-				expirationDate.add(Calendar.DAY_OF_MONTH, SALE_EXPIRATION_DAYS);
+				LocalDateTime expirationDate = LocalDateTime.now().plusDays(SALE_EXPIRATION_DAYS);
 				Sale sale = saleDao.create(connection, new Sale(movieId, userId, expirationDate, creditCardNumber,
-						movie.getPrice(), getMovieUrl(movieId), Calendar.getInstance()));
+						movie.getPrice(), getMovieUrl(movieId), LocalDateTime.now()));
 
 				/* Commit. */
 				connection.commit();
@@ -227,8 +226,8 @@ public class MovieServiceImpl implements MovieService {
 		try (Connection connection = dataSource.getConnection()) {
 
 			Sale sale = saleDao.find(connection, saleId);
-			Calendar now = Calendar.getInstance();
-			if (sale.getExpirationDate().after(now)) {
+			LocalDateTime now = LocalDateTime.now();
+			if (sale.getExpirationDate().isAfter(now)) {
 				return sale;
 			} else {
 				throw new SaleExpirationException(saleId, sale.getExpirationDate());

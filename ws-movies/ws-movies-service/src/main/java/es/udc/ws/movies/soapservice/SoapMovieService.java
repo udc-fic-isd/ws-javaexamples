@@ -113,7 +113,7 @@ public class SoapMovieService {
         } catch (SaleExpirationException ex) {
             throw new SoapSaleExpirationException(
                     new SoapSaleExpirationExceptionInfo(ex.getSaleId(),
-                            ex.getExpirationDate()));
+                            ex.getExpirationDate().toString()));
         }
     }
 

@@ -1,17 +1,15 @@
 package es.udc.ws.movies.soapservice;
 
-import java.util.Calendar;
-
 public class SoapSaleExpirationExceptionInfo {
 
     private Long saleId;
-    private Calendar expirationDate;
+    private String expirationDate;
 
     public SoapSaleExpirationExceptionInfo() {
     }
 
     public SoapSaleExpirationExceptionInfo(Long saleId,
-            Calendar expirationDate) {
+    		String expirationDate) {
         this.saleId = saleId;
         this.expirationDate = expirationDate;
     }
@@ -20,11 +18,11 @@ public class SoapSaleExpirationExceptionInfo {
         return saleId;
     }
 
-    public Calendar getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

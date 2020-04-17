@@ -1,14 +1,14 @@
 package es.udc.ws.movies.model.movieservice.exceptions;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class SaleExpirationException extends Exception {
 
     private Long saleId;
-    private Calendar expirationDate;
+    private LocalDateTime expirationDate;
 
-    public SaleExpirationException(Long saleId, Calendar expirationDate) {
+    public SaleExpirationException(Long saleId, LocalDateTime expirationDate) {
         super("Sale with id=\"" + saleId + 
               "\" has expired (expirationDate = \"" + 
               expirationDate + "\")");
@@ -20,11 +20,11 @@ public class SaleExpirationException extends Exception {
         return saleId;
     }
 
-    public Calendar getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 

@@ -1,18 +1,16 @@
 package es.udc.ws.movies.dto;
 
-import java.util.Calendar;
-
 public class ServiceSaleDto {
 
     private Long saleId;
     private Long movieId;
-    private Calendar expirationDate;
+    private String expirationDate;
     private String movieUrl;
 
     public ServiceSaleDto() {
     }
 
-    public ServiceSaleDto(Long saleId, Long movieId, Calendar expirationDate,
+    public ServiceSaleDto(Long saleId, Long movieId, String expirationDate,
             String movieUrl) {
         this.expirationDate = expirationDate;
         this.movieId = movieId;
@@ -36,11 +34,11 @@ public class ServiceSaleDto {
         this.movieId = movieId;
     }
 
-    public Calendar getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

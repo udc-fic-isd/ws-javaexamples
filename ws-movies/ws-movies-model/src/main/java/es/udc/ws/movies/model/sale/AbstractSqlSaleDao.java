@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 
@@ -40,13 +40,16 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             i = 1;
             Long movieId = resultSet.getLong(i++);
             String userId = resultSet.getString(i++);
-            Calendar expirationDate = Calendar.getInstance();
-            expirationDate.setTime(resultSet.getTimestamp(i++));
-            String creditCardNumber = resultSet.getString(i++);
+			Timestamp expirationDateAsTimestamp = resultSet.getTimestamp(i++);
+			LocalDateTime expirationDate = expirationDateAsTimestamp != null
+					? expirationDateAsTimestamp.toLocalDateTime()
+					: null;
+	           String creditCardNumber = resultSet.getString(i++);
             float price = resultSet.getFloat(i++);
             String movieUrl = resultSet.getString(i++);
-            Calendar saleDate = Calendar.getInstance();
-            saleDate.setTime(resultSet.getTimestamp(i++));
+            Timestamp saleDateAsTimestamp = resultSet.getTimestamp(i++);
+			LocalDateTime saleDate = saleDateAsTimestamp != null ? saleDateAsTimestamp.toLocalDateTime()
+					: null;
 
             /* Return sale. */
             return new Sale(saleId, movieId, userId, expirationDate,
@@ -73,8 +76,7 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             int i = 1;
             preparedStatement.setLong(i++, sale.getMovieId());
             preparedStatement.setString(i++, sale.getUserId());
-            Timestamp date = sale.getExpirationDate() != null ? new Timestamp(
-                    sale.getExpirationDate().getTime().getTime()) : null;
+			Timestamp date = sale.getExpirationDate() != null ? Timestamp.valueOf(sale.getExpirationDate()) : null;
             preparedStatement.setTimestamp(i++, date);
             preparedStatement.setString(i++, sale.getCreditCardNumber());
             preparedStatement.setFloat(i++, sale.getPrice());

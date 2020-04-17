@@ -1,8 +1,8 @@
 package es.udc.ws.util.validation;
 
-import es.udc.ws.util.exceptions.InputValidationException;
 import java.math.BigInteger;
-import java.util.Calendar;
+
+import es.udc.ws.util.exceptions.InputValidationException;
 
 public final class PropertyValidator {
 
@@ -51,18 +51,6 @@ public final class PropertyValidator {
             throw new InputValidationException("Invalid " + propertyName +
                     " value (it cannot be null neither empty): " +
                     stringValue);
-        }
-
-    }
-
-    public static void validatePastDate(String propertyName,
-            Calendar propertyValue) throws InputValidationException {
-
-        Calendar now = Calendar.getInstance();
-        if ( (propertyValue == null) || (propertyValue.after(now)) ) {
-            throw new InputValidationException("Invalid " + propertyName +
-                    " value (it must be a past date): " +
-                    propertyValue);
         }
 
     }

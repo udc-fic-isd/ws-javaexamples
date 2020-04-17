@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -48,8 +49,9 @@ public abstract class AbstractSqlMovieDao implements SqlMovieDao {
             short runtime = resultSet.getShort(i++);
             String description = resultSet.getString(i++);
             float price = resultSet.getFloat(i++);
-            Calendar creationDate = Calendar.getInstance();
-            creationDate.setTime(resultSet.getTimestamp(i++));
+            Timestamp creationDateAsTimestamp = resultSet.getTimestamp(i++);
+			LocalDateTime creationDate = creationDateAsTimestamp != null ? creationDateAsTimestamp.toLocalDateTime()
+					: null;
 
             /* Return movie. */
             return new Movie(movieId, title, runtime, description, price,
@@ -102,8 +104,9 @@ public abstract class AbstractSqlMovieDao implements SqlMovieDao {
                 short runtime = resultSet.getShort(i++);
                 String description = resultSet.getString(i++);
                 float price = resultSet.getFloat(i++);
-                Calendar creationDate = Calendar.getInstance();
-                creationDate.setTime(resultSet.getTimestamp(i++));
+                Timestamp creationDateAsTimestamp = resultSet.getTimestamp(i++);
+    			LocalDateTime creationDate = creationDateAsTimestamp != null ? creationDateAsTimestamp.toLocalDateTime()
+    					: null;
 
                 movies.add(new Movie(movieId, title, runtime, description,
                         price, creationDate));

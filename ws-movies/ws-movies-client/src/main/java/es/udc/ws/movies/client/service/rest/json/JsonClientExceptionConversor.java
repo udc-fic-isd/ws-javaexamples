@@ -1,9 +1,7 @@
 package es.udc.ws.movies.client.service.rest.json;
 
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,14 +65,12 @@ public class JsonClientExceptionConversor {
 				} else {
 					JsonNode data = rootNode.path("saleExpirationException");
 					Long saleId = data.get("saleId").longValue();
-					String expirationDate = data.get("expirationDate").textValue();
-		            Calendar calendar = null;
-		            if (expirationDate != null) {
-		                SimpleDateFormat sdf = new SimpleDateFormat(CONVERSION_PATTERN, Locale.ENGLISH);
-		                calendar = Calendar.getInstance();
-		                calendar.setTime(sdf.parse(expirationDate));
+					String expirationDateAsString = data.get("expirationDate").textValue();
+		            LocalDateTime expirationDate = null;
+		            if (expirationDateAsString != null) {
+		            	expirationDate = LocalDateTime.parse(expirationDateAsString);
 		            }
-		            return new ClientSaleExpirationException(saleId, calendar);
+		            return new ClientSaleExpirationException(saleId, expirationDate);
 				}
 
 	        } catch (Exception e) {
