@@ -48,8 +48,7 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             float price = resultSet.getFloat(i++);
             String movieUrl = resultSet.getString(i++);
             Timestamp saleDateAsTimestamp = resultSet.getTimestamp(i++);
-			LocalDateTime saleDate = saleDateAsTimestamp != null ? saleDateAsTimestamp.toLocalDateTime()
-					: null;
+            LocalDateTime saleDate = saleDateAsTimestamp.toLocalDateTime();
 
             /* Return sale. */
             return new Sale(saleId, movieId, userId, expirationDate,
