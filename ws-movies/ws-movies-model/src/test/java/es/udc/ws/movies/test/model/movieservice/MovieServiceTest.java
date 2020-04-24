@@ -171,11 +171,20 @@ public class MovieServiceTest {
 		Movie addedMovie = null;
 
 		try {
+			LocalDateTime beforeCreationDate = LocalDateTime.now().withNano(0);
 			addedMovie = movieService.addMovie(movie);
+			LocalDateTime afterCreationDate = LocalDateTime.now().withNano(0);
+			
 			Movie foundMovie = movieService.findMovie(addedMovie.getMovieId());
 
 			assertEquals(addedMovie, foundMovie);
-		
+			assertEquals(foundMovie.getTitle(),movie.getTitle());
+			assertEquals(foundMovie.getRuntime(),movie.getRuntime());
+			assertEquals(foundMovie.getDescription(),movie.getDescription());
+			assertEquals(foundMovie.getPrice(),movie.getPrice());
+			assertTrue((foundMovie.getCreationDate().compareTo(beforeCreationDate) >= 0)
+					&& (foundMovie.getCreationDate().compareTo(afterCreationDate) <= 0));
+			
 		} finally {
 			// Clear Database
 			if (addedMovie!=null) {
