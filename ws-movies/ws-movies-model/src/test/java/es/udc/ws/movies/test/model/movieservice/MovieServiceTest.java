@@ -171,10 +171,15 @@ public class MovieServiceTest {
 		Movie addedMovie = null;
 
 		try {
+			
+			// Create Movie
 			LocalDateTime beforeCreationDate = LocalDateTime.now().withNano(0);
+			
 			addedMovie = movieService.addMovie(movie);
+			
 			LocalDateTime afterCreationDate = LocalDateTime.now().withNano(0);
 			
+			// Find Movie
 			Movie foundMovie = movieService.findMovie(addedMovie.getMovieId());
 
 			assertEquals(addedMovie, foundMovie);
@@ -371,29 +376,30 @@ public class MovieServiceTest {
 
 		try {
 
-			/* Buy movie. */
-			LocalDateTime beforeExpirationDate = LocalDateTime.now().plusDays(SALE_EXPIRATION_DAYS).withNano(0);
+			// Buy movie
+			LocalDateTime beforeBuyDate = LocalDateTime.now().withNano(0);
 
 			sale = movieService.buyMovie(movie.getMovieId(), USER_ID, VALID_CREDIT_CARD_NUMBER);
 
-			LocalDateTime afterExpirationDate = LocalDateTime.now().plusDays(SALE_EXPIRATION_DAYS).withNano(0);
+			LocalDateTime afterBuyDate = LocalDateTime.now().withNano(0);
 
-			/* Find sale. */
+			// Find sale
 			Sale foundSale = movieService.findSale(sale.getSaleId());
 
-			/* Check sale. */
+			// Check sale
 			assertEquals(sale, foundSale);
 			assertEquals(VALID_CREDIT_CARD_NUMBER, foundSale.getCreditCardNumber());
 			assertEquals(USER_ID, foundSale.getUserId());
 			assertEquals(movie.getMovieId(), foundSale.getMovieId());
 			assertTrue(movie.getPrice() == foundSale.getPrice());
-			assertTrue((foundSale.getExpirationDate().compareTo(beforeExpirationDate) >= 0)
-					&& (foundSale.getExpirationDate().compareTo(afterExpirationDate) <= 0));
-			assertTrue(LocalDateTime.now().isAfter(foundSale.getSaleDate()));
+			assertTrue((foundSale.getExpirationDate().compareTo(beforeBuyDate.plusDays(SALE_EXPIRATION_DAYS)) >= 0)
+					&& (foundSale.getExpirationDate().compareTo(afterBuyDate.plusDays(SALE_EXPIRATION_DAYS)) <= 0));
+			assertTrue((foundSale.getSaleDate().compareTo(beforeBuyDate) >= 0)
+					&& (foundSale.getSaleDate().compareTo(afterBuyDate) <= 0));
 			assertTrue(foundSale.getMovieUrl().startsWith(BASE_URL + sale.getMovieId()));
 
 		} finally {
-			/* Clear database: remove sale (if created) and movie. */
+			// Clear database: remove sale (if created) and movie
 			if (sale != null) {
 				removeSale(sale.getSaleId());
 			}
@@ -412,7 +418,7 @@ public class MovieServiceTest {
 				removeSale(sale.getSaleId());
 			});
 		} finally {
-			/* Clear database. */
+			// Clear database
 			removeMovie(movie.getMovieId());
 		}
 
