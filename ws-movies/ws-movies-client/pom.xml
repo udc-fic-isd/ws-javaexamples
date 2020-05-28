@@ -17,6 +17,10 @@
 			<groupId>es.udc.ws</groupId>
 			<artifactId>ws-util</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>es.udc.ws.movies</groupId>
+			<artifactId>ws-movies-thrift</artifactId>
+		</dependency>
  		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>fluent-hc</artifactId>

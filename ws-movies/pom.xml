@@ -16,6 +16,7 @@
 
     <modules>
         <module>ws-movies-model</module>
+        <module>ws-movies-thrift</module>
         <module>ws-movies-service</module>
         <module>ws-movies-client</module>
     </modules>
@@ -23,11 +24,14 @@
     <!-- Dependency management -->
     <dependencyManagement>
         <dependencies>
-			
-            <!-- WS-JavaExamples Movies Model Util -->
             <dependency>
                 <groupId>es.udc.ws.movies</groupId>
                 <artifactId>ws-movies-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>es.udc.ws.movies</groupId>
+                <artifactId>ws-movies-thrift</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

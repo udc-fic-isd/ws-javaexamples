@@ -35,7 +35,7 @@
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.12</httpclient.version>
 		<jackson.version>2.11.0</jackson.version>
-		
+		<thrift.version>0.13.0</thrift.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
@@ -58,6 +58,7 @@
 		<surefireMavenPlugin.version>3.0.0-M4</surefireMavenPlugin.version>
 		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
 		<enforcerMavenPlugin.version>3.0.0-M3</enforcerMavenPlugin.version>
+		<thriftMavenPlugin.version>0.10.0</thriftMavenPlugin.version>
 
 	</properties>
 
@@ -120,7 +121,13 @@
     			<groupId>com.fasterxml.jackson.core</groupId>
 			    <artifactId>jackson-databind</artifactId>
     			<version>${jackson.version}</version>
-			</dependency>		
+			</dependency>
+			<!-- Thrift -->
+			<dependency>
+            	<groupId>org.apache.thrift</groupId>
+            	<artifactId>libthrift</artifactId>
+            	<version>${thrift.version}</version>
+            </dependency>		
 			
 		</dependencies>
 	</dependencyManagement>

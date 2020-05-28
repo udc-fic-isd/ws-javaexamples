@@ -21,6 +21,10 @@
 			<artifactId>ws-movies-model</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>es.udc.ws.movies</groupId>
+			<artifactId>ws-movies-thrift</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
