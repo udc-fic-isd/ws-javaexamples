@@ -30,17 +30,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Package versions (except those defined in "profiles" section) -->
-		<commonsDbcp.version>2.5.0</commonsDbcp.version>
-		<junit.version>5.6.2</junit.version>
+		<commonsDbcp.version>2.7.0</commonsDbcp.version>
+		<junit.version>5.7.0-M1</junit.version>
 		<servletApi.version>2.3</servletApi.version>
-		<httpclient.version>4.5.6</httpclient.version>
-		<jackson.version>2.9.9</jackson.version>
+		<httpclient.version>4.5.12</httpclient.version>
+		<jackson.version>2.11.0</jackson.version>
 		
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
 		<jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-		<jdbcDriver.version>8.0.12</jdbcDriver.version>
+		<jdbcDriver.version>8.0.20</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 		<!-- Data source properties -->
@@ -50,11 +50,14 @@
 		<dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
 
 		<!-- Plugin versions -->
-		<mavenCompilerPlugin.version>3.7.0</mavenCompilerPlugin.version>
-		<mavenResourcesPlugin.version>3.1.0</mavenResourcesPlugin.version>
-		<execMavenPlugin.version>1.6.0</execMavenPlugin.version>
+		<compilerMavenPlugin.version>3.8.1</compilerMavenPlugin.version>
+		<resourcesMavenPlugin.version>3.1.0</resourcesMavenPlugin.version>
+		<execMavenPlugin.version>3.0.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
-		<jettyMavenPlugin>9.4.9.v20180320</jettyMavenPlugin>
+		<jettyMavenPlugin.version>9.4.28.v20200408</jettyMavenPlugin.version>
+		<surefireMavenPlugin.version>3.0.0-M4</surefireMavenPlugin.version>
+		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
+		<enforcerMavenPlugin.version>3.0.0-M3</enforcerMavenPlugin.version>
 
 	</properties>
 
@@ -159,23 +162,14 @@
 		<plugins>
 
 			<!-- ========================================================== -->
-			<!-- Surefire plugin -->
-			<!-- Default version does not support JUnit 5. -->
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-			</plugin>
-
-			<!-- ========================================================== -->
 			<!-- Compiler configuration -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${mavenCompilerPlugin.version}</version>
+				<version>${compilerMavenPlugin.version}</version>
 				<configuration>
 					<verbose>true</verbose>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>11</release>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
@@ -187,7 +181,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>${mavenResourcesPlugin.version}</version>
+				<version>${resourcesMavenPlugin.version}</version>
+			</plugin>
+
+			<!-- ========================================================== -->
+			<!-- Surefire plugin -->
+			<!-- Default version does not support JUnit 5. -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefireMavenPlugin.version}</version>
 			</plugin>
 
   			<!-- ========================================================== -->
@@ -263,6 +265,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${assemblyMavenPlugin.version}</version>
 				<configuration>
 					<descriptors>
 						<descriptor>src/main/assembly/src.xml</descriptor>
@@ -275,7 +278,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jettyMavenPlugin}</version>
+				<version>${jettyMavenPlugin.version}</version>
 
 				<configuration>
                     <httpConnector>
@@ -301,6 +304,27 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${enforcerMavenPlugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+								<version>3.0.5</version>
+								</requireMavenVersion>
+							</rules>    
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
 
 		</plugins>
 
