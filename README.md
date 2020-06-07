@@ -11,43 +11,6 @@
 	mvn sql:execute install
 
 
-## Running ws-jaxwstutorial example
----------------------------------------------------------------------
-
-`ws-jaxwstutorial` provides a web service application. `ws-jaxwstutorial` requires the database 
-server to be running.
-
-### Running ws-jaxwstutorial with Maven/Jetty.
-
-	cd ws-jaxwstutorial/ws-jaxwstutorial-service
-	mvn jetty:run
-
-
-### Running ws-jaxwstutorial with Tomcat.
-
-- Copy the `.war` file (e.g. `ws-jaxwstutorial/ws-jaxwstutorial-service/target/ws-jaxwstutorial-service.war`) 
-  to Tomcat's `webapp` directory.
-
-- Start Tomcat:
-
-	cd <<Tomcat home>>/bin
-	startup.sh
-
-- Shutdown Tomcat:
-
-	shutdown.sh
-
-### Running the ws-jaxwstutorial client application
-
-	cd ws-jaxwstutorial/ws-jaxwstutorial-client
-	# NOTE: if the service is running on Tomcat, use 8080 (Tomcat) instead of 9090 (Jetty).
-	mvn exec:java -Dexec.mainClass="es.udc.ws.jaxwstutorial.client.StockQuoteProviderClient" -Dexec.args="http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService IBM MIC"
-
-
-- Accessing to the WSDL file for ws-jaxwstutorial service (9090 for Jetty, 8080 for Tomcat)
-    - [http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService?wsdl](http://localhost:9090/ws-jaxwstutorial-service/services/StockQuotesService?wsdl)
-
-
 ## Running the ws-movies example
 ---------------------------------------------------------------------
 
@@ -107,10 +70,6 @@ Configure `src/main/resources/ConfigurationParameters.properties`
 - RemoveMovie
 
 	mvn exec:java -Dexec.mainClass="es.udc.ws.movies.client.ui.MovieServiceClient" -Dexec.args="-r 1"
-
-
-- Accessing to the WSDL file for ws-movies service (9090 for Jetty, 8080 for Tomcat)
-    - [http://localhost:9090/ws-movies-service/services/MoviesService?wsdl](http://localhost:9090/ws-movies-service/services/MoviesService?wsdl)
 
 - Accessing to ws-movies resources (9090 for Jetty, 8080 for Tomcat)
     - movies   - GET [http://localhost:9090/ws-movies-service/movies](http://localhost:9090/ws-movies-service/movies)

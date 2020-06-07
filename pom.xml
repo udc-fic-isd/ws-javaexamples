@@ -11,7 +11,6 @@
 
 	<modules>
 		<module>ws-jdbctutorial</module>
-		<module>ws-jaxwstutorial</module>
 		<module>ws-util</module>
 		<module>ws-movies</module>
 	</modules>
@@ -35,7 +34,6 @@
 		<junit.version>5.6.2</junit.version>
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.6</httpclient.version>
-		<jaxws.version>2.3.0.2</jaxws.version>
 		<jackson.version>2.9.9</jackson.version>
 		
 
@@ -57,37 +55,12 @@
 		<execMavenPlugin.version>1.6.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
 		<jettyMavenPlugin>9.4.9.v20180320</jettyMavenPlugin>
-		<jaxwsMavenPlugin>2.5</jaxwsMavenPlugin>
 
 	</properties>
 
 	<!-- ========================================================== -->
 	<!-- Profiles -->
 	<profiles>
-		<profile>
-			<id>win</id>
-			<activation>
-				<os>
-					<family>windows</family>
-				</os>
-			</activation>
-			<properties>
-				<tool.wsgen>${java.home}/../bin/wsgen.exe</tool.wsgen>
-				<tool.wsimport>${java.home}/../bin/wsimport.exe</tool.wsimport>
-			</properties>
-		</profile>
-		<profile>
-			<id>nix</id>
-			<activation>
-				<os>
-					<family>!windows</family>
-				</os>
-			</activation>
-			<properties>
-				<tool.wsgen>${java.home}/../bin/wsgen</tool.wsgen>
-				<tool.wsimport>${java.home}/../bin/wsimport</tool.wsimport>
-			</properties>
-		</profile>
 	</profiles>
 
 	<!-- ========================================================== -->
@@ -126,12 +99,6 @@
 				<artifactId>servlet-api</artifactId>
 				<version>${servletApi.version}</version>
 				<scope>provided</scope>
-			</dependency>
-			<!-- JAXWS -->
-			<dependency>
-				<groupId>com.sun.xml.ws</groupId>
-				<artifactId>jaxws-rt</artifactId>
-				<version>${jaxws.version}</version>
 			</dependency>
 			<!-- WS-JavaExamples Util -->
 			<dependency>
@@ -349,20 +316,6 @@
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>>org.codehaus.mojo</groupId>
-										<artifactId>jaxws-maven-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>wsgen</goal>
-											<goal>wsimport</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.codehaus.mojo</groupId>

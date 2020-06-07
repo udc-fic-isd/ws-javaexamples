@@ -22,29 +22,4 @@
 			<artifactId>fluent-hc</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxws-maven-plugin</artifactId>
-				<version>${jaxwsMavenPlugin}</version>
-				<executions>
-					<execution>
-						<id>wsimport-from-jdk</id>
-						<goals>
-							<goal>wsimport</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>${tool.wsimport}</executable>
-					<wsdlDirectory>../ws-movies-service/target/generated-sources/wsdl/</wsdlDirectory>
-					<sourceDestDir>src/main/java</sourceDestDir>
-					<packageName>es.udc.ws.movies.client.service.soap.wsdl</packageName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>

@@ -21,40 +21,8 @@
 			<artifactId>ws-movies-model</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-rt</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<finalName>ws-movies-service</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxws-maven-plugin</artifactId>
-				<version>${jaxwsMavenPlugin}</version>
-				<executions>
-					<execution>
-						<id>wsgen-from-jdk</id>
-						<goals>
-							<goal>wsgen</goal>
-						</goals>
-						<configuration>
-							<executable>${tool.wsgen}</executable>
-							<sei>
-								es.udc.ws.movies.soapservice.SoapMovieService
-							</sei>
-							<genWsdl>true</genWsdl>
-							<keep>true</keep>
-							<verbose>true</verbose>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
