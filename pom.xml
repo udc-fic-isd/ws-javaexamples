@@ -176,6 +176,9 @@
 				<version>${compilerMavenPlugin.version}</version>
 				<configuration>
 					<verbose>true</verbose>
+                    <!-- Source & target are not necessary, but intelliJ depends on it to set the Java compiler settings  -->
+                    <source>11</source>
+                    <target>11</target>					
 					<release>11</release>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<showDeprecation>true</showDeprecation>
