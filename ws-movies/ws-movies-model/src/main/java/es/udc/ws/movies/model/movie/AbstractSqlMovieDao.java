@@ -98,7 +98,7 @@ public abstract class AbstractSqlMovieDao implements SqlMovieDao {
             while (resultSet.next()) {
 
                 int i = 1;
-                Long movieId = new Long(resultSet.getLong(i++));
+                Long movieId = Long.valueOf(resultSet.getLong(i++));
                 String title = resultSet.getString(i++);
                 short runtime = resultSet.getShort(i++);
                 String description = resultSet.getString(i++);
