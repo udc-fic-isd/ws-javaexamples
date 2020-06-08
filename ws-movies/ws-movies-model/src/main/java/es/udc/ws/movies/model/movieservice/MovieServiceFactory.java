@@ -16,7 +16,7 @@ public class MovieServiceFactory {
             String serviceClassName = ConfigurationParametersManager
                     .getParameter(CLASS_NAME_PARAMETER);
             Class serviceClass = Class.forName(serviceClassName);
-            return (MovieService) serviceClass.newInstance();
+            return (MovieService) serviceClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -23,7 +23,7 @@ public class SqlSaleDaoFactory {
             String daoClassName = ConfigurationParametersManager
                     .getParameter(CLASS_NAME_PARAMETER);
             Class daoClass = Class.forName(daoClassName);
-            return (SqlSaleDao) daoClass.newInstance();
+            return (SqlSaleDao) daoClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

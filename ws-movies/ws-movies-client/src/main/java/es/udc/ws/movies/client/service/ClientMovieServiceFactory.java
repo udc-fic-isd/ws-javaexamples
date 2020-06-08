@@ -2,6 +2,8 @@ package es.udc.ws.movies.client.service;
 
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class ClientMovieServiceFactory {
 
     private final static String CLASS_NAME_PARAMETER
@@ -30,8 +32,8 @@ public class ClientMovieServiceFactory {
     public static ClientMovieService getService() {
 
         try {
-            return (ClientMovieService) getServiceClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return (ClientMovieService) getServiceClass().getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
 
