@@ -31,7 +31,7 @@
 
 		<!-- Package versions (except those defined in "profiles" section) -->
 		<commonsDbcp.version>2.7.0</commonsDbcp.version>
-		<junit.version>5.7.0-M1</junit.version>
+		<junit.version>5.6.2</junit.version>
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.12</httpclient.version>
 		<jackson.version>2.11.0</jackson.version>
@@ -55,9 +55,9 @@
 		<execMavenPlugin.version>3.0.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
 		<jettyMavenPlugin.version>9.4.28.v20200408</jettyMavenPlugin.version>
-		<surefireMavenPlugin.version>3.0.0-M4</surefireMavenPlugin.version>
+		<surefireMavenPlugin.version>2.22.2</surefireMavenPlugin.version>
 		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
-		<enforcerMavenPlugin.version>3.0.0-M3</enforcerMavenPlugin.version>
+		<enforcerMavenPlugin.version>1.4.1</enforcerMavenPlugin.version>
 		<thriftMavenPlugin.version>0.10.0</thriftMavenPlugin.version>
 
 	</properties>
