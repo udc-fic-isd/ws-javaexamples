@@ -7,7 +7,7 @@
     <parent>
         <groupId>es.udc.ws</groupId>
         <artifactId>ws-javaexamples</artifactId>
-        <version>3.3.0</version>
+        <version>3.4.0</version>
     </parent>
     <artifactId>ws-jdbctutorial</artifactId>
     <packaging>jar</packaging>

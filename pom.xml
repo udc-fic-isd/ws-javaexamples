@@ -6,7 +6,7 @@
 	<groupId>es.udc.ws</groupId>
 	<artifactId>ws-javaexamples</artifactId>
 	<packaging>pom</packaging>
-	<version>3.3.0</version>
+	<version>3.4.0</version>
 	<name>WS-JavaExamples Project</name>
 
 	<modules>
@@ -338,37 +338,6 @@
 
 		</plugins>
 
-		<!-- ========================================================== -->
-		<!-- Prevent m2eclipse plugin to mark projects as invalid -->
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>sql-maven-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>execute</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 
 	</build>
 
