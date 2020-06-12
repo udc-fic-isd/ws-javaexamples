@@ -8,14 +8,38 @@ struct ThriftMovieDto {
     5: double price
 }
 
+struct ThriftSaleDto {
+    1: i64 saleId;
+    2: i64 movieId;
+    3: string expirationDate;
+    4: string movieUrl;
+}
+
 exception ThriftInputValidationException {
     1: string message
+}
+
+exception ThriftInstanceNotFoundException {
+    1: string instanceId
+    2: string instanceType
+}
+
+exception ThriftSaleExpirationException {
+    1: i64 saleId;
+    3: string expirationDate;
 }
 
 service ThriftMovieService {
 
    i64 addMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e)
 
-   list<ThriftMovieDto> findMovies(1: string keywords);
+   void updateMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e1, 2: ThriftInstanceNotFoundException e2)
 
+   void removeMovie(1: i64 movieId) throws (1: ThriftInstanceNotFoundException e)
+
+   list<ThriftMovieDto> findMovies(1: string keywords)
+
+   i64 buyMovie(1: i64 movieId, 2: string userId, 3: string creditCardNumber) throws (1: ThriftInputValidationException e1, 2: ThriftInstanceNotFoundException e2)
+
+   ThriftSaleDto findSale(1: i64 saleId) throws (1: ThriftInstanceNotFoundException e1, 2: ThriftSaleExpirationException e2)
 }

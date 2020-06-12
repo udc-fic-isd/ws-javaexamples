@@ -4,7 +4,9 @@ import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.movies.thrift.ThriftInputValidationException;
+import es.udc.ws.movies.thrift.ThriftInstanceNotFoundException;
 import es.udc.ws.movies.thrift.ThriftMovieService;
+import es.udc.ws.movies.thrift.ThriftSaleExpirationException;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -14,15 +16,17 @@ import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ThriftClientMovieService implements ClientMovieService {
 
     private final static String ENDPOINT_ADDRESS_PARAMETER =
-        "ThriftClientMovieService.endpointAddress";
+            "ThriftClientMovieService.endpointAddress";
 
     private final static String endpointAddress =
-        ConfigurationParametersManager.getParameter(ENDPOINT_ADDRESS_PARAMETER);
+            ConfigurationParametersManager.getParameter(ENDPOINT_ADDRESS_PARAMETER);
 
     @Override
     public Long addMovie(ClientMovieDto movie) throws InputValidationException {
@@ -37,19 +41,46 @@ public class ThriftClientMovieService implements ClientMovieService {
         } catch (ThriftInputValidationException e) {
             throw new InputValidationException(e.getMessage());
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
     }
 
     @Override
-    public void updateMovie(ClientMovieDto movie)
-        throws InputValidationException, InstanceNotFoundException {
+    public void updateMovie(ClientMovieDto movie) throws InputValidationException, InstanceNotFoundException {
+
+        ThriftMovieService.Client client = getClient();
+
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+
+            transport.open();
+            client.updateMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie));
+
+        } catch (ThriftInputValidationException e) {
+            throw new InputValidationException(e.getMessage());
+        } catch (ThriftInstanceNotFoundException e) {
+            throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
     public void removeMovie(Long movieId) throws InstanceNotFoundException {
+
+        ThriftMovieService.Client client = getClient();
+
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+
+            transport.open();
+            client.removeMovie(movieId);
+
+        } catch (ThriftInstanceNotFoundException e) {
+            throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -70,17 +101,44 @@ public class ThriftClientMovieService implements ClientMovieService {
     }
 
     @Override
-    public Long buyMovie(Long movieId, String userId, String creditCardNumber)
-        throws InstanceNotFoundException, InputValidationException {
+    public Long buyMovie(Long movieId, String userId, String creditCardNumber) throws InstanceNotFoundException,
+            InputValidationException {
 
-        return null;
+        ThriftMovieService.Client client = getClient();
+
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+
+            transport.open();
+            return client.buyMovie(movieId, userId, creditCardNumber);
+
+        } catch (ThriftInputValidationException e) {
+            throw new InputValidationException(e.getMessage());
+        } catch (ThriftInstanceNotFoundException e) {
+            throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
-    public String getMovieUrl(Long saleId) throws InstanceNotFoundException,
-        ClientSaleExpirationException {
+    public String getMovieUrl(Long saleId) throws InstanceNotFoundException, ClientSaleExpirationException {
 
-        return null;
+        ThriftMovieService.Client client = getClient();
+
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+
+            transport.open();
+            return client.findSale(saleId).getMovieUrl();
+
+        } catch (ThriftInstanceNotFoundException e) {
+            throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
+        } catch (ThriftSaleExpirationException e) {
+            throw new ClientSaleExpirationException(e.getSaleId(), LocalDateTime.parse(e.getExpirationDate(),
+                    DateTimeFormatter.ISO_DATE_TIME));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
