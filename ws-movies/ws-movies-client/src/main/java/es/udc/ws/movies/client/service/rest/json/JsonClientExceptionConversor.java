@@ -15,8 +15,6 @@ import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonClientExceptionConversor {
 
-	   public final static String CONVERSION_PATTERN = "EEE, d MMM yyyy HH:mm:ss Z";
-
 	    public static InputValidationException fromInputValidationException(InputStream ex) 
 	            throws ParsingException {
 	        try {

@@ -9,8 +9,6 @@ import es.udc.ws.util.exceptions.InstanceNotFoundException;
 
 public class JsonServiceExceptionConversor {
 
-    public final static String CONVERSION_PATTERN = "EEE, d MMM yyyy HH:mm:ss Z";
-
 	public static ObjectNode toInputValidationException(InputValidationException ex) {
 		
     	ObjectNode exceptionObject = JsonNodeFactory.instance.objectNode();
