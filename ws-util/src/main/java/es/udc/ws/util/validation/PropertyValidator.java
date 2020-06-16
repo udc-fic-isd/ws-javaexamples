@@ -47,7 +47,7 @@ public final class PropertyValidator {
     public static void validateMandatoryString(String propertyName,
             String stringValue) throws InputValidationException {
 
-        if ( (stringValue == null) || (stringValue.length() == 0) ) {
+        if ( (stringValue == null) || (stringValue.trim().length() == 0) ) {
             throw new InputValidationException("Invalid " + propertyName +
                     " value (it cannot be null neither empty): " +
                     stringValue);
