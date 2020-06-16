@@ -36,7 +36,8 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
         } catch (InputValidationException e) {
             throw new ThriftInputValidationException(e.getMessage());
         } catch (InstanceNotFoundException e) {
-            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(), e.getInstanceType());
+            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
+                    e.getInstanceType().substring(e.getInstanceType().lastIndexOf('.') + 1));
         }
 
     }
@@ -48,7 +49,8 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
         try {
             MovieServiceFactory.getService().removeMovie(movieId);
         } catch (InstanceNotFoundException e) {
-            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(), e.getInstanceType());
+            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
+                    e.getInstanceType().substring(e.getInstanceType().lastIndexOf('.') + 1));
         }
 
     }
@@ -72,7 +74,8 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
             return sale.getSaleId();
 
         } catch (InstanceNotFoundException e) {
-            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(), e.getInstanceType());
+            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
+                    e.getInstanceType().substring(e.getInstanceType().lastIndexOf('.') + 1));
         } catch (InputValidationException e) {
             throw new ThriftInputValidationException(e.getMessage());
         }
@@ -88,7 +91,8 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
             return SaleToThriftSaleDtoConversor.toThriftSaleDto(sale);
 
         } catch (InstanceNotFoundException e) {
-            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(), e.getInstanceType());
+            throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
+                    e.getInstanceType().substring(e.getInstanceType().lastIndexOf('.') + 1));
         } catch (SaleExpirationException e) {
             throw new ThriftSaleExpirationException(e.getSaleId(), e.getExpirationDate().toString());
         }

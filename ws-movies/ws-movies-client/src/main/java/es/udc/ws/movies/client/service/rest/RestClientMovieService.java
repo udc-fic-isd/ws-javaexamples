@@ -1,21 +1,7 @@
 package es.udc.ws.movies.client.service.rest;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.entity.ContentType;
-
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
@@ -26,7 +12,18 @@ import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.json.ObjectMapperFactory;
-import es.udc.ws.util.json.exceptions.ParsingException;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.List;
 
 public class RestClientMovieService implements ClientMovieService {
 
@@ -98,7 +95,7 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             HttpResponse response = Request.Get(getEndpointAddress() + "movies?keywords="
-                            + URLEncoder.encode(keywords, "UTF-8")).
+                    + URLEncoder.encode(keywords, "UTF-8")).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_OK, response);
@@ -121,10 +118,10 @@ public class RestClientMovieService implements ClientMovieService {
             HttpResponse response = Request.Post(getEndpointAddress() + "sales").
                     bodyForm(
                             Form.form().
-                            add("movieId", Long.toString(movieId)).
-                            add("userId", userId).
-                            add("creditCardNumber", creditCardNumber).
-                            build()).
+                                    add("movieId", Long.toString(movieId)).
+                                    add("userId", userId).
+                                    add("creditCardNumber", creditCardNumber).
+                                    build()).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
@@ -176,7 +173,8 @@ public class RestClientMovieService implements ClientMovieService {
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectMapper objectMapper = ObjectMapperFactory.instance();
-            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream, JsonClientMovieDtoConversor.toObjectNode(movie));
+            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream,
+                    JsonClientMovieDtoConversor.toObjectNode(movie));
 
             return new ByteArrayInputStream(outputStream.toByteArray());
 
@@ -186,9 +184,7 @@ public class RestClientMovieService implements ClientMovieService {
 
     }
 
-    private void validateStatusCode(int successCode, HttpResponse response)
-            throws InstanceNotFoundException, ClientSaleExpirationException,
-            InputValidationException, ParsingException {
+    private void validateStatusCode(int successCode, HttpResponse response) throws Exception {
 
         try {
 
@@ -203,15 +199,15 @@ public class RestClientMovieService implements ClientMovieService {
             switch (statusCode) {
 
                 case HttpStatus.SC_NOT_FOUND:
-                    throw JsonClientExceptionConversor.fromInstanceNotFoundException(
+                    throw JsonClientExceptionConversor.fromNotFoundErrorCode(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_BAD_REQUEST:
-                    throw JsonClientExceptionConversor.fromInputValidationException(
+                    throw JsonClientExceptionConversor.fromBadRequestErrorCode(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_GONE:
-                    throw JsonClientExceptionConversor.fromSaleExpirationException(
+                    throw JsonClientExceptionConversor.fromGoneErrorCode(
                             response.getEntity().getContent());
 
                 default:
