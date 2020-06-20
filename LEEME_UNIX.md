@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2019-2020 - Linux y macOS
+# Instalación / Configuración entorno ISD / 2020-2021 - Linux y macOS
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW
@@ -27,7 +27,7 @@
 
 ```shell
     cd $HOME/software
-    tar zxf ws-javaexamples-3.3.0-src.tar.gz
+    tar zxf ws-javaexamples-3.4.0-src.tar.gz
 ```
 
 ## Establecer variables de entorno
@@ -180,7 +180,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-    cd $HOME/software/ws-javaexamples-3.3.0
+    cd $HOME/software/ws-javaexamples-3.4.0
     mvn sql:execute install
 ```
     

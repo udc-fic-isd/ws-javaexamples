@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2019-2020 - Windows
+# Instalación / Configuración entorno ISD / 2020-2021 - Windows
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW 
@@ -117,7 +117,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-	cd C:/software/ws-javaexamples-3.3.0
+	cd C:/software/ws-javaexamples-3.4.0
 	mvn sql:execute install
 ```
 	
