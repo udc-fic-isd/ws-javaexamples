@@ -3,11 +3,11 @@ package es.udc.ws.movies.restservice.json;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import es.udc.ws.movies.dto.ServiceSaleDto;
+import es.udc.ws.movies.restservice.dto.RestSaleDto;
 
-public class JsonServiceSaleDtoConversor {
+public class JsonToRestSaleDtoConversor {
 
-	public static ObjectNode toObjectNode(ServiceSaleDto sale) {		
+	public static ObjectNode toObjectNode(RestSaleDto sale) {
 
 		ObjectNode saleNode = JsonNodeFactory.instance.objectNode();
 

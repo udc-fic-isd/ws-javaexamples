@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.udc.ws.movies.dto.ServiceMovieDto;
+import es.udc.ws.movies.restservice.dto.RestMovieDto;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
-import es.udc.ws.movies.restservice.json.JsonServiceExceptionConversor;
-import es.udc.ws.movies.restservice.json.JsonServiceMovieDtoConversor;
-import es.udc.ws.movies.serviceutil.MovieToMovieDtoConversor;
+import es.udc.ws.movies.restservice.json.JsonToExceptionConversor;
+import es.udc.ws.movies.restservice.json.JsonToRestMovieDtoConversor;
+import es.udc.ws.movies.restservice.dto.MovieToRestMovieDtoConversor;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.json.exceptions.ParsingException;
@@ -29,35 +29,35 @@ public class MoviesServlet extends HttpServlet {
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path != null && path.length() > 0) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(
+					JsonToExceptionConversor.toInputValidationException(
 							new InputValidationException("Invalid Request: " + "invalid path " + path)),
 					null);
 			return;
 		}
-		ServiceMovieDto movieDto;
+		RestMovieDto movieDto;
 		try {
-			movieDto = JsonServiceMovieDtoConversor.toServiceMovieDto(req.getInputStream());
+			movieDto = JsonToRestMovieDtoConversor.toServiceMovieDto(req.getInputStream());
 		} catch (ParsingException ex) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonServiceExceptionConversor
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException(ex.getMessage())), null);
 			return;
 		}
-		Movie movie = MovieToMovieDtoConversor.toMovie(movieDto);
+		Movie movie = MovieToRestMovieDtoConversor.toMovie(movieDto);
 		try {
 			movie = MovieServiceFactory.getService().addMovie(movie);
 		} catch (InputValidationException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(ex), null);
+					JsonToExceptionConversor.toInputValidationException(ex), null);
 			return;
 		}
-		movieDto = MovieToMovieDtoConversor.toMovieDto(movie);
+		movieDto = MovieToRestMovieDtoConversor.toRestMovieDto(movie);
 
 		String movieURL = ServletUtils.normalizePath(req.getRequestURL().toString()) + "/" + movie.getMovieId();
 		Map<String, String> headers = new HashMap<>(1);
 		headers.put("Location", movieURL);
 
 		ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_CREATED,
-				JsonServiceMovieDtoConversor.toObjectNode(movieDto), headers);
+				JsonToRestMovieDtoConversor.toObjectNode(movieDto), headers);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class MoviesServlet extends HttpServlet {
 
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path == null || path.length() == 0) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonServiceExceptionConversor
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException("Invalid Request: " + "invalid movie id")),
 					null);
 			return;
@@ -76,37 +76,37 @@ public class MoviesServlet extends HttpServlet {
 			movieId = Long.valueOf(movieIdAsString);
 		} catch (NumberFormatException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(new InputValidationException(
+					JsonToExceptionConversor.toInputValidationException(new InputValidationException(
 							"Invalid Request: " + "invalid movie id '" + movieIdAsString + "'")),
 					null);
 			return;
 		}
 
-		ServiceMovieDto movieDto;
+		RestMovieDto movieDto;
 		try {
-			movieDto = JsonServiceMovieDtoConversor.toServiceMovieDto(req.getInputStream());
+			movieDto = JsonToRestMovieDtoConversor.toServiceMovieDto(req.getInputStream());
 		} catch (ParsingException ex) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonServiceExceptionConversor
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException(ex.getMessage())), null);
 			return;
 
 		}
 		if (!movieId.equals(movieDto.getMovieId())) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonServiceExceptionConversor
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException("Invalid Request: " + "invalid movieId")),
 					null);
 			return;
 		}
-		Movie movie = MovieToMovieDtoConversor.toMovie(movieDto);
+		Movie movie = MovieToRestMovieDtoConversor.toMovie(movieDto);
 		try {
 			MovieServiceFactory.getService().updateMovie(movie);
 		} catch (InputValidationException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(ex), null);
+					JsonToExceptionConversor.toInputValidationException(ex), null);
 			return;
 		} catch (InstanceNotFoundException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
-					JsonServiceExceptionConversor.toInstanceNotFoundException(ex), null);
+					JsonToExceptionConversor.toInstanceNotFoundException(ex), null);
 			return;
 		}
 		ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NO_CONTENT, null, null);
@@ -116,7 +116,7 @@ public class MoviesServlet extends HttpServlet {
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path == null || path.length() == 0) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonServiceExceptionConversor
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException("Invalid Request: " + "invalid movie id")),
 					null);
 			return;
@@ -127,7 +127,7 @@ public class MoviesServlet extends HttpServlet {
 			movieId = Long.valueOf(movieIdAsString);
 		} catch (NumberFormatException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(new InputValidationException(
+					JsonToExceptionConversor.toInputValidationException(new InputValidationException(
 							"Invalid Request: " + "invalid movie id '" + movieIdAsString + "'")),
 					null);
 
@@ -137,7 +137,7 @@ public class MoviesServlet extends HttpServlet {
 			MovieServiceFactory.getService().removeMovie(movieId);
 		} catch (InstanceNotFoundException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
-					JsonServiceExceptionConversor.toInstanceNotFoundException(ex), null);
+					JsonToExceptionConversor.toInstanceNotFoundException(ex), null);
 			return;
 		}
 		ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NO_CONTENT, null, null);
@@ -149,12 +149,12 @@ public class MoviesServlet extends HttpServlet {
 		if (path == null || path.length() == 0) {
 			String keyWords = req.getParameter("keywords");
 			List<Movie> movies = MovieServiceFactory.getService().findMovies(keyWords);
-			List<ServiceMovieDto> movieDtos = MovieToMovieDtoConversor.toMovieDtos(movies);
+			List<RestMovieDto> movieDtos = MovieToRestMovieDtoConversor.toRestMovieDtos(movies);
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_OK,
-					JsonServiceMovieDtoConversor.toArrayNode(movieDtos), null);
+					JsonToRestMovieDtoConversor.toArrayNode(movieDtos), null);
 		} else {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					JsonServiceExceptionConversor.toInputValidationException(
+					JsonToExceptionConversor.toInputValidationException(
 							new InputValidationException("Invalid Request: " + "invalid path " + path)),
 					null);
 		}

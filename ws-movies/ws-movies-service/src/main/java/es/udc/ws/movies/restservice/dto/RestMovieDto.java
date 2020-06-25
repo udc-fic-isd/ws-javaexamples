@@ -1,6 +1,6 @@
-package es.udc.ws.movies.dto;
+package es.udc.ws.movies.restservice.dto;
 
-public class ServiceMovieDto {
+public class RestMovieDto {
 
     private Long movieId;
     private String title;
@@ -8,11 +8,11 @@ public class ServiceMovieDto {
     private String description;
     private float price;
 
-    public ServiceMovieDto() {
+    public RestMovieDto() {
     }
 
-    public ServiceMovieDto(Long movieId, String title, short runtime,
-            String description, float price) {
+    public RestMovieDto(Long movieId, String title, short runtime,
+                        String description, float price) {
 
         this.movieId = movieId;
         this.title = title;

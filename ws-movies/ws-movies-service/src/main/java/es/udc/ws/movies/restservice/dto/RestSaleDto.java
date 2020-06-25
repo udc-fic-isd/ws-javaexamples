@@ -1,17 +1,17 @@
-package es.udc.ws.movies.dto;
+package es.udc.ws.movies.restservice.dto;
 
-public class ServiceSaleDto {
+public class RestSaleDto {
 
     private Long saleId;
     private Long movieId;
     private String expirationDate;
     private String movieUrl;
 
-    public ServiceSaleDto() {
+    public RestSaleDto() {
     }
 
-    public ServiceSaleDto(Long saleId, Long movieId, String expirationDate,
-            String movieUrl) {
+    public RestSaleDto(Long saleId, Long movieId, String expirationDate,
+                       String movieUrl) {
         this.expirationDate = expirationDate;
         this.movieId = movieId;
         this.movieUrl = movieUrl;

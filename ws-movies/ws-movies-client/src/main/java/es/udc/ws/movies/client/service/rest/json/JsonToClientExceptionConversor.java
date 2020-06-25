@@ -12,7 +12,7 @@ import es.udc.ws.util.json.exceptions.ParsingException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 
-public class JsonClientExceptionConversor {
+public class JsonToClientExceptionConversor {
 
     public static Exception fromBadRequestErrorCode(InputStream ex) throws ParsingException {
         try {

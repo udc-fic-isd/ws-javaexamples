@@ -12,7 +12,7 @@ import es.udc.ws.movies.client.service.dto.ClientSaleDto;
 import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
-public class JsonClientSaleDtoConversor {
+public class JsonToClientSaleDtoConversor {
 
 	public static ClientSaleDto toClientSaleDto(InputStream jsonSale) throws ParsingException {
 		try {

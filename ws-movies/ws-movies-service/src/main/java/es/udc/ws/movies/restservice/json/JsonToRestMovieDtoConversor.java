@@ -10,13 +10,13 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import es.udc.ws.movies.dto.ServiceMovieDto;
+import es.udc.ws.movies.restservice.dto.RestMovieDto;
 import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
-public class JsonServiceMovieDtoConversor {
+public class JsonToRestMovieDtoConversor {
 
-	public static ObjectNode toObjectNode(ServiceMovieDto movie) {
+	public static ObjectNode toObjectNode(RestMovieDto movie) {
 
 		ObjectNode movieObject = JsonNodeFactory.instance.objectNode();
 
@@ -31,11 +31,11 @@ public class JsonServiceMovieDtoConversor {
 		return movieObject;
 	}
 
-	public static ArrayNode toArrayNode(List<ServiceMovieDto> movies) {
+	public static ArrayNode toArrayNode(List<RestMovieDto> movies) {
 
 		ArrayNode moviesNode = JsonNodeFactory.instance.arrayNode();
 		for (int i = 0; i < movies.size(); i++) {
-			ServiceMovieDto movieDto = movies.get(i);
+			RestMovieDto movieDto = movies.get(i);
 			ObjectNode movieObject = toObjectNode(movieDto);
 			moviesNode.add(movieObject);
 		}
@@ -43,7 +43,7 @@ public class JsonServiceMovieDtoConversor {
 		return moviesNode;
 	}
 
-	public static ServiceMovieDto toServiceMovieDto(InputStream jsonMovie) throws ParsingException {
+	public static RestMovieDto toServiceMovieDto(InputStream jsonMovie) throws ParsingException {
 		try {
 			ObjectMapper objectMapper = ObjectMapperFactory.instance();
 			JsonNode rootNode = objectMapper.readTree(jsonMovie);
@@ -61,7 +61,7 @@ public class JsonServiceMovieDtoConversor {
 				short runtime =  movieObject.get("runtime").shortValue();
 				float price = movieObject.get("price").floatValue();
 
-				return new ServiceMovieDto(movieId, title, runtime, description, price);
+				return new RestMovieDto(movieId, title, runtime, description, price);
 			}
 		} catch (ParsingException ex) {
 			throw ex;

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
-import es.udc.ws.movies.client.service.rest.json.JsonClientExceptionConversor;
-import es.udc.ws.movies.client.service.rest.json.JsonClientMovieDtoConversor;
-import es.udc.ws.movies.client.service.rest.json.JsonClientSaleDtoConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonToClientExceptionConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonToClientMovieDtoConversor;
+import es.udc.ws.movies.client.service.rest.json.JsonToClientSaleDtoConversor;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -41,7 +41,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
 
-            return JsonClientMovieDtoConversor.toClientMovieDto(response.getEntity().getContent()).getMovieId();
+            return JsonToClientMovieDtoConversor.toClientMovieDto(response.getEntity().getContent()).getMovieId();
 
         } catch (InputValidationException e) {
             throw e;
@@ -100,7 +100,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_OK, response);
 
-            return JsonClientMovieDtoConversor.toClientMovieDtos(response.getEntity()
+            return JsonToClientMovieDtoConversor.toClientMovieDtos(response.getEntity()
                     .getContent());
 
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
 
-            return JsonClientSaleDtoConversor.toClientSaleDto(
+            return JsonToClientSaleDtoConversor.toClientSaleDto(
                     response.getEntity().getContent()).getSaleId();
 
         } catch (InputValidationException | InstanceNotFoundException e) {
@@ -148,7 +148,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_OK, response);
 
-            return JsonClientSaleDtoConversor.toClientSaleDto(
+            return JsonToClientSaleDtoConversor.toClientSaleDto(
                     response.getEntity().getContent()).getMovieUrl();
 
         } catch (InstanceNotFoundException | ClientSaleExpirationException e) {
@@ -174,7 +174,7 @@ public class RestClientMovieService implements ClientMovieService {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectMapper objectMapper = ObjectMapperFactory.instance();
             objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream,
-                    JsonClientMovieDtoConversor.toObjectNode(movie));
+                    JsonToClientMovieDtoConversor.toObjectNode(movie));
 
             return new ByteArrayInputStream(outputStream.toByteArray());
 
@@ -199,15 +199,15 @@ public class RestClientMovieService implements ClientMovieService {
             switch (statusCode) {
 
                 case HttpStatus.SC_NOT_FOUND:
-                    throw JsonClientExceptionConversor.fromNotFoundErrorCode(
+                    throw JsonToClientExceptionConversor.fromNotFoundErrorCode(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_BAD_REQUEST:
-                    throw JsonClientExceptionConversor.fromBadRequestErrorCode(
+                    throw JsonToClientExceptionConversor.fromBadRequestErrorCode(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_GONE:
-                    throw JsonClientExceptionConversor.fromGoneErrorCode(
+                    throw JsonToClientExceptionConversor.fromGoneErrorCode(
                             response.getEntity().getContent());
 
                 default:

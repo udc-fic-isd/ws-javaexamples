@@ -16,7 +16,7 @@ import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.util.json.ObjectMapperFactory;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
-public class JsonClientMovieDtoConversor {
+public class JsonToClientMovieDtoConversor {
 	public static ObjectNode toObjectNode(ClientMovieDto movie) throws IOException {
 
 		ObjectNode movieObject = JsonNodeFactory.instance.objectNode();
