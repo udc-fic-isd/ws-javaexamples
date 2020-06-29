@@ -7,19 +7,53 @@
 - Seleccionar la versión adecuada al operativo (Linux macOS) / 
   arquitectura del ordenador (32 o 64 bits).
   
-- [Linux] Descargar y descomprimir en `/opt` el siguiente software
-    - jdk
-    - maven
-    - eclipse
+- [Linux] 
+    - Descargar y descomprimir en `/opt` el siguiente software
+        - Maven 3.6.x o superior 
+            - https://maven.apache.org/download.cgi
+            - Descargar el "Binary tar.gz archive".
+        - IDEA IntelliJ
+            - https://www.jetbrains.com/es-es/idea/download
+            - Se puede utilizar la versión Community (libre) o la versión Ultimate 
+              (solicitando una licencia para estudiantes). 
+    - Instalar como paquete
+        - AdoptOpenJDK
+            - Instalar como paquete siguiendo las instrucciones que se 
+              indican en la sección "Linux RPM and DEB installer packages" de 
+              https://adoptopenjdk.net/installation.html.
+            - Instalar la version "Open JDK 11 (LTS)" con la JVM "Hotspot"
+              (adoptopenjdk-11-hotspot).
+        - MySQL
+            - Seguir las instrucciones que se indican en 
+              https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
 
 - [macOS] 
-    - Descargar maven y descomprimirlo en `/opt` .
-    - Instalar jdk y eclipse haciendo doble clic en los archivos .dmg 
-      correspondientes.
+    - Descargar y descomprimir en `/opt`
+        - Maven 3.6.x o superior 
+            - https://maven.apache.org/download.cgi
+            - Descargar el "Binary tar.gz archive"
+    - Deescargar e instalar
+        - IDEA IntelliJ
+            - https://www.jetbrains.com/es-es/idea/download
+            - Se puede utilizar la versión Community (libre) o la versión Ultimate 
+              (solicitando una licencia para estudiantes). 
+            - Instalar usando las opciones por defecto.
+        - AdoptOpenJDK
+            - https://adoptopenjdk.net/
+            - Seleccionar la version "Open JDK 11 (LTS)" y la JVM "Hotspot".
+            - Descargar el instalador .pkg para macOS e instalar usando las opciones por defecto.
+        - MySQL 8
+            - https://dev.mysql.com/downloads/mysql/
+            - Descargar el instalador .dmg para macOS
+            - Instalar con las opciones por defecto.
+            - Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer starts up".
+            - Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
 
 - Descargar y descomprimir en `$HOME/software` el siguiente software
-    - tomcat
-     
+    - Tomcat 9.x 
+        + https://tomcat.apache.org/download-90.cgi
+        + En el apartado "Binary Distributions" / "Core" descargar el .tar.gz.
+         
 ## Descargar y descomprimir los ejemplos de la asignatura
 - Descargar en `$HOME/software`
 
@@ -30,26 +64,38 @@
     tar zxf ws-javaexamples-3.3.0-src.tar.gz
 ```
 
-## Establecer variables de entorno
-- Añadir al fichero `$HOME/.bashrc` lo siguiente (en el caso de macOS utilizar 
-  el fichero `$HOME/.bash_profile`)
+## [Linux] Establecer variables de entorno
+- Añadir al fichero `$HOME/.bashrc` lo siguiente 
+> NOTA: Los valores de las variables MAVEN_HOME y JAVA_HOME deben sustituirse por los 
+  directorios donde se haya descomprimido Maven e instalado AdoptOpenJDK respectivamente
 
 ```shell
-    # JDK (Linux)
-    export JAVA_HOME=/opt/jdk1.8.0_181
-
-    # Para macOS usa:
-    #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+    # AdoptOpenJDK (Linux)
+    export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=/opt/apache-maven-3.6.1
+    MAVEN_HOME=/opt/apache-maven-3.6.3
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
+```
 
-    # Eclipse.
-    PATH=/opt/eclipse:$PATH
+## [macOS] Establecer variables de entorno
+- Añadir al fichero `$HOME/.bash_profile` lo siguiente:
+> NOTA: Los valores de las variables MAVEN_HOME y JAVA_HOME deben sustituirse por los 
+  directorios donde se haya descomprimido Maven e instalado AdoptOpenJDK respectivamente
+
+```shell
+    # AdoptOpenJDK (macOS)
+    #export JAVA_HOME=/Library/Java/JavaVirtualMachines/AdoptOpenJDK-11.0.7.10-hotspot.jdk/
+
+    PATH=$JAVA_HOME/bin:$PATH
+
+    # Maven
+    MAVEN_HOME=/opt/apache-maven-3.6.3
+    PATH=$MAVEN_HOME/bin:$PATH
+    export MAVEN_OPTS="-Xms512m -Xmx1024m"
 ```
 
 - Cerrar todos los terminales y abrir terminales nuevos
@@ -63,79 +109,6 @@
     which eclipse
 ```
     
-## Instalación de MySQL 8.0.12 en Linux (método recomendado)
-- Se recomienda instalarlo como paquete siguiendo las instrucciones que se 
-  indican en https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
-
-## Instalación de MySQL 8.0.12 en Linux (método alternativo)
-- En caso de no poder instalarlo como paquete se pueden seguir las 
-  instrucciones de este apartado para realizar una instalación de MySQL
-  como usuario root y ejecución como usuario normal
-
-- Descargar y descomprimir mysql en `/opt` 
-
-```shell
-    sudo chown -R root:root mysql-8.0.12-linux-glibc2.12-x86_64
-```
-
-```shell
-    sudo chmod -R 755 mysql-8.0.12-linux-glibc2.12-x86_64
-    sudo ln -s /opt/mysql-8.0.12-linux-glibc2.12-x86_64 /usr/local/mysql
-```
-
-- En Ubuntu debe instalarse la librería libaio1
-
-```shell
-    sudo apt-get install libaio1
-```
-
-- Añadir al fichero `$HOME/.bashrc` lo siguiente
-
-```shell
-    # MySQL 
-    MYSQL_HOME=/opt/mysql-8.0.12-linux-glibc2.12-x86_64
-    PATH=$MYSQL_HOME/bin:$PATH
-```
-
-- Cerrar todos los terminales y abrir terminales nuevos. Comprobar que 
-  ha quedado correctamente instalado
-
-```shell
-    which mysqld
-```
-
-- Creación del directorio de datos
-
-```shell
-    mkdir $HOME/software/.MySQLData
-```
-
-- Crear un fichero $HOME/.my.cnf con el siguiente contenido (en lugar de \<login\>
-  poner el login del usuario)
-
-```shell
-    [mysqld]
-    datadir=/home/<login>/software/.MySQLData
-```
-
-- Creación de zona de datos del servidor MySQL (se creará el usuario root con 
-  password vacía)
-
-```shell
-    cd /usr/local/mysql/bin
-    mysqld --initialize-insecure
-```    
-
-## Instalación de MySQL en macOS
-
-- Doble clic en el archivo .dmg correspondiente y elegir las opciones 
-  por defecto.
-
-- Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer 
-  starts up".
-
-- Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
-
 ## Creación de bases de datos necesarias para los ejemplos
 
 - Arrancar MySQL (sólo si el arranque no es automático)
@@ -144,21 +117,21 @@
     mysqld
 ```
 
-> NOTA: Si se produce un error de conexión al ejecutar los siguientes comandos
-  (`mysqladmin` o `myqsl`), probar a ejecutarlos añadiendo la opción `-p` para que
-  solicite la password del usuario root.
+> NOTA: En los siguientes pasos, al ejecutar los comandos  `mysqladmin` y `myqsl` 
+  con la opción `-p` las password que nos solicitarán es la password del usuario
+  root que se especificó al instalar MySQL.
 
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
 
 ```shell
-  mysqladmin -u root create ws
-  mysqladmin -u root create wstest
+  mysqladmin -u root create ws -p
+  mysqladmin -u root create wstest -p
 ```
 
 - Creación de usuario ws con password con permisos sobre ws y wstest
 
 ```shell
-    mysql -u root
+    mysql -u root -p
         CREATE USER 'ws'@'localhost' IDENTIFIED BY 'ws';
         GRANT ALL PRIVILEGES ON ws.* to 'ws'@'localhost' WITH GRANT OPTION;
         GRANT ALL PRIVILEGES ON wstest.* to 'ws'@'localhost' WITH GRANT OPTION;
@@ -180,7 +153,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-    cd $HOME/software/ws-javaexamples-3.3.0
+    cd $HOME/software/ws-javaexamples-3.4.0
     mvn sql:execute install
 ```
     
@@ -192,33 +165,23 @@
     mysqladmin -u root shutdown
 ```
 
-## Configuración de eclipse
-> NOTA: El wizard "Preferences" está accesible desde el menú "Window" (menú
-  "Eclipse" en macOS)
+## Configuración de IDEA IntelliJ
+- Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
-- Utilizar Java 1.8:
-    + En "Preferences>Java>Compiler" seleccionar "1.8" en "Compiler
-    compliance level".
-    + En "Preferences>Java>Installed JREs" seleccionar la JVM 1.8.0(Java SE 8).
 
-- Establecer UTF-8 como el encoding por defecto de Eclipse
-     + En "Preferences>General>Workspace" seleccionar UTF-8 en "Text File Encoding"
-  
-- Establecer UTF-8 como el encoding por defecto para ficheros properties Java
-    + En "Preferences>General>Content Types>Text>Java Properties File", escribir "UTF-8" y pulsar "Update"
-  
 ## Instalación y configuración básica de Git
 ---------------------------------------------------------------------
+> NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas
 
-- Instalación en Linux (Ubuntu)
-
-```shell
-    sudo apt-get install git
-```
-
+- Instalación en Linux
+    - https://git-scm.com/downloads
+    - Hacer clic en "Linux/Unix" y seguir las instrucciones según la distribución de linux utilizada.
+     
 - Instalación en macOS
-    - Descargar el archivo .dmg de [ftp://ftp.fic.udc.es/POJOyWS/](ftp://ftp.fic.udc.es/POJOyWS/)
-    - Doble-clic en el archivo e instalar con las opciones por defecto
+    - https://git-scm.com/downloads
+    - Hacer clic en "MacOs". En la siguiente pantalla hacer clic en "installer"
+      dentro de la sección "Binary Installer" y descargar la última versión del instalador .dmg.
+    - Instalar con las opciones por defecto.
 
 - Configuración básica (Linux y macOS)
 
@@ -233,10 +196,11 @@
     git config --global core.editor "subl -w"
 ```
 
-- Instalación de utilidad de autocompletado para Git
+- (Opcional) Instalación de utilidad de autocompletado para Git
     - Seguir las instrucciones indicadas en https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion
 
 ## Creación y configuración de claves SSH
+> NOTA: Este paso no es necesario si ya utilizó Git en otras asignaturas
 
 - Desde un terminal ejecutar:
 > Generar las claves en la ruta por defecto ($HOME/.ssh) y con los nombres 
@@ -264,11 +228,4 @@
 
 ## Instalación de una herramienta cliente gráfica para Git
 
-- Linux: En el ftp están disponibles "GitKraken" y "SmartGit" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients) y descomprimirlo en `/opt`
-    - En el caso de "SmartGit", para ejecutar la herramienta utilizar el script `/opt/smartgit/bin/smartgit.sh`
-
-    
-- macOS: En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otro ([ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients))
-    - SourceTree: descargar el archivo .zip de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients), descomprimirlo y hacer doble clic en el archivo .dmg.
-    - GitKraken: descargar el archivo .dmg y hacer doble clic en él.
+- Puede utilizarse cualquier herramienta cliente (https://git-scm.com/downloads/guis)

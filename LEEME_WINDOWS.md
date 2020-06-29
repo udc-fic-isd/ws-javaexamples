@@ -1,8 +1,7 @@
 # Instalación / Configuración entorno ISD / 2019-2020 - Windows
 -------------------------------------------------------------------------------
 
-## Descargar y copiar el SW 
-> Disponible desde ftp://ftp.fic.udc.es/POJOyWS/
+## Descargar e instalar el SW 
 
 - Seleccionar la versión adecuada al operativo (Windows) / arquitectura del 
   ordenador (32 o 64 bits).
@@ -11,25 +10,36 @@
   para evitar problemas con Eclipse y Maven.
 
 - Descargar y descomprimir en `C:\Program Files\Java` el siguiente software
-    - maven
-    - eclipse
-    - tomcat
+    - Maven 3.6.x o superior 
+        + https://maven.apache.org/download.cgi
+        + Descargar el "Binary zip archive"
+    - Tomcat 9.x 
+        + https://tomcat.apache.org/download-90.cgi
+        + En el apartado "Binary Distributions" / "Core" descargar el zip.
 
-- Descargar e instalar en la ruta por defecto el JDK
-    - Doble-click en `jdk-8u181-windows-<xxx>.exe`. Usar las opciones por defecto.
+- Descargar e instalar AdoptOpenJDK 11
+    - https://adoptopenjdk.net/
+    - Seleccionar la version "Open JDK 11 (LTS)" y la JVM "Hotspot".
+    - Descargar el instalador .msi para Windows e instalar usando las opciones por defecto.
+
+- Descargar e instalar IDEA IntelliJ
+    - https://www.jetbrains.com/es-es/idea/download
+        + Se puede utilizar la versión Community (libre) o la versión Ultimate 
+          (solicitando una licencia para estudiantes). 
+    - Instalar usando las opciones por defecto.
 	 
-- Descargar e instalar en la ruta por defecto MySQL:
-    - Doble-click en `mysql-installer-community-8.0.12.0.msi`
-    - Aceptar la licencia   
+- Descargar e instalar MySQL 8:
+    - https://dev.mysql.com/downloads/mysql/
+        + Descargar el instalador .msi para Windows
+    - Instalar en la ruta por defecto.
+    - Comprobar que la opción "Start the MySQL Server at System Startup"
+      está marcada, para que se instale como servicio Windows.
     - Elegir "Server only" o "Custom" (para instalar Server + Workbench) y usar 
      las opciones por defecto.
     - Después de la instalación, se ejecutará el wizard de Configuración de 
      MySQL Server. Utilizar las opciones por defecto excepto las siguientes:
          + Debe introducirse una contraseña no vacía para el usuario `root` (e.g. `root`)
 
-> NOTA: Comprobar que la opción "Start the MySQL Server at System Startup"
-  está marcada, para que se instale como servicio Windows.
-    
 ## Descargar y descomprimir los ejemplos de la asignatura 
 
 > Disponibles en moodle
@@ -44,13 +54,16 @@
   variables de entorno (para cada una pulsar en "Nueva ...", introducir el 
   nombre y el valor, y pulsar "Aceptar")
     - Nombre: `JAVA_HOME`
-        + Valor: `C:\Program Files\Java\jdk1.8.0_181`
+        + Valor: Directorio donde se instaló AdoptOpenJDK
+        + Por ejemplo:`C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot`
     - Nombre: `MAVEN_HOME`
-        + Valor: `C:\Program Files\Java\apache-maven-3.6.1`
+        + Valor: Directorio donde se descomprimió Maven
+        + Por ejemplo: `C:\Program Files\Java\apache-maven-3.6.3`
     - Nombre: `MAVEN_OPTS`
         + Valor: `-Xms512m -Xmx1024m`
     - Nombre: `MYSQL_HOME`
-        + Valor: `C:\Program Files\MySQL\MySQL Server 8.0`
+        + Valor: Directorio donde se instaló MySQL
+        + Por ejemplo: `C:\Program Files\MySQL\MySQL Server 8.0`
 
 - En la sección "Variables de usuario para `<user>`", modificar la variable de
   entorno `PATH`. Para ello hay que seleccionarla, pulsar en "Editar..." y 
@@ -70,7 +83,6 @@
 	java -version
 	mvn -version
 	mysqld --version
-	eclipse             # (pulsar en "Cancel" en la ventana que se abre)
 ```
 
 ## Creación de bases de datos necesarias para los ejemplos
@@ -81,21 +93,21 @@
 > NOTA: En Panel de Control, Servicios Locales se puede configurar arranque 
   automático o manual. También se puede arrancar y detener.
            
-> NOTA: Si se produce un error de conexión al ejecutar los siguientes comandos
-  (`mysqladmin` o `myqsl`), probar a ejecutarlos añadiendo la opción `-p` para que
-  solicite la password del usuario root.
+> NOTA: En los siguientes pasos, al ejecutar los comandos  `mysqladmin` y `myqsl` 
+  con la opción `-p` las password que nos solicitarán es la password del usuario
+  root que se especificó al instalar MySQL.
 
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
 
 ```shell
-	mysqladmin -u root create ws
-	mysqladmin -u root create wstest
+	mysqladmin -u root create ws -p
+	mysqladmin -u root create wstest -p
 ```
 
 - Creación de usuario ws con password con permisos sobre ws y wstest
 
 ```shell
-	mysql -u root
+	mysql -u root -p
         CREATE USER 'ws'@'localhost' IDENTIFIED BY 'ws';
 		GRANT ALL PRIVILEGES ON ws.* to 'ws'@'localhost' WITH GRANT OPTION;
 		GRANT ALL PRIVILEGES ON wstest.* to 'ws'@'localhost' WITH GRANT OPTION;
@@ -117,49 +129,24 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-	cd C:/software/ws-javaexamples-3.3.0
+	cd C:/software/ws-javaexamples-3.4.0
 	mvn sql:execute install
 ```
 	
-## Configuración de eclipse
-> NOTA: El wizard "Preferences" está accesible desde el menú "Window" (menú
-  "Eclipse" en Mac OS X)
+## Configuración de IDEA IntelliJ
+- Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
-- Utilizar Java 1.8:
-    + En "Preferences>Java>Compiler" seleccionar "1.8" en "Compiler
-    compliance level".
-    + En "Preferences>Java>Installed JREs" seleccionar la JVM 1.8.0(Java SE 8).
-
-- Establecer UTF-8 como el encoding por defecto de Eclipse
-     + En "Preferences>General>Workspace" seleccionar UTF-8 en "Text File Encoding"
-  
-- Establecer UTF-8 como el encoding por defecto para ficheros properties Java
-    + En "Preferences>General>Content Types>Text>Java Properties File", escribir "UTF-8" y pulsar "Update"
     
-> NOTA: Es posible que eclipse muestre errores como el siguiente en el `pom.xml` de los proyectos que utilicen el goal `wsgen`. El problema en Windows 8 y 10 es debido a que en el PATH del sistema, al instalar un JRE, se añade de primero la ruta `C:\ProgramData\Oracle\Java\javapath`. Se trata de un enlace simbólico al path del ejecutable de Java. Al estar de primero, es el que usa eclipse (el path del sistema se añade antes que el path del usuario). 
-
-```shell 
-Cannot execute: C:\Program Files\Java\jre1.8.0_181\..\bin\wsgen.exe (org.codehaus.mojo:jaxws-maven-plugin:2.4.1:wsgen:wsgen-from-jdk:process-classes)
-```
-
-> Para evitar el problema anterior  
-  - Opción 1: Añadir la ruta al JDK que queremos que se utilice antes que `C:\ProgramData\Oracle\Java\javapath` en el PATH del sistema.
-  - Opción 2: Añadir al fichero `eclipse.ini` contenido en el directorio de instalación de eclipse, la ruta al ejecutable de Java utilizado (JDK, no JRE), justo antes de la línea que especifica `--launcher.appendVmargs`.
-  
-```shell
--vm
-C:\Program Files\Java\jdk1.8.0_181\bin\javaw.exe
-```
-
 ## Instalación y configuración básica de Git
----------------------------------------------------------------------
+> NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas
 
-- Instalación
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git](ftp://ftp.fic.udc.es/POJOyWS/git)
-    - Doble-click en el instalador e instalar con las opciones por defecto
+- Descargar e instalar Git
+    - https://git-scm.com/downloads
+    - Hacer clic en "Windows" para descargar.
+    - Instalar con las opciones por defecto.
 
 - Configuración básica
-    - Ejecutar git-bash (`$GIT_HOME/git-bash.exe`) y desde ese intérprete de  comandos ejecutar:
+    - Ejecutar git-bash (`$GIT_HOME/git-bash.exe`) y desde ese intérprete de comandos ejecutar:
     
 ```shell
     git config --global user.email "your_email@udc.es"
@@ -173,9 +160,10 @@ C:\Program Files\Java\jdk1.8.0_181\bin\javaw.exe
 ```
 
 ## Creación y configuración de claves SSH
+> NOTA: Este paso no es necesario si ya utilizó Git en otras asignaturas
 
 - Desde el intérprete de comandos git-bash ejecutar:
-> Generar las claves en la ruta por defecto ($HOME/.ssh) y con los nombres  por defecto 
+> Genera las claves en la ruta por defecto ($HOME/.ssh) y con los nombres  por defecto 
       
 ```shell
     ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
@@ -196,7 +184,5 @@ C:\Program Files\Java\jdk1.8.0_181\bin\javaw.exe
     
 ## Instalación de una herramienta cliente gráfica para Git
 
-- En el ftp están disponibles "GitKraken" y "SourceTree" pero puede utilizarse cualquier otra (https://git-scm.com/downloads/guis)
-    - Descargar el instalador de [ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients](ftp://ftp.fic.udc.es/POJOyWS/git-gui-clients)
-    - Doble-click en el instalador e instalar con las opciones por defecto
+- Puede utilizarse cualquier herramienta cliente (https://git-scm.com/downloads/guis)
     
