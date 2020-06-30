@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2019-2020 - Linux y macOS
+# Instalación / Configuración entorno ISD / 2020-2021 - Linux y macOS
 -------------------------------------------------------------------------------
 
 ## Descargar y copiar el SW
@@ -61,7 +61,7 @@
 
 ```shell
     cd $HOME/software
-    tar zxf ws-javaexamples-3.3.0-src.tar.gz
+    tar zxf ws-javaexamples-3.4.0-src.tar.gz
 ```
 
 ## [Linux] Establecer variables de entorno
@@ -88,7 +88,7 @@
 
 ```shell
     # AdoptOpenJDK (macOS)
-    #export JAVA_HOME=/Library/Java/JavaVirtualMachines/AdoptOpenJDK-11.0.7.10-hotspot.jdk/
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/AdoptOpenJDK-11.0.7.10-hotspot.jdk/
 
     PATH=$JAVA_HOME/bin:$PATH
 
@@ -106,7 +106,6 @@
 ```shell
     which java
     which mvn
-    which eclipse
 ```
     
 ## Creación de bases de datos necesarias para los ejemplos
@@ -190,7 +189,7 @@
     git config --global user.name "Your Name"
 ```
 
-> The following line illustrates how to set Sublime as the Git default editor, but you can use any other editor installed in your OS
+> El siguiente comando ilustra como configurar Sublime como editor por defecto de Git, aunque se puede utilizar otro editor instalado en el sistema operativo.
 
 ```shell
     git config --global core.editor "subl -w"

@@ -1,4 +1,4 @@
-# Instalación / Configuración entorno ISD / 2019-2020 - Windows
+# Instalación / Configuración entorno ISD / 2020-2021 - Windows
 -------------------------------------------------------------------------------
 
 ## Descargar e instalar el SW 
@@ -69,7 +69,7 @@
   entorno `PATH`. Para ello hay que seleccionarla, pulsar en "Editar..." y 
   añadir al principio de su valor (sin borrar su valor antiguo):
   
-  `%JAVA_HOME%\bin;%MAVEN_HOME%\bin;%MYSQL_HOME%\bin;C:\Program Files\Java\eclipse;`
+  `%JAVA_HOME%\bin;%MAVEN_HOME%\bin;%MYSQL_HOME%\bin;`
   
 > NOTA: Si la variable de entorno PATH no existiese, entonces habría que 
     crearla procediendo de igual forma que se hizo con las variables anteriores.
@@ -153,7 +153,7 @@
     git config --global user.name "Your Name"
 ```
 
-> The following line illustrates how to set Sublime as the Git default editor, but you can use any other editor installed in your OS
+> El siguiente comando ilustra como configurar Sublime como editor por defecto de Git, aunque se puede utilizar otro editor instalado en el sistema operativo.
     
 ```shell
     git config --global core.editor "'C:\Program Files\Sublime Text 3\sublime_text.exe' -w"
