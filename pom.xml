@@ -124,10 +124,10 @@
 			</dependency>
 			<!-- Thrift -->
 			<dependency>
-            	<groupId>org.apache.thrift</groupId>
-            	<artifactId>libthrift</artifactId>
-            	<version>${thrift.version}</version>
-            </dependency>		
+					<groupId>org.apache.thrift</groupId>
+					<artifactId>libthrift</artifactId>
+					<version>${thrift.version}</version>
+			</dependency>		
 			
 		</dependencies>
 	</dependencyManagement>
@@ -291,9 +291,9 @@
 				<version>${jettyMavenPlugin.version}</version>
 
 				<configuration>
-                    <httpConnector>
-                        <port>9090</port>
-                    </httpConnector>
+					<httpConnector>
+						<port>9090</port>
+					</httpConnector>
 					<webAppConfig>
 						<contextPath>/${project.artifactId}</contextPath>
 						<jettyEnvXml>target/jetty/jetty-env.xml</jettyEnvXml>
@@ -315,6 +315,8 @@
 				</dependencies>
 			</plugin>
 
+			<!-- ========================================================== -->
+			<!-- Enforcer configuration -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
