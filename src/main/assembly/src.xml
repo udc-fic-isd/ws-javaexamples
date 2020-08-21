@@ -13,6 +13,8 @@
                 <include>**/*</include>
             </includes>
             <excludes>
+                <exclude>**/.idea/**</exclude>
+				<exclude>**/*.iml</exclude>      
 			    <exclude>**/client/service/soap/wsdl/</exclude>
                 <exclude>**/.project</exclude>
                 <exclude>**/.classpath</exclude>
