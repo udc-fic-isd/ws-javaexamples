@@ -88,7 +88,7 @@
 
 ```shell
     # AdoptOpenJDK (macOS)
-    export JAVA_HOME=/Library/Java/JavaVirtualMachines/AdoptOpenJDK-11.0.8.10-hotspot.jdk/
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
 
     PATH=$JAVA_HOME/bin:$PATH
 
