@@ -12,7 +12,7 @@
         - Maven 3.6.x o superior 
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive".
-        - IDEA IntelliJ
+        - IntelliJ IDEA
             - https://www.jetbrains.com/es-es/idea/download
             - Se puede utilizar la versión Community (libre) o la versión Ultimate 
               (solicitando una licencia para estudiantes). 
@@ -33,7 +33,7 @@
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive"
     - Deescargar e instalar
-        - IDEA IntelliJ
+        - IntelliJ IDEA
             - https://www.jetbrains.com/es-es/idea/download
             - Se puede utilizar la versión Community (libre) o la versión Ultimate 
               (solicitando una licencia para estudiantes). 
@@ -53,6 +53,9 @@
     - Tomcat 9.x 
         + https://tomcat.apache.org/download-90.cgi
         + En el apartado "Binary Distributions" / "Core" descargar el .tar.gz.
+
+- Descargar e instalar el compilador de Apache Thrift:
+    - TODO
          
 ## Descargar y descomprimir los ejemplos de la asignatura
 - Descargar en `$HOME/software`
@@ -164,7 +167,7 @@
     mysqladmin -u root shutdown
 ```
 
-## Configuración de IDEA IntelliJ
+## Configuración de IntelliJ IDEA
 - Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
 

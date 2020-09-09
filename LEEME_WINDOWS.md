@@ -22,7 +22,7 @@
     - Seleccionar la version "Open JDK 11 (LTS)" y la JVM "Hotspot".
     - Descargar el instalador .msi para Windows e instalar usando las opciones por defecto.
 
-- Descargar e instalar IDEA IntelliJ
+- Descargar e instalar IntelliJ IDEA
     - https://www.jetbrains.com/es-es/idea/download
         + Se puede utilizar la versión Community (libre) o la versión Ultimate 
           (solicitando una licencia para estudiantes). 
@@ -40,6 +40,11 @@
      MySQL Server. Utilizar las opciones por defecto excepto las siguientes:
          + Debe introducirse una contraseña no vacía para el usuario `root` (e.g. `root`)
 
+- Descargar e instalar el compilador de Apache Thrift:
+     - http://www.apache.org/dyn/closer.cgi?path=/thrift/0.13.0/thrift-0.13.0.exe
+     - Renombrar el ejecutable a thrift.exe y copiarlo dentro del directorio bin que hay 
+     dentro del directorio donde se descomprimió Maven 
+     
 ## Descargar y descomprimir los ejemplos de la asignatura 
 
 > Disponibles en moodle
@@ -133,7 +138,7 @@
 	mvn sql:execute install
 ```
 	
-## Configuración de IDEA IntelliJ
+## Configuración de IntelliJ IDEA
 - Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
     
