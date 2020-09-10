@@ -43,7 +43,7 @@ server to be running.
 	cd ws-movies/ws-movies-client
 
 Configure `src/main/resources/ConfigurationParameters.properties`
-  for specifying the client movie service implementation (Rest or Soap) and 
+  for specifying the client movie service implementation (Rest or Thrift) and 
   the port number of the web server in the endpoint address (9090 for Jetty, 8080
   for Tomcat)
 
