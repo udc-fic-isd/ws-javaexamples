@@ -23,10 +23,14 @@
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
     - Instalar el compilador de Apache Thrift
-        - Instalarlo como paquete si está disponible para la distribución Linux
-            - Ubuntu 20.0.4 LTS (version 0.13.0), 18.0.4 LTS (version 0.9.1)
+        - Instalarlo como paquete si está disponible para la distribución Linux utilizada
+            - Ubuntu 20.0.4, 18.0.4, 16.0.4
                - sudo apt-get update -y
                - sudo apt-get install -y thrift-compiler 
+            - Alpine, ALT Linux, Arch Linux, CentOS, Fedora, FreeBSD, Mageia, NetBSD, openSUSE, Slackware
+               - Descargar paquete de https://pkgs.org/download/thrift e instalarlo
+            - Debian
+               - Descargar paquete de https://packages.debian.org/sid/thrift-compiler e instalarlo
         - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
 
 - [macOS] 
