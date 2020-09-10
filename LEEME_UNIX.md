@@ -4,7 +4,7 @@
 ## Descargar e instalar el SW
   
 - [Linux] 
-    - Descargar y descomprimir en `/opt` el siguiente software
+    - Descargar y descomprimir en `$HOME/software` el siguiente software
         - Maven 3.6.x o superior 
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive".
@@ -22,9 +22,15 @@
         - MySQL 8
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
+    - Instalar el compilador de Apache Thrift
+        - Instalarlo como paquete si está disponible para la distribución Linux
+            - Ubuntu 20.0.4 LTS (version 0.13.0), 18.0.4 LTS (version 0.9.1)
+               - sudo apt-get update -y
+               - sudo apt-get install -y thrift-compiler 
+        - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
 
 - [macOS] 
-    - Descargar y descomprimir en `/opt`
+    - Descargar y descomprimir en `$HOME/software`
         - Maven 3.6.x o superior 
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive"
@@ -44,21 +50,20 @@
             - Instalar con las opciones por defecto.
             - Preferencias del sistema -> MySQL -> Elegir "Start MySQL when your computer starts up".
             - Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
+    - Instalar como paquete el compilador de Apache Thrift:
+        - Se puede instalar de forma sencilla usando cualquiera de los dos siguientes gestores de paquetes: MacPorts o Homebrew.
+        - Si no tienes ninguno de estos gestores de paquetes en tu macOS, instala uno de ellos (el que prefieras):
+            - Instalación de MacPorts: https://www.macports.org/install.php.
+            - Instalación de Homebrew: https://brew.sh/index_es.
+        - Instalación de Thrift con MacPorts:
+            - sudo port install thrift
+        - Instalación de Thrift con Homebrew:
+            - brew install thrift
 
-- Descargar y descomprimir en `$HOME/software` el siguiente software
+- [Linux y macOS] Descargar y descomprimir en `$HOME/software` el siguiente software
     - Tomcat 9.x 
         + https://tomcat.apache.org/download-90.cgi
         + En el apartado "Binary Distributions" / "Core" descargar el .tar.gz.
-
-- [macOS] Instalar el compilador de Apache Thrift:
-    - Thrift se puede instalar de forma sencilla usando cualquiera de los dos siguientes gestores de paquetes: MacPorts o Homebrew.
-    - Si no tienes ninguno de estos gestores de paquetes en tu macOS, instala uno de ellos (el que prefieras):
-      + Instalación de MacPorts: https://www.macports.org/install.php.
-      + Instalación de Homebrew: https://brew.sh/index_es.
-    - Instalación de Thrift con MacPorts:
-      + sudo port install thrift
-    - Instalación de Thrift con Homebrew:
-      + brew install thrift
          
 ## Descargar y descomprimir los ejemplos de la asignatura
 - Descargar en `$HOME/software`
@@ -82,12 +87,12 @@
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=/opt/apache-maven-3.6.3
+    MAVEN_HOME=$HOME/software/apache-maven-3.6.3
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
     # IntelliJ IDEA
-    IDEA_HOME=/opt/idea
+    IDEA_HOME=$HOME/software/idea
     PATH=$IDEA_HOME/bin:$PATH
 ```
 
@@ -114,7 +119,7 @@
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=/opt/apache-maven-3.6.3
+    MAVEN_HOME=$HOME/software/apache-maven-3.6.3
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 ```
