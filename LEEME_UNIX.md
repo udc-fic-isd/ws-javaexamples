@@ -17,13 +17,13 @@
             - Se puede utilizar la versión Community (libre) o la versión Ultimate 
               (solicitando una licencia para estudiantes). 
     - Instalar como paquete
-        - AdoptOpenJDK
+        - AdoptOpenJDK 11
             - Instalar como paquete siguiendo las instrucciones que se 
               indican en la sección "Linux RPM and DEB installer packages" de 
               https://adoptopenjdk.net/installation.html.
             - Instalar la version "Open JDK 11 (LTS)" con la JVM "Hotspot"
               (adoptopenjdk-11-hotspot).
-        - MySQL
+        - MySQL 8
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
 
@@ -38,7 +38,7 @@
             - Se puede utilizar la versión Community (libre) o la versión Ultimate 
               (solicitando una licencia para estudiantes). 
             - Instalar usando las opciones por defecto.
-        - AdoptOpenJDK
+        - AdoptOpenJDK 11
             - https://adoptopenjdk.net/
             - Seleccionar la version "Open JDK 11 (LTS)" y la JVM "Hotspot".
             - Descargar el instalador .pkg para macOS e instalar usando las opciones por defecto.
@@ -82,6 +82,21 @@
     MAVEN_HOME=/opt/apache-maven-3.6.3
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
+
+    # IntelliJ IDEA
+    IDEA_HOME=/opt/idea
+    PATH=$IDEA_HOME/bin:$PATH
+```
+
+- Cerrar todos los terminales y abrir terminales nuevos
+
+- Comprobar que el entorno ha quedado correctamente configurado comprobando 
+  las salidas de los siguientes comandos
+
+```shell
+    which java
+    which mvn
+    which idea
 ```
 
 ## [macOS] Establecer variables de entorno
