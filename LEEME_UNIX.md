@@ -55,7 +55,14 @@
         + En el apartado "Binary Distributions" / "Core" descargar el .tar.gz.
 
 - Descargar e instalar el compilador de Apache Thrift:
-    - TODO
+    - Thrift se puede instalar de forma sencilla usando cualquiera de los dos siguientes gestores de paquetes: MacPorts o Homebrew.
+    - Si no tienes ninguno de estos gestores de paquetes en tu macOS, instala uno de ellos (el que prefieras):
+      + Instalación de MacPorts: https://www.macports.org/install.php.
+      + Instalación de Homebrew: https://brew.sh/index_es.
+    - Instalación de Thrift con MacPorts:
+      + sudo port install thrift
+    - Instalación de Thrift con Homebrew:
+      + brew install thrift
          
 ## Descargar y descomprimir los ejemplos de la asignatura
 - Descargar en `$HOME/software`
