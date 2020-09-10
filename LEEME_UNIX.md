@@ -1,11 +1,7 @@
 # Instalación / Configuración entorno ISD / 2020-2021 - Linux y macOS
 -------------------------------------------------------------------------------
 
-## Descargar y copiar el SW
-> Disponible desde ftp://ftp.fic.udc.es/POJOyWS/
-
-- Seleccionar la versión adecuada al operativo (Linux macOS) / 
-  arquitectura del ordenador (32 o 64 bits).
+## Descargar e instalar el SW
   
 - [Linux] 
     - Descargar y descomprimir en `/opt` el siguiente software

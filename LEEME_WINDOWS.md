@@ -1,10 +1,7 @@
 # Instalación / Configuración entorno ISD / 2020-2021 - Windows
 -------------------------------------------------------------------------------
 
-## Descargar e instalar el SW 
-
-- Seleccionar la versión adecuada al operativo (Windows) / arquitectura del 
-  ordenador (32 o 64 bits).
+## Descargar e instalar el SW
 
 > NOTA: Se recomienda utilizar un usuario de Windows sin espacios en el nombre 
   para evitar problemas con Eclipse y Maven.
