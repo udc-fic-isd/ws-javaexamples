@@ -54,7 +54,7 @@
         + https://tomcat.apache.org/download-90.cgi
         + En el apartado "Binary Distributions" / "Core" descargar el .tar.gz.
 
-- Descargar e instalar el compilador de Apache Thrift:
+- [macOS] Instalar el compilador de Apache Thrift:
     - Thrift se puede instalar de forma sencilla usando cualquiera de los dos siguientes gestores de paquetes: MacPorts o Homebrew.
     - Si no tienes ninguno de estos gestores de paquetes en tu macOS, instala uno de ellos (el que prefieras):
       + Instalación de MacPorts: https://www.macports.org/install.php.
