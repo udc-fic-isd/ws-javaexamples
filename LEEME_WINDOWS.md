@@ -4,7 +4,7 @@
 ## Descargar e instalar el SW
 
 > NOTA: Se recomienda utilizar un usuario de Windows sin espacios en el nombre 
-  para evitar problemas con Eclipse y Maven.
+  para evitar problemas con Maven.
 
 - Descargar y descomprimir en `C:\Program Files\Java` el siguiente software
     - Maven 3.6.x o superior 
