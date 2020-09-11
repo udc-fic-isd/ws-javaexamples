@@ -33,8 +33,9 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
-
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
             transport.open();
             return client.addMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie));
 
@@ -42,6 +43,10 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InputValidationException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }
@@ -51,8 +56,9 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
-
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
             transport.open();
             client.updateMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie));
 
@@ -62,6 +68,10 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }
@@ -71,8 +81,9 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
-
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
             transport.open();
             client.removeMovie(movieId);
 
@@ -80,6 +91,10 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }
@@ -89,13 +104,18 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
-
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
             transport.open();
             return ClientMovieDtoToThriftMovieDtoConversor.toClientMovieDto(client.findMovies(keywords));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }
@@ -106,8 +126,9 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
-
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
             transport.open();
             return client.buyMovie(movieId, userId, creditCardNumber);
 
@@ -117,6 +138,10 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }
@@ -126,7 +151,9 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         ThriftMovieService.Client client = getClient();
 
-        try (TTransport transport = client.getInputProtocol().getTransport()) {
+        TTransport transport = null;
+        try  {
+            transport = client.getInputProtocol().getTransport();
 
             transport.open();
             return client.findSale(saleId).getMovieUrl();
@@ -138,6 +165,10 @@ public class ThriftClientMovieService implements ClientMovieService {
                     DateTimeFormatter.ISO_DATE_TIME));
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (transport!=null) {
+                transport.close();
+            }
         }
 
     }

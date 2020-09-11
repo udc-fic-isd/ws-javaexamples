@@ -35,7 +35,7 @@
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.12</httpclient.version>
 		<jackson.version>2.11.0</jackson.version>
-		<thrift.version>0.13.0</thrift.version>
+		<thrift.version>0.9.1</thrift.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
@@ -127,8 +127,12 @@
 					<groupId>org.apache.thrift</groupId>
 					<artifactId>libthrift</artifactId>
 					<version>${thrift.version}</version>
-			</dependency>		
-			
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>4.4.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
