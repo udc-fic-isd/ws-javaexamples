@@ -35,7 +35,8 @@
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.12</httpclient.version>
 		<jackson.version>2.11.0</jackson.version>
-		<thrift.version>0.9.1</thrift.version>
+		<thrift.version>0.13.0</thrift.version>
+		<slf4j.version>1.7.25</slf4j.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
@@ -65,6 +66,12 @@
 	<!-- ========================================================== -->
 	<!-- Profiles -->
 	<profiles>
+		<profile>
+			<id>thrift-0.9.1</id>
+			<properties>
+				<thrift.version>0.9.1</thrift.version>
+			</properties>
+		</profile>
 	</profiles>
 
 	<!-- ========================================================== -->
@@ -113,6 +120,11 @@
 			<!-- Commons HttpClient -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>fluent-hc</artifactId>
 				<version>${httpclient.version}</version>
 			</dependency>
@@ -124,14 +136,15 @@
 			</dependency>
 			<!-- Thrift -->
 			<dependency>
-					<groupId>org.apache.thrift</groupId>
-					<artifactId>libthrift</artifactId>
-					<version>${thrift.version}</version>
+				<groupId>org.apache.thrift</groupId>
+				<artifactId>libthrift</artifactId>
+				<version>${thrift.version}</version>
 			</dependency>
+			<!-- SLF4j (required by Thrift) -->
 			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpcore</artifactId>
-				<version>4.4.1</version>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
