@@ -35,9 +35,6 @@
 		<servletApi.version>2.3</servletApi.version>
 		<httpclient.version>4.5.12</httpclient.version>
 		<jackson.version>2.11.0</jackson.version>
-		<thrift.version>0.13.0</thrift.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<annotation-api.version>1.3.2</annotation-api.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
@@ -68,27 +65,44 @@
 	<!-- Profiles -->
 	<profiles>
 		<profile>
+			<id>thrift-0.13.0</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<thrift.version>0.13.0</thrift.version>
+				<slf4j.version>1.7.25</slf4j.version>
+			</properties>
+		</profile>
+		<profile>
 			<id>thrift-0.9.1</id>
 			<properties>
 				<thrift.version>0.9.1</thrift.version>
+				<slf4j.version>1.5.8</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.10.0</id>
 			<properties>
 				<thrift.version>0.10.0</thrift.version>
+				<slf4j.version>1.7.12</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.11.0</id>
 			<properties>
 				<thrift.version>0.11.0</thrift.version>
+				<slf4j.version>1.7.12</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.12.0</id>
 			<properties>
 				<thrift.version>0.12.0</thrift.version>
+				<slf4j.version>1.7.25</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
 	</profiles>
@@ -164,12 +178,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>
-			</dependency>
-			<!-- javax.annotation-api (required by Thrift) -->
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>${annotation-api.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

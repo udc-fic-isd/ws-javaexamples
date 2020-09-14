@@ -12,16 +12,45 @@
 	<packaging>jar</packaging>
 	<name>WS-JavaExamples Movies Thrift Subsystem</name>
 
+	<profiles>
+		<profile>
+			<id>thrift-0.10.0</id>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>thrift-0.11.0</id>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>thrift-0.12.0</id>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
 			<artifactId>libthrift</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-		</dependency>
-
 	</dependencies>
 
 	<build>
