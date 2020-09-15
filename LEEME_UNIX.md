@@ -223,6 +223,7 @@
 - Definir un data source con nombre `jdbc/ws-javaexamples-ds`
     - Añadir las siguientes líneas al fichero `$HOME/software/apache-tomcat-9.0.x/conf/server.xml`, 
       dentro de la etiqueta `<GlobalNamingResources>`
+
       ```shell
       <!-- MySQL -->
       <Resource name="jdbc/ws-javaexamples-ds"
@@ -242,6 +243,7 @@
 	  ```	
     - Añadir las siguientes líneas al fichero `$HOME/software/apache-tomcat-9.0.x/conf/context.xml`, 
       dentro de la etiqueta `<Context>`
+
       ```shell
       <ResourceLink name="jdbc/ws-javaexamples-ds" global="jdbc/ws-javaexamples-ds"
                 type="javax.sql.DataSource"/>      
