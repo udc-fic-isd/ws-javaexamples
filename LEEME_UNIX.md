@@ -23,6 +23,8 @@
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
     - Instalar el compilador de Apache Thrift
+        > NOTA: La verión recomendada es la 0.13.0, pero se puede instalar cualquier versión
+          comprendida entre la 0.9.1 y la 0.13.0
         - Instalarlo como paquete si está disponible para la distribución Linux utilizada
             - Ubuntu 20.0.4, 18.0.4, 16.0.4
                - sudo apt-get update -y
@@ -32,6 +34,19 @@
             - Debian
                - Descargar paquete de https://packages.debian.org/sid/thrift-compiler e instalarlo
         - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
+        - IMPORTANTE: Si no se ha instalado la versión 0.13.0 (para saber la versión instalada basta con ejecutar
+          `thrif -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la 
+          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
+          siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>` 
+          dentro de la etiqueta `<settings>`):   
+
+            ```shell
+            <settings>
+                <activeProfiles>
+                    <activeProfile>thrift-0.9.1</activeProfile>
+                </activeProfiles>
+            </settings>
+            ```
 
 - [macOS] 
     - Descargar y descomprimir en `$HOME/software`
@@ -198,6 +213,43 @@
 - Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
 
+## Configuración de Tomcat
+> NOTA: Se asume que Tomcat está descomprimido en el directorio `$HOME/software/apache-tomcat-9.0.x`
+
+- Copiar el driver JDBC de MySQL al directorio `$HOME/software/apache-tomcat-9.0.x/lib`
+    - El driver JDBC se puede obtener de la siguiente ruta (siempre y cuando se hayan compilado previamente los ejemplos):
+     `$HOME/.m2/repository/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar` 
+
+- Definir un data source con nombre `jdbc/ws-javaexamples-ds`
+    - Añadir las siguientes líneas al fichero `$HOME/software/apache-tomcat-9.0.x/conf/server.xml`, 
+      dentro de la etiqueta `<GlobalNamingResources>`
+      ```shell
+      <!-- MySQL -->
+      <Resource name="jdbc/ws-javaexamples-ds"
+                auth="Container"
+                type="javax.sql.DataSource"
+                driverClassName="com.mysql.jdbc.Driver"
+                url= "jdbc:mysql://localhost/ws?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid"
+                username="ws"
+                password="ws"
+                maxActive="4"
+                maxIdle="2"
+                maxWait="10000"
+                removeAbandoned="true"
+                removeAbandonedTimeout="60"
+                logAbandoned="true"
+                validationQuery="SELECT 1"/>
+	  ```	
+    - Añadir las siguientes líneas al fichero `$HOME/software/apache-tomcat-9.0.x/conf/context.xml`, 
+      dentro de la etiqueta `<Context>`
+      ```shell
+      <ResourceLink name="jdbc/ws-javaexamples-ds" global="jdbc/ws-javaexamples-ds"
+                type="javax.sql.DataSource"/>      
+	  ```	
+> NOTA: Para comprobar que Tomcat está correctamente configurado se puede ejecutar el ejemplo `ws-movies`
+>siguiendo los pasos del fichero `README.md` que se encuentra en el directorio raíz de los ejemplos
+
+      
 ## Instalación y configuración básica de Git
 ---------------------------------------------------------------------
 > NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas

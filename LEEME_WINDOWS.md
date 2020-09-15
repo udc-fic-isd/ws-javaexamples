@@ -138,6 +138,44 @@
 ## Configuración de IntelliJ IDEA
 - Se recomienda instalar el plugin de Thrift (lo sugerirá el editor al abrir un fichero .thrift)
 
+
+## Configuración de Tomcat
+> NOTA: Se asume que Tomcat está descomprimido en el directorio `C:\Program Files\Java\apache-tomcat-9.0.x`
+
+- Copiar el driver JDBC de MySQL al directorio `C:\Program Files\Java\apache-tomcat-9.0.x\lib`
+    - El driver JDBC se puede obtener de la siguiente ruta (siempre y cuando se hayan compilado previamente 
+    los ejemplos):
+     `%HOME%/.m2/repository/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar` 
+
+- Definir un data source con nombre `jdbc/ws-javaexamples-ds`
+    - Añadir las siguientes líneas al fichero `C:\Program Files\Java\apache-tomcat-9.0.x\conf\server.xml`, 
+      dentro de la etiqueta `<GlobalNamingResources>`
+      ```shell
+      <!-- MySQL -->
+      <Resource name="jdbc/ws-javaexamples-ds"
+                auth="Container"
+                type="javax.sql.DataSource"
+                driverClassName="com.mysql.jdbc.Driver"
+                url= "jdbc:mysql://localhost/ws?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Europe/Madrid"
+                username="ws"
+                password="ws"
+                maxActive="4"
+                maxIdle="2"
+                maxWait="10000"
+                removeAbandoned="true"
+                removeAbandonedTimeout="60"
+                logAbandoned="true"
+                validationQuery="SELECT 1"/>
+	  ```	
+    - Añadir las siguientes líneas al fichero `C:\Program Files\Java\apache-tomcat-9.0.x\conf\context.xml`, 
+      dentro de la etiqueta `<Context>`
+      ```shell
+      <ResourceLink name="jdbc/ws-javaexamples-ds" global="jdbc/ws-javaexamples-ds"
+                type="javax.sql.DataSource"/>      
+	  ```	
+> NOTA: Para comprobar que Tomcat está correctamente configurado se puede ejecutar el ejemplo `ws-movies`
+>siguiendo los pasos del fichero `README.md` que se encuentra en el directorio raíz de los ejemplos
+
     
 ## Instalación y configuración básica de Git
 > NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas
