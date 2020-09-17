@@ -23,7 +23,7 @@
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
     - Instalar el compilador de Apache Thrift
-        > NOTA: La verión recomendada es la 0.13.0, pero se puede instalar cualquier versión
+        > NOTA: La versión recomendada es la 0.13.0, pero se puede instalar cualquier versión
           comprendida entre la 0.9.1 y la 0.13.0
         - Instalarlo como paquete si está disponible para la distribución Linux utilizada
             - Ubuntu 20.0.4, 18.0.4, 16.0.4
