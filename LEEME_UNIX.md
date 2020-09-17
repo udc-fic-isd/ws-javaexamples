@@ -96,8 +96,9 @@
 
 ## [Linux] Establecer variables de entorno
 - Añadir al fichero `$HOME/.bashrc` lo siguiente 
-> NOTA: Los valores de las variables MAVEN_HOME y JAVA_HOME deben sustituirse por los 
-  directorios donde se haya descomprimido Maven e instalado AdoptOpenJDK respectivamente
+
+> NOTA: Los valores de las variables MAVEN_HOME, IDEA_HOME y JAVA_HOME deben sustituirse por los 
+  directorios donde se haya descomprimido Maven e IntelliJ IDEA, e instalado AdoptOpenJDK, respectivamente
 
 ```shell
     # AdoptOpenJDK (Linux)
@@ -128,6 +129,7 @@
 
 ## [macOS] Establecer variables de entorno
 - Añadir al fichero `$HOME/.bash_profile` lo siguiente:
+
 > NOTA: Los valores de las variables MAVEN_HOME y JAVA_HOME deben sustituirse por los 
   directorios donde se haya descomprimido Maven e instalado AdoptOpenJDK respectivamente
 
@@ -162,7 +164,7 @@
 ```
 
 > NOTA: En los siguientes pasos, al ejecutar los comandos  `mysqladmin` y `myqsl` 
-  con la opción `-p` las password que nos solicitarán es la password del usuario
+  con la opción `-p` la password que nos solicitarán es la del usuario
   root que se especificó al instalar MySQL.
 
 - Creación de bases de datos ws y wstest (abrir en una consola diferente)
@@ -254,7 +256,7 @@
       
 ## Instalación y configuración básica de Git
 ---------------------------------------------------------------------
-> NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas
+> NOTA: Este paso no es necesario si ya se utilizó y configuró Git en otras asignaturas
 
 - Instalación en Linux
     - https://git-scm.com/downloads
@@ -286,6 +288,7 @@
 > NOTA: Este paso no es necesario si ya utilizó Git en otras asignaturas
 
 - Desde un terminal ejecutar:
+
 > Generar las claves en la ruta por defecto ($HOME/.ssh) y con los nombres 
   por defecto
        
@@ -309,6 +312,6 @@
 ```
 
 
-## Instalación de una herramienta cliente gráfica para Git
+## Instalación de una herramienta cliente gráfica para Git (opcional)
 
 - Puede utilizarse cualquier herramienta cliente (https://git-scm.com/downloads/guis)

@@ -96,10 +96,10 @@
   automático o manual. También se puede arrancar y detener.
            
 > NOTA: En los siguientes pasos, al ejecutar los comandos  `mysqladmin` y `myqsl` 
-  con la opción `-p` las password que nos solicitarán es la password del usuario
+  con la opción `-p` la password que nos solicitarán es la del usuario
   root que se especificó al instalar MySQL.
 
-- Creación de bases de datos ws y wstest (abrir en una consola diferente)
+- Creación de bases de datos ws y wstest (ejecutar desde una consola)
 
 ```shell
 	mysqladmin -u root create ws -p
@@ -145,7 +145,7 @@
 - Copiar el driver JDBC de MySQL al directorio `C:\Program Files\Java\apache-tomcat-9.0.x\lib`
     - El driver JDBC se puede obtener de la siguiente ruta (siempre y cuando se hayan compilado previamente 
     los ejemplos):
-     `%HOME%/.m2/repository/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar` 
+     `%HOME%\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar` 
 
 - Definir un data source con nombre `jdbc/ws-javaexamples-ds`
     - Añadir las siguientes líneas al fichero `C:\Program Files\Java\apache-tomcat-9.0.x\conf\server.xml`, 
@@ -180,7 +180,7 @@
 
     
 ## Instalación y configuración básica de Git
-> NOTA: Este paso no es necesario si ya utilizó y configuró Git en otras asignaturas
+> NOTA: Este paso no es necesario si ya se utilizó y configuró Git en otras asignaturas
 
 - Descargar e instalar Git
     - https://git-scm.com/downloads
@@ -188,6 +188,9 @@
     - Instalar con las opciones por defecto.
 
 - Configuración básica
+
+> NOTA: `$GIT_HOME` debe sustituirse por la ruta donde se instaló git.
+
     - Ejecutar git-bash (`$GIT_HOME/git-bash.exe`) y desde ese intérprete de comandos ejecutar:
     
 ```shell
@@ -205,14 +208,15 @@
 > NOTA: Este paso no es necesario si ya utilizó Git en otras asignaturas
 
 - Desde el intérprete de comandos git-bash ejecutar:
-> Genera las claves en la ruta por defecto ($HOME/.ssh) y con los nombres  por defecto 
+
+> Genera las claves en la ruta por defecto (%USERPROFILE%/.ssh) y con los nombres  por defecto 
       
 ```shell
     ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
 ```    
     
 - Acceder a [https://git.fic.udc.es/profile/keys](https://git.fic.udc.es/profile/keys)
-- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero `$HOME/.ssh/id_rsa.pub`
+- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero `%USERPROFILE%/.ssh/id_rsa.pub`
 - En el campo "Title" ponerle un nombre
 - Clic en "Add key"
 
@@ -224,7 +228,7 @@
     ssh -T git@git.fic.udc.es
 ```
     
-## Instalación de una herramienta cliente gráfica para Git
+## Instalación de una herramienta cliente gráfica para Git (opcional)
 
 - Puede utilizarse cualquier herramienta cliente (https://git-scm.com/downloads/guis)
     
