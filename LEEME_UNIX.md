@@ -26,7 +26,7 @@
         > NOTA: La versión recomendada es la 0.13.0, pero se puede instalar cualquier versión
           comprendida entre la 0.9.1 y la 0.13.0
         - Instalarlo como paquete si está disponible para la distribución Linux utilizada
-            - Ubuntu 20.0.4, 18.0.4, 16.0.4
+            - Ubuntu 20.04, 18.04, 16.04
                - sudo apt-get update -y
                - sudo apt-get install -y thrift-compiler 
             - Alpine, ALT Linux, Arch Linux, CentOS, Fedora, FreeBSD, Mageia, NetBSD, openSUSE, Slackware
@@ -35,7 +35,7 @@
                - Descargar paquete de https://packages.debian.org/sid/thrift-compiler e instalarlo
         - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
         - IMPORTANTE: Si no se ha instalado la versión 0.13.0 (para saber la versión instalada basta con ejecutar
-          `thrif -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la 
+          `thrift -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la 
           versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
           siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>` 
           dentro de la etiqueta `<settings>`):   
