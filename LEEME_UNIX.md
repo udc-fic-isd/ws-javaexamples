@@ -124,7 +124,7 @@
 ```shell
     which java
     which mvn
-    which idea
+    which idea.sh
 ```
 
 ## [macOS] Establecer variables de entorno
