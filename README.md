@@ -73,5 +73,4 @@ Configure `src/main/resources/ConfigurationParameters.properties`
 
 - Accessing to ws-movies resources (9090 for Jetty, 8080 for Tomcat)
     - movies   - GET [http://localhost:9090/ws-movies-service/movies](http://localhost:9090/ws-movies-service/movies)
-    - movie #1 - GET [http://localhost:9090/ws-movies-service/movies/1](http://localhost:9090/ws-movies-service/movies/1)
     - sale #1  - GET [http://localhost:9090/ws-movies-service/sales/1](http://localhost:9090/ws-movies-service/sales/1)
