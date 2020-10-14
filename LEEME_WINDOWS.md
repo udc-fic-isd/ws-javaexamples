@@ -10,6 +10,8 @@
     - Maven 3.6.x o superior 
         + https://maven.apache.org/download.cgi
         + Descargar el "Binary zip archive"
+
+- Descargar y descomprimir en `C:\software` el siguiente software
     - Tomcat 9.x 
         + https://tomcat.apache.org/download-90.cgi
         + En el apartado "Binary Distributions" / "Core" descargar el zip.
