@@ -147,6 +147,10 @@
     MAVEN_HOME=$HOME/software/apache-maven-3.6.3
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
+
+    # MySQL.
+    MYSQL_HOME=/usr/local/mysql
+    PATH=$MYSQL_HOME/bin:$PATH
 ```
 
 - Cerrar todos los terminales y abrir terminales nuevos
