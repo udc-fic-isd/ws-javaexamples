@@ -43,7 +43,7 @@ public class JsonToRestMovieDtoConversor {
 		return moviesNode;
 	}
 
-	public static RestMovieDto toServiceMovieDto(InputStream jsonMovie) throws ParsingException {
+	public static RestMovieDto toRestMovieDto(InputStream jsonMovie) throws ParsingException {
 		try {
 			ObjectMapper objectMapper = ObjectMapperFactory.instance();
 			JsonNode rootNode = objectMapper.readTree(jsonMovie);

@@ -36,7 +36,7 @@ public class MoviesServlet extends HttpServlet {
 		}
 		RestMovieDto movieDto;
 		try {
-			movieDto = JsonToRestMovieDtoConversor.toServiceMovieDto(req.getInputStream());
+			movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
 		} catch (ParsingException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException(ex.getMessage())), null);
@@ -84,7 +84,7 @@ public class MoviesServlet extends HttpServlet {
 
 		RestMovieDto movieDto;
 		try {
-			movieDto = JsonToRestMovieDtoConversor.toServiceMovieDto(req.getInputStream());
+			movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
 		} catch (ParsingException ex) {
 			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST, JsonToExceptionConversor
 					.toInputValidationException(new InputValidationException(ex.getMessage())), null);
