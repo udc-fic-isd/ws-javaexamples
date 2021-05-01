@@ -5,12 +5,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.udc.ws.util.exceptions.InputValidationException;
+import es.udc.ws.util.json.ExceptionToJsonConversor;
 import es.udc.ws.util.json.ObjectMapperFactory;
 
 public class ServletUtils {
@@ -72,4 +75,65 @@ public class ServletUtils {
 		return count;
 	}
 
+	public static String getMandatoryParameter(HttpServletRequest req, HttpServletResponse resp, String paramName) throws IOException {
+		String paramValue = req.getParameter(paramName);
+		if (paramValue == null) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					ExceptionToJsonConversor.toInputValidationException(
+							new InputValidationException("Invalid Request: " + "parameter " + paramName + " is mandatory")),
+					null);
+		}
+		return paramValue;
+	}
+
+	public static Long getMandatoryParameterAsLong(HttpServletRequest req, HttpServletResponse resp, String paramName) throws IOException {
+		String paramValue = null;
+		Long paramValueAsLong = null;
+		if ((paramValue = getMandatoryParameter(req, resp, paramName)) != null) {
+			try {
+				paramValueAsLong = Long.valueOf(paramValue);
+			} catch (NumberFormatException ex) {
+				ServletUtils
+						.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+								ExceptionToJsonConversor.toInputValidationException(new InputValidationException(
+										"Invalid Request: " + "parameter '"+ paramName +"' is invalid '" + paramValue + "'")),
+								null);
+			}
+		}
+		return paramValueAsLong;
+	}
+
+	public static boolean checkEmptyPath(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String path = ServletUtils.normalizePath(req.getPathInfo());
+		if (path != null && path.length() > 0) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					ExceptionToJsonConversor.toInputValidationException(
+							new InputValidationException("Invalid Request: " + "invalid path " + path)),
+					null);
+			return false;
+		}
+		return true;
+	}
+
+	public static Long getIdFromPath(HttpServletRequest req, HttpServletResponse resp, String resourceName) throws IOException {
+		Long id = null;
+		String path = ServletUtils.normalizePath(req.getPathInfo());
+		if (path == null || path.length() == 0) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					ExceptionToJsonConversor.toInputValidationException(
+							new InputValidationException("Invalid Request: " + "invalid " + resourceName + " id")),
+					null);
+			return id;
+		}
+		String idAsString = path.substring(1);
+		try {
+			id = Long.valueOf(idAsString);
+		} catch (NumberFormatException ex) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+					ExceptionToJsonConversor.toInputValidationException(
+							new InputValidationException("Invalid Request: invalid " + resourceName + " id '" + idAsString + "'")),
+					null);
+		}
+		return id;
+	}
 }
