@@ -75,64 +75,45 @@ public class ServletUtils {
 		return count;
 	}
 
-	public static String getMandatoryParameter(HttpServletRequest req, HttpServletResponse resp, String paramName) throws IOException {
+	public static String getMandatoryParameter(HttpServletRequest req, String paramName) throws InputValidationException {
 		String paramValue = req.getParameter(paramName);
 		if (paramValue == null) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					ExceptionToJsonConversor.toInputValidationException(
-							new InputValidationException("Invalid Request: " + "parameter " + paramName + " is mandatory")),
-					null);
+			throw new InputValidationException("Invalid Request: " + "parameter " + paramName + " is mandatory");
 		}
 		return paramValue;
 	}
 
-	public static Long getMandatoryParameterAsLong(HttpServletRequest req, HttpServletResponse resp, String paramName) throws IOException {
+	public static Long getMandatoryParameterAsLong(HttpServletRequest req, String paramName) throws IOException, InputValidationException {
 		String paramValue = null;
 		Long paramValueAsLong = null;
-		if ((paramValue = getMandatoryParameter(req, resp, paramName)) != null) {
+		if ((paramValue = getMandatoryParameter(req, paramName)) != null) {
 			try {
 				paramValueAsLong = Long.valueOf(paramValue);
 			} catch (NumberFormatException ex) {
-				ServletUtils
-						.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-								ExceptionToJsonConversor.toInputValidationException(new InputValidationException(
-										"Invalid Request: " + "parameter '"+ paramName +"' is invalid '" + paramValue + "'")),
-								null);
+				throw new InputValidationException("Invalid Request: " + "parameter '"+ paramName +"' is invalid '" + paramValue + "'");
 			}
 		}
 		return paramValueAsLong;
 	}
 
-	public static boolean checkEmptyPath(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public static void checkEmptyPath(HttpServletRequest req) throws InputValidationException {
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path != null && path.length() > 0) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					ExceptionToJsonConversor.toInputValidationException(
-							new InputValidationException("Invalid Request: " + "invalid path " + path)),
-					null);
-			return false;
+			throw new InputValidationException("Invalid Request: " + "invalid path " + path);
 		}
-		return true;
 	}
 
-	public static Long getIdFromPath(HttpServletRequest req, HttpServletResponse resp, String resourceName) throws IOException {
+	public static Long getIdFromPath(HttpServletRequest req, String resourceName) throws IOException, InputValidationException {
 		Long id = null;
 		String path = ServletUtils.normalizePath(req.getPathInfo());
 		if (path == null || path.length() == 0) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					ExceptionToJsonConversor.toInputValidationException(
-							new InputValidationException("Invalid Request: " + "invalid " + resourceName + " id")),
-					null);
-			return id;
+			throw new InputValidationException("Invalid Request: " + "invalid " + resourceName + " id");
 		}
 		String idAsString = path.substring(1);
 		try {
 			id = Long.valueOf(idAsString);
 		} catch (NumberFormatException ex) {
-			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
-					ExceptionToJsonConversor.toInputValidationException(
-							new InputValidationException("Invalid Request: invalid " + resourceName + " id '" + idAsString + "'")),
-					null);
+			throw new InputValidationException("Invalid Request: invalid " + resourceName + " id '" + idAsString + "'");
 		}
 		return id;
 	}
