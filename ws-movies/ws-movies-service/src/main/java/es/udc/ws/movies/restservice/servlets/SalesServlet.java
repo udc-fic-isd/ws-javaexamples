@@ -14,12 +14,12 @@ import es.udc.ws.movies.restservice.servlets.actions.FindSaleAction;
 public class SalesServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Action.execute(new BuyMovieAction(), req, resp);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Action.execute(new FindSaleAction(), req, resp);
     }
 }

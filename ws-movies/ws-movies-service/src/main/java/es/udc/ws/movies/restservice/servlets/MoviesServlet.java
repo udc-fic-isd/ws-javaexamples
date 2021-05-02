@@ -16,22 +16,22 @@ import es.udc.ws.movies.restservice.servlets.actions.UpdateMovieAction;
 public class MoviesServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Action.execute(new AddMovieAction(), req, resp);
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Action.execute(new UpdateMovieAction(), req, resp);
 	}
 
 	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Action.execute(new RemoveMovieAction(), req, resp);
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Action.execute(new FindMoviesAction(), req, resp);
 	}
 
