@@ -1,11 +1,9 @@
 package es.udc.ws.movies.restservice.servlets.actions;
 
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
-import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.restservice.servlets.Action;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
-import es.udc.ws.util.json.ExceptionToJsonConversor;
 import es.udc.ws.util.servlet.ServletUtils;
 
 import javax.servlet.http.HttpServletRequest;

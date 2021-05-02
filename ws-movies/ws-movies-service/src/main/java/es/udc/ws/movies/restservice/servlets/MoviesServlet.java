@@ -1,16 +1,14 @@
 package es.udc.ws.movies.restservice.servlets;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import es.udc.ws.movies.restservice.servlets.actions.AddMovieAction;
 import es.udc.ws.movies.restservice.servlets.actions.FindMoviesAction;
 import es.udc.ws.movies.restservice.servlets.actions.RemoveMovieAction;
 import es.udc.ws.movies.restservice.servlets.actions.UpdateMovieAction;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class MoviesServlet extends HttpServlet {
