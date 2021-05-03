@@ -6,7 +6,7 @@ import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 
-public class JsonToExceptionConversor {
+public class MoviesExceptionToJsonConversor {
 
     public static ObjectNode toInputValidationException(InputValidationException ex) {
 
