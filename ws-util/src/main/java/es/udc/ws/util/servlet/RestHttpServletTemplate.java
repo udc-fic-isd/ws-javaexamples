@@ -20,16 +20,13 @@ public class RestHttpServletTemplate extends HttpServlet {
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
                     ExceptionToJsonConversor.toInstanceNotFoundException(ex), null);
-            return;
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
-            return;
         } catch (ParsingException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
                     null);
-            return;
         }
     }
 
@@ -45,16 +42,13 @@ public class RestHttpServletTemplate extends HttpServlet {
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
                     ExceptionToJsonConversor.toInstanceNotFoundException(ex), null);
-            return;
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
-            return;
         } catch (ParsingException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
                     null);
-            return;
         }
     }
 
@@ -70,16 +64,13 @@ public class RestHttpServletTemplate extends HttpServlet {
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
                     ExceptionToJsonConversor.toInstanceNotFoundException(ex), null);
-            return;
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
-            return;
         } catch (ParsingException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
                     null);
-            return;
         }
     }
 
@@ -95,16 +86,13 @@ public class RestHttpServletTemplate extends HttpServlet {
         } catch (InstanceNotFoundException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NOT_FOUND,
                     ExceptionToJsonConversor.toInstanceNotFoundException(ex), null);
-            return;
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
-            return;
         } catch (ParsingException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
                     null);
-            return;
         }
     }
 
