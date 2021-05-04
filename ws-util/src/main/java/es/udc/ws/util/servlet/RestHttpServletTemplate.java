@@ -3,6 +3,7 @@ package es.udc.ws.util.servlet;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.json.ExceptionToJsonConversor;
+import es.udc.ws.util.json.exceptions.ParsingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class HttpServletTemplate extends HttpServlet {
+public class RestHttpServletTemplate extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -23,6 +24,11 @@ public class HttpServletTemplate extends HttpServlet {
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
+            return;
+        } catch (ParsingException ex) {
+            ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+                    ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
+                    null);
             return;
         }
     }
@@ -44,6 +50,11 @@ public class HttpServletTemplate extends HttpServlet {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
             return;
+        } catch (ParsingException ex) {
+            ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+                    ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
+                    null);
+            return;
         }
     }
 
@@ -64,6 +75,11 @@ public class HttpServletTemplate extends HttpServlet {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
             return;
+        } catch (ParsingException ex) {
+            ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+                    ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
+                    null);
+            return;
         }
     }
 
@@ -83,6 +99,11 @@ public class HttpServletTemplate extends HttpServlet {
         } catch (InputValidationException ex) {
             ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
                     ExceptionToJsonConversor.toInputValidationException(ex), null);
+            return;
+        } catch (ParsingException ex) {
+            ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_BAD_REQUEST,
+                    ExceptionToJsonConversor.toInputValidationException(new InputValidationException(ex.getMessage())),
+                    null);
             return;
         }
     }

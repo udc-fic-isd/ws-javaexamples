@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,11 +16,11 @@ import es.udc.ws.movies.restservice.json.JsonToRestSaleDtoConversor;
 import es.udc.ws.movies.restservice.dto.SaleToRestSaleDtoConversor;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
-import es.udc.ws.util.servlet.HttpServletTemplate;
+import es.udc.ws.util.servlet.RestHttpServletTemplate;
 import es.udc.ws.util.servlet.ServletUtils;
 
 @SuppressWarnings("serial")
-public class SalesServlet extends HttpServletTemplate {
+public class SalesServlet extends RestHttpServletTemplate {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws IOException,
