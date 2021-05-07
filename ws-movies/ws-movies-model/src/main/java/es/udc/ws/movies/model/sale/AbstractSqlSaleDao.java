@@ -60,6 +60,29 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
 
     }
 
+    public boolean existsByMovieId(Connection connection, Long movieId) {
+
+        /* Create "queryString". */
+        String queryString = "SELECT 1 FROM Sale WHERE movieId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+
+            /* Fill "preparedStatement". */
+            int i = 1;
+            preparedStatement.setLong(i++, movieId.longValue());
+
+            /* Execute query. */
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            /* Return result. */
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     @Override
     public void update(Connection connection, Sale sale)
             throws InstanceNotFoundException {

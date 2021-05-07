@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +89,7 @@ public class MovieServiceTest {
 
 		try {
 			movieService.removeMovie(movieId);
-		} catch (InstanceNotFoundException e) {
+		} catch (InstanceNotFoundException | MovieNotRemovableException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -321,7 +322,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void testRemoveMovie() throws InstanceNotFoundException {
+	public void testRemoveMovie() throws InstanceNotFoundException, MovieNotRemovableException {
 
 		Movie movie = createMovie(getValidMovie());
 
@@ -334,6 +335,23 @@ public class MovieServiceTest {
 	@Test
 	public void testRemoveNonExistentMovie() {
 		assertThrows(InstanceNotFoundException.class, () -> movieService.removeMovie(NON_EXISTENT_MOVIE_ID));
+	}
+
+	@Test
+	public void testRemoveMovieWithSales() throws InputValidationException, InstanceNotFoundException {
+		Movie movie = createMovie(getValidMovie());
+		Sale sale = null;
+		try {
+			sale = movieService.buyMovie(movie.getMovieId(), USER_ID, VALID_CREDIT_CARD_NUMBER);
+
+			assertThrows(MovieNotRemovableException.class, () -> movieService.removeMovie(movie.getMovieId()));
+		} finally {
+			// Clear Database (sale if it was created and movie)
+			if (sale != null) {
+				removeSale(sale.getSaleId());
+			}
+			removeMovie(movie.getMovieId());
+		}
 	}
 
 	@Test

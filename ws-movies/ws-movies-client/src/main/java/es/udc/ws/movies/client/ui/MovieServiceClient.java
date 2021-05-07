@@ -3,6 +3,7 @@ package es.udc.ws.movies.client.ui;
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.ClientMovieServiceFactory;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
+import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -46,7 +47,7 @@ public class MovieServiceClient {
                 System.out.println("Movie with id " + args[1] +
                         " removed sucessfully");
 
-            } catch (NumberFormatException | InstanceNotFoundException ex) {
+            } catch (NumberFormatException | InstanceNotFoundException | ClientMovieNotRemovableException ex) {
                 ex.printStackTrace(System.err);
             } catch (Exception ex) {
                 ex.printStackTrace(System.err);

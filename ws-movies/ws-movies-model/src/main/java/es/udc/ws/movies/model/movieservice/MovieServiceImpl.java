@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movie.SqlMovieDao;
 import es.udc.ws.movies.model.movie.SqlMovieDaoFactory;
+import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
 import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.model.sale.Sale;
 import es.udc.ws.movies.model.sale.SqlSaleDao;
@@ -124,7 +125,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public void removeMovie(Long movieId) throws InstanceNotFoundException {
+	public void removeMovie(Long movieId) throws InstanceNotFoundException, MovieNotRemovableException {
 
 		try (Connection connection = dataSource.getConnection()) {
 
@@ -135,6 +136,9 @@ public class MovieServiceImpl implements MovieService {
 				connection.setAutoCommit(false);
 
 				/* Do work. */
+				if (saleDao.existsByMovieId(connection, movieId)) {
+					throw new MovieNotRemovableException(movieId);
+				}
 				movieDao.remove(connection, movieId);
 
 				/* Commit. */

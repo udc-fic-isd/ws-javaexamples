@@ -2,6 +2,7 @@ package es.udc.ws.movies.thriftservice;
 
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
+import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
 import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.model.sale.Sale;
 import es.udc.ws.movies.thrift.*;
@@ -45,13 +46,15 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
 
 
     @Override
-    public void removeMovie(long movieId) throws ThriftInstanceNotFoundException {
+    public void removeMovie(long movieId) throws ThriftInstanceNotFoundException, ThriftMovieNotRemovableException {
 
         try {
             MovieServiceFactory.getService().removeMovie(movieId);
         } catch (InstanceNotFoundException e) {
             throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
                     e.getInstanceType().substring(e.getInstanceType().lastIndexOf('.') + 1));
+        } catch (MovieNotRemovableException e) {
+            throw new ThriftMovieNotRemovableException(e.getMovieId());
         }
 
     }

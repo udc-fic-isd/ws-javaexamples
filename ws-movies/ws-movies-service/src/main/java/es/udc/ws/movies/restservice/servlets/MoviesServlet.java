@@ -8,11 +8,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
+import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.restservice.dto.RestMovieDto;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
 import es.udc.ws.movies.restservice.json.JsonToRestMovieDtoConversor;
 import es.udc.ws.movies.restservice.dto.MovieToRestMovieDtoConversor;
+import es.udc.ws.movies.restservice.json.MoviesExceptionToJsonConversor;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.servlet.RestHttpServletTemplate;
@@ -62,7 +65,14 @@ public class MoviesServlet extends RestHttpServletTemplate {
 			InputValidationException, InstanceNotFoundException {
 		Long movieId = ServletUtils.getIdFromPath(req, "movie");
 
-		MovieServiceFactory.getService().removeMovie(movieId);
+		try {
+			MovieServiceFactory.getService().removeMovie(movieId);
+		} catch (MovieNotRemovableException ex) {
+			ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_FORBIDDEN,
+					MoviesExceptionToJsonConversor.toMovieNotRemovableException(ex),
+					null);
+			return;
+		}
 
 		ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NO_CONTENT, null, null);
 	}

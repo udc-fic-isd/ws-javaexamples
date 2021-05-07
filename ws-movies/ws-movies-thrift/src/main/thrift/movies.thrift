@@ -26,16 +26,19 @@ exception ThriftInstanceNotFoundException {
 
 exception ThriftSaleExpirationException {
     1: i64 saleId;
-    3: string expirationDate;
+    2: string expirationDate;
 }
 
+exception ThriftMovieNotRemovableException {
+    1: i64 movieId;
+}
 service ThriftMovieService {
 
    ThriftMovieDto addMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e)
 
    void updateMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e, 2: ThriftInstanceNotFoundException ee)
 
-   void removeMovie(1: i64 movieId) throws (1: ThriftInstanceNotFoundException e)
+   void removeMovie(1: i64 movieId) throws (1: ThriftInstanceNotFoundException e, 2: ThriftMovieNotRemovableException ee)
 
    list<ThriftMovieDto> findMovies(1: string keywords)
 

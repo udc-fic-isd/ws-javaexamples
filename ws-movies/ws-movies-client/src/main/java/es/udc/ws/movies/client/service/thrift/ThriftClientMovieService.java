@@ -2,11 +2,9 @@ package es.udc.ws.movies.client.service.thrift;
 
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
+import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
-import es.udc.ws.movies.thrift.ThriftInputValidationException;
-import es.udc.ws.movies.thrift.ThriftInstanceNotFoundException;
-import es.udc.ws.movies.thrift.ThriftMovieService;
-import es.udc.ws.movies.thrift.ThriftSaleExpirationException;
+import es.udc.ws.movies.thrift.*;
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -74,7 +72,7 @@ public class ThriftClientMovieService implements ClientMovieService {
     }
 
     @Override
-    public void removeMovie(Long movieId) throws InstanceNotFoundException {
+    public void removeMovie(Long movieId) throws InstanceNotFoundException, ClientMovieNotRemovableException {
 
         ThriftMovieService.Client client = getClient();
         TTransport transport = client.getInputProtocol().getTransport();
@@ -86,6 +84,8 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         } catch (ThriftInstanceNotFoundException e) {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
+        } catch (ThriftMovieNotRemovableException e) {
+            throw new ClientMovieNotRemovableException(e.getMovieId());
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

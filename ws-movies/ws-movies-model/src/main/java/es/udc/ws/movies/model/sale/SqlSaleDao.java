@@ -11,6 +11,8 @@ public interface SqlSaleDao {
     public Sale find(Connection connection, Long saleId)
             throws InstanceNotFoundException;
 
+    public boolean existsByMovieId(Connection connection, Long movieId);
+
     public void update(Connection connection, Sale sale)
             throws InstanceNotFoundException;
 

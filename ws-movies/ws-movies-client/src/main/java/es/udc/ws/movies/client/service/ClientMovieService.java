@@ -1,6 +1,7 @@
 package es.udc.ws.movies.client.service;
 
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
+import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
@@ -14,7 +15,8 @@ public interface ClientMovieService {
     public void updateMovie(ClientMovieDto movie)
             throws InputValidationException, InstanceNotFoundException;
 
-    public void removeMovie(Long movieId) throws InstanceNotFoundException;
+    public void removeMovie(Long movieId) throws InstanceNotFoundException,
+            ClientMovieNotRemovableException;
 
     public List<ClientMovieDto> findMovies(String keywords);
 

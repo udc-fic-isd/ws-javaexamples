@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
+import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.movies.client.service.rest.json.JsonToClientExceptionConversor;
 import es.udc.ws.movies.client.service.rest.json.JsonToClientMovieDtoConversor;
@@ -72,7 +73,7 @@ public class RestClientMovieService implements ClientMovieService {
     }
 
     @Override
-    public void removeMovie(Long movieId) throws InstanceNotFoundException {
+    public void removeMovie(Long movieId) throws InstanceNotFoundException, ClientMovieNotRemovableException {
 
         try {
 
@@ -82,6 +83,8 @@ public class RestClientMovieService implements ClientMovieService {
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
 
         } catch (InstanceNotFoundException e) {
+            throw e;
+        } catch (ClientMovieNotRemovableException e) {
             throw e;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -204,6 +207,10 @@ public class RestClientMovieService implements ClientMovieService {
 
                 case HttpStatus.SC_BAD_REQUEST:
                     throw JsonToClientExceptionConversor.fromBadRequestErrorCode(
+                            response.getEntity().getContent());
+
+                case HttpStatus.SC_FORBIDDEN:
+                    throw JsonToClientExceptionConversor.fromForbiddenErrorCode(
                             response.getEntity().getContent());
 
                 case HttpStatus.SC_GONE:

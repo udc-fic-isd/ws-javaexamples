@@ -1,5 +1,6 @@
 package es.udc.ws.movies.model.movieservice;
 
+import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
 import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import java.util.List;
 
@@ -15,7 +16,8 @@ public interface MovieService {
     public void updateMovie(Movie movie) throws InputValidationException,
             InstanceNotFoundException;
 
-    public void removeMovie(Long movieId) throws InstanceNotFoundException;
+    public void removeMovie(Long movieId) throws InstanceNotFoundException,
+            MovieNotRemovableException;
 
     public Movie findMovie(Long movieId) throws InstanceNotFoundException;
 
