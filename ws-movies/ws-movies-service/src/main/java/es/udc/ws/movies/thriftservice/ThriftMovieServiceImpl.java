@@ -13,12 +13,13 @@ import java.util.List;
 public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
 
     @Override
-    public long addMovie(ThriftMovieDto movieDto) throws ThriftInputValidationException {
+    public ThriftMovieDto addMovie(ThriftMovieDto movieDto) throws ThriftInputValidationException {
 
         Movie movie = MovieToThriftMovieDtoConversor.toMovie(movieDto);
 
         try {
-            return MovieServiceFactory.getService().addMovie(movie).getMovieId();
+            Movie addedMovie = MovieServiceFactory.getService().addMovie(movie);
+            return MovieToThriftMovieDtoConversor.toThriftMovieDto(addedMovie);
         } catch (InputValidationException e) {
             throw new ThriftInputValidationException(e.getMessage());
         }

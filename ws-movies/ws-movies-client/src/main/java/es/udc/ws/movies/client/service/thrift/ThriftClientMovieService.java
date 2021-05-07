@@ -38,7 +38,7 @@ public class ThriftClientMovieService implements ClientMovieService {
 
             transport.open();
 
-            return client.addMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie));
+            return client.addMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie)).getMovieId();
 
         } catch (ThriftInputValidationException e) {
             throw new InputValidationException(e.getMessage());

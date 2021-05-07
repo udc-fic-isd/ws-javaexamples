@@ -31,7 +31,7 @@ exception ThriftSaleExpirationException {
 
 service ThriftMovieService {
 
-   i64 addMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e)
+   ThriftMovieDto addMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e)
 
    void updateMovie(1: ThriftMovieDto movieDto) throws (1: ThriftInputValidationException e, 2: ThriftInstanceNotFoundException ee)
 

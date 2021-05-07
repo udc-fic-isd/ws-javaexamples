@@ -24,7 +24,7 @@ public class MovieToThriftMovieDtoConversor {
 
     }
 
-    private static ThriftMovieDto toThriftMovieDto(Movie movie) {
+    public static ThriftMovieDto toThriftMovieDto(Movie movie) {
 
         return new ThriftMovieDto(movie.getMovieId(), movie.getTitle(),
             movie.getRuntime(), movie.getDescription(),
