@@ -91,7 +91,7 @@
 
 ```shell
     cd $HOME/software
-    tar zxf ws-javaexamples-3.4.0-src.tar.gz
+    tar zxf ws-javaexamples-3.5.0-src.tar.gz
 ```
 
 ## [Linux] Establecer variables de entorno
@@ -207,7 +207,7 @@
 - Inicialización de la base de datos y compilación de los ejemplos
 
 ```shell
-    cd $HOME/software/ws-javaexamples-3.4.0
+    cd $HOME/software/ws-javaexamples-3.5.0
     mvn sql:execute install
 ```
     
