@@ -65,10 +65,24 @@
 	<!-- Profiles -->
 	<profiles>
 		<profile>
-			<id>thrift-0.13.0</id>
+			<id>thrift-0.14.1</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<thrift.version>0.14.1</thrift.version>
+				<slf4j.version>1.7.28</slf4j.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.14.0</id>
+			<properties>
+				<thrift.version>0.14.0</thrift.version>
+				<slf4j.version>1.7.28</slf4j.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.13.0</id>
 			<properties>
 				<thrift.version>0.13.0</thrift.version>
 				<slf4j.version>1.7.25</slf4j.version>
