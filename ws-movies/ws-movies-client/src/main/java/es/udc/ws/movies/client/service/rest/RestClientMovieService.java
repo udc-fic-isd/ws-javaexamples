@@ -82,9 +82,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
 
-        } catch (InstanceNotFoundException e) {
-            throw e;
-        } catch (ClientMovieNotRemovableException e) {
+        } catch (InstanceNotFoundException | ClientMovieNotRemovableException e) {
             throw e;
         } catch (Exception e) {
             throw new RuntimeException(e);

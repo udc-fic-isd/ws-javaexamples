@@ -29,8 +29,7 @@ public class MoviesServlet extends RestHttpServletTemplate {
 			InputValidationException {
 		ServletUtils.checkEmptyPath(req);
 
-		RestMovieDto movieDto;
-		movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
+		RestMovieDto movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
 		Movie movie = MovieToRestMovieDtoConversor.toMovie(movieDto);
 
 		movie = MovieServiceFactory.getService().addMovie(movie);
@@ -48,8 +47,7 @@ public class MoviesServlet extends RestHttpServletTemplate {
 			InputValidationException, InstanceNotFoundException {
 		Long movieId = ServletUtils.getIdFromPath(req, "movie");
 
-		RestMovieDto movieDto;
-		movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
+		RestMovieDto movieDto = JsonToRestMovieDtoConversor.toRestMovieDto(req.getInputStream());
 		if (!movieId.equals(movieDto.getMovieId())) {
 			throw new InputValidationException("Invalid Request: invalid movieId");
 		}

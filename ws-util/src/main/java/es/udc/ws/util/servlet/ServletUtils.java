@@ -53,17 +53,6 @@ public class ServletUtils {
         }
     }
 
-    private static int copy(InputStream input, OutputStream output) throws IOException {
-        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
-        int count = 0;
-        int n = 0;
-        while (-1 != (n = input.read(buffer))) {
-            output.write(buffer, 0, n);
-            count += n;
-        }
-        return count;
-    }
-
     public static String getMandatoryParameter(HttpServletRequest req, String paramName)
             throws InputValidationException {
         String paramValue = req.getParameter(paramName);
@@ -73,9 +62,9 @@ public class ServletUtils {
         return paramValue;
     }
 
-    public static Long getMandatoryParameterAsLong(HttpServletRequest req, String paramName) throws IOException,
-            InputValidationException {
-        String paramValue = null;
+    public static Long getMandatoryParameterAsLong(HttpServletRequest req, String paramName)
+            throws InputValidationException {
+        String paramValue;
         Long paramValueAsLong = null;
         if ((paramValue = getMandatoryParameter(req, paramName)) != null) {
             try {
