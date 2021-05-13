@@ -30,16 +30,6 @@ public class ServletUtils {
         }
     }
 
-    public static void writeServiceResponse(HttpServletResponse response, int responseCode, String contentType,
-                                            InputStream content, Map<String, String> headers) throws IOException {
-
-        writeResponse(response, responseCode, contentType, headers);
-
-        if (content != null) {
-            copy(content, response.getOutputStream());
-        }
-    }
-
     private static void writeResponse(HttpServletResponse response, int responseCode, String contentType,
                                       Map<String, String> headers) {
         if (headers != null && !headers.isEmpty()) {
