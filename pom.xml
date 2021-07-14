@@ -53,7 +53,7 @@
 		<resourcesMavenPlugin.version>3.2.0</resourcesMavenPlugin.version>
 		<execMavenPlugin.version>3.0.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
-		<jettyMavenPlugin.version>9.4.28.v20200408</jettyMavenPlugin.version>
+		<jettyMavenPlugin.version>9.4.43.v20210629</jettyMavenPlugin.version>
 		<surefireMavenPlugin.version>2.22.2</surefireMavenPlugin.version>
 		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
 		<enforcerMavenPlugin.version>1.4.1</enforcerMavenPlugin.version>
