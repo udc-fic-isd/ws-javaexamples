@@ -30,16 +30,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Package versions (except those defined in "profiles" section) -->
-		<commonsDbcp.version>2.7.0</commonsDbcp.version>
-		<junit.version>5.6.2</junit.version>
+		<commonsDbcp.version>2.8.0</commonsDbcp.version>
+		<junit.version>5.7.2</junit.version>
 		<servletApi.version>2.3</servletApi.version>
-		<httpclient.version>4.5.12</httpclient.version>
-		<jackson.version>2.11.0</jackson.version>
+		<httpclient.version>4.5.13</httpclient.version>
+		<jackson.version>2.12.4</jackson.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
 		<jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
-		<jdbcDriver.version>8.0.20</jdbcDriver.version>
+		<jdbcDriver.version>8.0.25</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 		<!-- Data source properties -->
@@ -50,7 +50,7 @@
 
 		<!-- Plugin versions -->
 		<compilerMavenPlugin.version>3.8.1</compilerMavenPlugin.version>
-		<resourcesMavenPlugin.version>3.1.0</resourcesMavenPlugin.version>
+		<resourcesMavenPlugin.version>3.2.0</resourcesMavenPlugin.version>
 		<execMavenPlugin.version>3.0.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
 		<jettyMavenPlugin.version>9.4.28.v20200408</jettyMavenPlugin.version>
@@ -65,12 +65,12 @@
 	<!-- Profiles -->
 	<profiles>
 		<profile>
-			<id>thrift-0.14.1</id>
+			<id>thrift-0.14.2</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<thrift.version>0.14.1</thrift.version>
+				<thrift.version>0.14.2</thrift.version>
 				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
@@ -132,6 +132,16 @@
 			<id>thrift-0.14.0</id>
 			<properties>
 				<thrift.version>0.14.0</thrift.version>
+				<slf4j.version>1.7.28</slf4j.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.14.1</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<thrift.version>0.14.1</thrift.version>
 				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
