@@ -7,7 +7,7 @@
   para evitar problemas con Maven.
 
 - Descargar y descomprimir en `C:\Program Files\Java` el siguiente software
-    - Maven 3.6.x o superior 
+    - Maven 3.8.x o superior 
         + https://maven.apache.org/download.cgi
         + Descargar el "Binary zip archive"
 
@@ -40,7 +40,7 @@
          + Debe introducirse una contraseña no vacía para el usuario `root` (e.g. `root`)
 
 - Descargar e instalar el compilador de Apache Thrift:
-     - http://www.apache.org/dyn/closer.cgi?path=/thrift/0.13.0/thrift-0.13.0.exe
+     - http://www.apache.org/dyn/closer.cgi?path=/thrift/0.14.2/thrift-0.14.2.exe
      - Renombrar el ejecutable a thrift.exe y copiarlo dentro del directorio bin que hay 
      dentro del directorio donde se descomprimió Maven 
      
@@ -59,10 +59,10 @@
   nombre y el valor, y pulsar "Aceptar")
     - Nombre: `JAVA_HOME`
         + Valor: Directorio donde se instaló AdoptOpenJDK
-        + Por ejemplo:`C:\Program Files\AdoptOpenJDK\jdk-11.0.8.10-hotspot`
+        + Por ejemplo:`C:\Program Files\AdoptOpenJDK\jdk-11.0.11.9-hotspot`
     - Nombre: `MAVEN_HOME`
         + Valor: Directorio donde se descomprimió Maven
-        + Por ejemplo: `C:\Program Files\Java\apache-maven-3.6.3`
+        + Por ejemplo: `C:\Program Files\Java\apache-maven-3.8.1`
     - Nombre: `MAVEN_OPTS`
         + Valor: `-Xms512m -Xmx1024m`
     - Nombre: `MYSQL_HOME`

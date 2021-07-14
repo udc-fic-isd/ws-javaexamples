@@ -5,7 +5,7 @@
   
 - [Linux] 
     - Descargar y descomprimir en `$HOME/software` el siguiente software
-        - Maven 3.6.x o superior 
+        - Maven 3.8.x o superior 
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive".
         - IntelliJ IDEA
@@ -23,8 +23,8 @@
             - Seguir las instrucciones que se indican en 
               https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html
     - Instalar el compilador de Apache Thrift
-        > NOTA: La versión recomendada es la 0.13.0, pero se puede instalar cualquier versión
-          comprendida entre la 0.9.1 y la 0.13.0
+        > NOTA: La versión recomendada es la 0.14.2, pero se puede instalar cualquier versión
+          comprendida entre la 0.9.1 y la 0.14.2
         - Instalarlo como paquete si está disponible para la distribución Linux utilizada
             - Ubuntu 20.04, 18.04, 16.04
                - sudo apt-get update -y
@@ -50,7 +50,7 @@
 
 - [macOS] 
     - Descargar y descomprimir en `$HOME/software`
-        - Maven 3.6.x o superior 
+        - Maven 3.8.x o superior 
             - https://maven.apache.org/download.cgi
             - Descargar el "Binary tar.gz archive"
     - Deescargar e instalar
@@ -107,7 +107,7 @@
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=$HOME/software/apache-maven-3.6.3
+    MAVEN_HOME=$HOME/software/apache-maven-3.8.1
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
