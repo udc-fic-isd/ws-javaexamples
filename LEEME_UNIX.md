@@ -10,8 +10,9 @@
             - Descargar el "Binary tar.gz archive".
         - IntelliJ IDEA
             - https://www.jetbrains.com/es-es/idea/download
-            - Se puede utilizar la versión Community (libre) o la versión Ultimate 
-              (solicitando una licencia para estudiantes). 
+                + Se puede utilizar la versión Community (libre) o la versión Ultimate
+                  (solicitando una licencia para estudiantes según se indica en
+                  https://www.jetbrains.com/es-es/community/education/#students).
     - Instalar como paquete
         - AdoptOpenJDK 11
             - Instalar como paquete siguiendo las instrucciones que se 
@@ -34,7 +35,7 @@
             - Debian
                - Descargar paquete de https://packages.debian.org/sid/thrift-compiler e instalarlo
         - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
-        - IMPORTANTE: Si no se ha instalado la versión 0.13.0 (para saber la versión instalada basta con ejecutar
+        - IMPORTANTE: Si no se ha instalado la versión 0.14.2 (para saber la versión instalada basta con ejecutar
           `thrift -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la 
           versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
           siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>` 
@@ -56,8 +57,9 @@
     - Deescargar e instalar
         - IntelliJ IDEA
             - https://www.jetbrains.com/es-es/idea/download
-            - Se puede utilizar la versión Community (libre) o la versión Ultimate 
-              (solicitando una licencia para estudiantes). 
+                + Se puede utilizar la versión Community (libre) o la versión Ultimate
+                  (solicitando una licencia para estudiantes según se indica en
+                  https://www.jetbrains.com/es-es/community/education/#students).
             - Instalar usando las opciones por defecto.
         - AdoptOpenJDK 11
             - https://adoptopenjdk.net/
@@ -78,6 +80,19 @@
             - sudo port install thrift
         - Instalación de Thrift con Homebrew:
             - brew install thrift
+        - IMPORTANTE: Si no se ha instalado la versión 0.14.2 (para saber la versión instalada basta con ejecutar
+          `thrift -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la
+          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
+          siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>`
+          dentro de la etiqueta `<settings>`):
+
+            ```shell
+            <settings>
+                <activeProfiles>
+                    <activeProfile>thrift-0.9.1</activeProfile>
+                </activeProfiles>
+            </settings>
+            ```
 
 - [Linux y macOS] Descargar y descomprimir en `$HOME/software` el siguiente software
     - Tomcat 9.x 
