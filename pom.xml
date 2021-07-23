@@ -290,6 +290,9 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefireMavenPlugin.version}</version>
+				<configuration>
+ 				   <forkCount>0</forkCount>
+				</configuration>
 			</plugin>
 
   			<!-- ========================================================== -->
