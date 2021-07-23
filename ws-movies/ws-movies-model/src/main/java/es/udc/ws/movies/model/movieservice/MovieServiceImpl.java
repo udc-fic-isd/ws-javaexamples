@@ -144,7 +144,7 @@ public class MovieServiceImpl implements MovieService {
 				/* Commit. */
 				connection.commit();
 
-			} catch (InstanceNotFoundException e) {
+			} catch (InstanceNotFoundException | MovieNotRemovableException e) {
 				connection.commit();
 				throw e;
 			} catch (SQLException e) {
