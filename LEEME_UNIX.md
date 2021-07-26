@@ -37,14 +37,14 @@
         - En otro caso, seguir las instrucciones de https://thrift.apache.org/docs/install/
         - IMPORTANTE: Si no se ha instalado la versión 0.14.2 (para saber la versión instalada basta con ejecutar
           `thrift -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la 
-          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
+          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.13.0, el fichero debería tener el
           siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>` 
           dentro de la etiqueta `<settings>`):   
 
             ```shell
             <settings>
                 <activeProfiles>
-                    <activeProfile>thrift-0.9.1</activeProfile>
+                    <activeProfile>thrift-0.13.0</activeProfile>
                 </activeProfiles>
             </settings>
             ```
@@ -82,14 +82,14 @@
             - brew install thrift
         - IMPORTANTE: Si no se ha instalado la versión 0.14.2 (para saber la versión instalada basta con ejecutar
           `thrift -version`) es necesario crear o modificar el fichero `$HOME/.m2/settings.xml` para indicar la
-          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.9.1, el fichero debería tener el
+          versión de Thrift que se va a utilizar. Por ejemplo, para la versión 0.13.0, el fichero debería tener el
           siguiente contenido (en caso de que el fichero ya exista, hay que añadir la etiqueta `<activeProfiles>`
           dentro de la etiqueta `<settings>`):
 
             ```shell
             <settings>
                 <activeProfiles>
-                    <activeProfile>thrift-0.9.1</activeProfile>
+                    <activeProfile>thrift-0.13.0</activeProfile>
                 </activeProfiles>
             </settings>
             ```
