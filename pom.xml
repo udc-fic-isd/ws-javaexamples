@@ -6,7 +6,7 @@
 	<groupId>es.udc.ws</groupId>
 	<artifactId>ws-javaexamples</artifactId>
 	<packaging>pom</packaging>
-	<version>3.5.0</version>
+	<version>3.5.0-jakarta</version>
 	<name>WS-JavaExamples Project</name>
 
 	<modules>
