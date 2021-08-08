@@ -32,7 +32,7 @@
 		<!-- Package versions (except those defined in "profiles" section) -->
 		<commonsDbcp.version>2.8.0</commonsDbcp.version>
 		<junit.version>5.7.2</junit.version>
-		<servletApi.version>2.3</servletApi.version>
+		<servletApi.version>5.0.0</servletApi.version>
 		<httpclient.version>4.5.13</httpclient.version>
 		<jackson.version>2.12.4</jackson.version>
 
@@ -53,7 +53,7 @@
 		<resourcesMavenPlugin.version>3.2.0</resourcesMavenPlugin.version>
 		<execMavenPlugin.version>3.0.0</execMavenPlugin.version>
 		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
-		<jettyMavenPlugin.version>9.4.43.v20210629</jettyMavenPlugin.version>
+		<jettyMavenPlugin.version>11.0.6</jettyMavenPlugin.version>
 		<surefireMavenPlugin.version>2.22.2</surefireMavenPlugin.version>
 		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
 		<enforcerMavenPlugin.version>1.4.1</enforcerMavenPlugin.version>
@@ -70,7 +70,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<thrift.version>0.14.2</thrift.version>
+				<thrift.version>0.14.2-jakarta</thrift.version>
 				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
@@ -176,8 +176,8 @@
 			</dependency>
 			<!-- Servlet API -->
 			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
 				<version>${servletApi.version}</version>
 				<scope>provided</scope>
 			</dependency>
@@ -209,6 +209,12 @@
 				<groupId>org.apache.thrift</groupId>
 				<artifactId>libthrift</artifactId>
 				<version>${thrift.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.tomcat.embed</groupId>
+						<artifactId>tomcat-embed-core</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- SLF4j (required by Thrift) -->
 			<dependency>
@@ -384,11 +390,19 @@
 					<httpConnector>
 						<port>9090</port>
 					</httpConnector>
-					<webAppConfig>
+					<webApp>
 						<contextPath>/${project.artifactId}</contextPath>
 						<jettyEnvXml>target/jetty/jetty-env.xml</jettyEnvXml>
-					</webAppConfig>
-					<reload>manual</reload>
+					</webApp>
+					<!--
+					https://www.eclipse.org/jetty/documentation/jetty-11/programming-guide/index.html#container-classpath
+					The pause in seconds between sweeps of the webapp to check for changes and automatically
+					hot redeploy if any are detected. By default this is -1, which disables hot redeployment
+					scanning. A value of 0 means no hot redeployment is done, and that you must use the Enter
+					key to manually force a redeploy. Any positive integer will enable hot redeployment, using
+					the number as the sweep interval in seconds.
+					-->
+					<scan>0</scan>
 				</configuration>
 
 				<dependencies>
@@ -420,7 +434,7 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-								<version>3.0.5</version>
+								<version>3.5.0</version>
 								</requireMavenVersion>
 							</rules>    
 						</configuration>
