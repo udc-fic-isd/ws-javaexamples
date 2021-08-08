@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2007-2016 Manuel Álvarez (mad@udc.es), Juan Raposo (jrs@udc.es),
+ * Copyright (c) 2007-2021 Manuel Álvarez (mad@udc.es), Juan Raposo (jrs@udc.es),
  * Paula Montoto (pmontoto@udc.es), Fernando Bellas (fbellas@udc.es),
  * José Losada (jlosada@udc.es), Alberto Pan (apan@udc.es) 
  * 
