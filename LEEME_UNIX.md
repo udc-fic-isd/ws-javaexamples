@@ -159,7 +159,7 @@
     PATH=$JAVA_HOME/bin:$PATH
 
     # Maven
-    MAVEN_HOME=$HOME/software/apache-maven-3.6.3
+    MAVEN_HOME=$HOME/software/apache-maven-3.8.1
     PATH=$MAVEN_HOME/bin:$PATH
     export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
@@ -319,11 +319,12 @@
     ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
 ```
 
-- Acceder a [https://git.fic.udc.es/profile/keys](https://git.fic.udc.es/profile/keys)
-- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero 
+- Acceder a [https://github.com/settings/keys](https://github.com/settings/keys).
+- Clic en "New SSH Key" para añadir una nueva clave SSH.
+- En el campo "Title" ponerle un nombre.
+- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero
   `$HOME/.ssh/id_rsa.pub`
-- En el campo "Title" ponerle un nombre
-- Clic en "Add key"
+- Clic en "Add SSH key".
 
 - Comprobar conexión SSH con el servidor de git y añadirlo a la lista de hosts 
   conocidos 
@@ -331,7 +332,7 @@
 > Contestar "yes" a "Are you sure you want to continue connecting (yes/no)?"
     
 ```shell
-    ssh -T git@git.fic.udc.es
+    ssh -T git@github.com
 ```
 
 
