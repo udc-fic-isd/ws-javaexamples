@@ -210,6 +210,8 @@
 				<artifactId>libthrift</artifactId>
 				<version>${thrift.version}</version>
 				<exclusions>
+					<!--  To avoid scanning the classes of the package javax.servlet
+					      from multiple locations -->
 					<exclusion>
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-core</artifactId>
