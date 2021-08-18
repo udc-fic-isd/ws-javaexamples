@@ -209,6 +209,14 @@
 				<groupId>org.apache.thrift</groupId>
 				<artifactId>libthrift</artifactId>
 				<version>${thrift.version}</version>
+				<exclusions>
+					<!--  To avoid scanning the classes of the package javax.servlet
+					      from multiple locations -->
+					<exclusion>
+						<groupId>org.apache.tomcat.embed</groupId>
+						<artifactId>tomcat-embed-core</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- SLF4j (required by Thrift) -->
 			<dependency>
