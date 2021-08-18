@@ -216,20 +216,23 @@
 ```shell
     ssh-keygen -t rsa -b 4096 -C "your_email@udc.es"
 ```    
-    
-- Acceder a [https://git.fic.udc.es/profile/keys](https://git.fic.udc.es/profile/keys)
-- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero `%USERPROFILE%/.ssh/id_rsa.pub`
-- En el campo "Title" ponerle un nombre
-- Clic en "Add key"
 
-- Comprobar conexión SSH con el servidor de git y añadirlo a la lista de hosts conocidos. Desde git-bash:
-  
+- Acceder a [https://github.com/settings/keys](https://github.com/settings/keys).
+- Clic en "New SSH Key" para añadir una nueva clave SSH.
+- En el campo "Title" ponerle un nombre.
+- En el campo "Key" copiar la clave pública, es decir, el contenido del fichero
+  `$HOME/.ssh/id_rsa.pub`
+- Clic en "Add SSH key".
+
+- Comprobar conexión SSH con el servidor de git y añadirlo a la lista de hosts
+  conocidos
+
 > Contestar "yes" a "Are you sure you want to continue connecting (yes/no)?"
-   
+
 ```shell
-    ssh -T git@git.fic.udc.es
+    ssh -T git@github.com
 ```
-    
+
 ## Instalación de una herramienta cliente gráfica para Git (opcional)
 
 - Puede utilizarse cualquier herramienta cliente (https://git-scm.com/downloads/guis)
