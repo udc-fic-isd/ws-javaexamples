@@ -30,7 +30,7 @@ server to be running.
 
 - Start Tomcat:
 
-	cd <<Tomcat home>>/bin
+	cd <TOMCAT_HOME>/bin
 	startup.sh
 
 - Shutdown Tomcat:
