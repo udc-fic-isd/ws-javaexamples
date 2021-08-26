@@ -35,7 +35,7 @@
 
 ### Running the ws-movies client application
 
-Configure `src/main/resources/ConfigurationParameters.properties`
+Configure `ws-movies/ws-movies-client/src/main/resources/ConfigurationParameters.properties`
   to specify the client implementation (REST or Thrift) to be used and 
   the port number of the web server in the `endpointAddress` property 
   (9090 for Jetty, 8080 for Tomcat)
