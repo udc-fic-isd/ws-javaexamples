@@ -22,7 +22,7 @@ public class ClientMovieDtoToThriftMovieDtoConversor {
 
     }
 
-    public static List<ClientMovieDto> toClientMovieDto(List<ThriftMovieDto> movies) {
+    public static List<ClientMovieDto> toClientMovieDtos(List<ThriftMovieDto> movies) {
 
         List<ClientMovieDto> clientMovieDtos = new ArrayList<>(movies.size());
 

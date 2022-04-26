@@ -104,7 +104,7 @@ public class ThriftClientMovieService implements ClientMovieService {
 
             transport.open();
 
-            return ClientMovieDtoToThriftMovieDtoConversor.toClientMovieDto(client.findMovies(keywords));
+            return ClientMovieDtoToThriftMovieDtoConversor.toClientMovieDtos(client.findMovies(keywords));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
