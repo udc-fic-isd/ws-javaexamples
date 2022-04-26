@@ -1,18 +1,18 @@
 namespace java es.udc.ws.movies.thrift
 
 struct ThriftMovieDto {
-    1: i64 movieId;
-    2: string title;
-    3: i16 runtime;
-    4: string description;
+    1: i64 movieId
+    2: string title
+    3: i16 runtime
+    4: string description
     5: double price
 }
 
 struct ThriftSaleDto {
-    1: i64 saleId;
-    2: i64 movieId;
-    3: string expirationDate;
-    4: string movieUrl;
+    1: i64 saleId
+    2: i64 movieId
+    3: string expirationDate
+    4: string movieUrl
 }
 
 exception ThriftInputValidationException {
@@ -25,12 +25,12 @@ exception ThriftInstanceNotFoundException {
 }
 
 exception ThriftSaleExpirationException {
-    1: i64 saleId;
-    2: string expirationDate;
+    1: i64 saleId
+    2: string expirationDate
 }
 
 exception ThriftMovieNotRemovableException {
-    1: i64 movieId;
+    1: i64 movieId
 }
 service ThriftMovieService {
 
