@@ -42,7 +42,7 @@ service ThriftMovieService {
 
    list<ThriftMovieDto> findMovies(1: string keywords)
 
-   i64 buyMovie(1: i64 movieId, 2: string userId, 3: string creditCardNumber) throws (1: ThriftInputValidationException e, 2: ThriftInstanceNotFoundException ee)
+   ThriftSaleDto buyMovie(1: i64 movieId, 2: string userId, 3: string creditCardNumber) throws (1: ThriftInputValidationException e, 2: ThriftInstanceNotFoundException ee)
 
    ThriftSaleDto findSale(1: i64 saleId) throws (1: ThriftInstanceNotFoundException e, 2: ThriftSaleExpirationException ee)
 }

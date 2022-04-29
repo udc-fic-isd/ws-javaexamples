@@ -125,7 +125,7 @@ public class ThriftClientMovieService implements ClientMovieService {
 
             transport.open();
 
-            return client.buyMovie(movieId, userId, creditCardNumber);
+            return client.buyMovie(movieId, userId, creditCardNumber).getSaleId();
 
         } catch (ThriftInputValidationException e) {
             throw new InputValidationException(e.getMessage());

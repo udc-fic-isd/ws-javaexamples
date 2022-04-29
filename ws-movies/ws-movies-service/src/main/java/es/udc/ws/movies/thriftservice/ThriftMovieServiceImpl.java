@@ -69,13 +69,13 @@ public class ThriftMovieServiceImpl implements ThriftMovieService.Iface {
     }
 
     @Override
-    public long buyMovie(long movieId, String userId, String creditCardNumber) throws ThriftInputValidationException,
+    public ThriftSaleDto buyMovie(long movieId, String userId, String creditCardNumber) throws ThriftInputValidationException,
             ThriftInstanceNotFoundException {
 
         try {
 
             Sale sale = MovieServiceFactory.getService().buyMovie(movieId, userId, creditCardNumber);
-            return sale.getSaleId();
+            return SaleToThriftSaleDtoConversor.toThriftSaleDto(sale);
 
         } catch (InstanceNotFoundException e) {
             throw new ThriftInstanceNotFoundException(e.getInstanceId().toString(),
