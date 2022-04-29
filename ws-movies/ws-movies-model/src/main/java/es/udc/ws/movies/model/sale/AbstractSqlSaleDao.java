@@ -63,7 +63,7 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
     public boolean existsByMovieId(Connection connection, Long movieId) {
 
         /* Create "queryString". */
-        String queryString = "SELECT 1 FROM Sale WHERE movieId = ?";
+        String queryString = "SELECT COUNT(*) FROM Sale WHERE movieId = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
@@ -74,8 +74,16 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             /* Execute query. */
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            if (!resultSet.next()) {
+                throw new SQLException("Error retrieving the number of sales for the movie with id " + movieId);
+            }
+
+            /* Get results. */
+            i = 1;
+            Long numberOfSales = resultSet.getLong(i++);
+
             /* Return result. */
-            return resultSet.next();
+            return numberOfSales > 0;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
