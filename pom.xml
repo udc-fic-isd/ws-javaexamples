@@ -6,7 +6,7 @@
 	<groupId>es.udc.ws</groupId>
 	<artifactId>ws-javaexamples</artifactId>
 	<packaging>pom</packaging>
-	<version>3.5.0</version>
+	<version>3.6.0</version>
 	<name>WS-JavaExamples Project</name>
 
 	<modules>
@@ -59,6 +59,7 @@
 		<assemblyMavenPlugin.version>3.3.0</assemblyMavenPlugin.version>
 		<enforcerMavenPlugin.version>1.4.1</enforcerMavenPlugin.version>
 		<thriftMavenPlugin.version>0.10.0</thriftMavenPlugin.version>
+		<springBootMavenPlugin.version>2.6.7</springBootMavenPlugin.version>
 
 	</properties>
 
@@ -66,13 +67,13 @@
 	<!-- Profiles -->
 	<profiles>
 		<profile>
-			<id>thrift-0.14.2</id>
+			<id>thrift-0.16.0</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<thrift.version>0.14.2</thrift.version>
-				<slf4j.version>1.7.28</slf4j.version>
+				<thrift.version>0.16.0</thrift.version>
+				<slf4j.version>1.7.35</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
@@ -143,6 +144,20 @@
 				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
+		<profile>
+			<id>thrift-0.14.2</id>
+			<properties>
+				<thrift.version>0.14.2</thrift.version>
+				<slf4j.version>1.7.28</slf4j.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.15.0</id>
+			<properties>
+				<thrift.version>0.15.0</thrift.version>
+				<slf4j.version>1.7.28</slf4j.version>
+			</properties>
+		</profile>
 	</profiles>
 
 	<!-- ========================================================== -->
@@ -159,14 +174,12 @@
 				<groupId>${jdbcDriver.groupId}</groupId>
 				<artifactId>${jdbcDriver.artifactId}</artifactId>
 				<version>${jdbcDriver.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<!-- Commons DBCP - JDBC Connection Pool -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-dbcp2</artifactId>
 				<version>${commonsDbcp.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<!-- JUnit -->
 			<dependency>

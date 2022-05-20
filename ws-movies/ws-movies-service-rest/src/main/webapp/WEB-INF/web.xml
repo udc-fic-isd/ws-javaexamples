@@ -37,19 +37,6 @@
         <url-pattern>/sales/*</url-pattern>
     </servlet-mapping>
 
-
-    <!-- Thrift service -->
-
-    <servlet>
-        <servlet-name>ThriftMovieServiceServlet</servlet-name>
-        <servlet-class>es.udc.ws.movies.thriftservice.ThriftMovieServiceServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ThriftMovieServiceServlet</servlet-name>
-        <url-pattern>/thrift/movieservice</url-pattern>
-    </servlet-mapping>
-
     <!-- General configuration -->
 
     <session-config>

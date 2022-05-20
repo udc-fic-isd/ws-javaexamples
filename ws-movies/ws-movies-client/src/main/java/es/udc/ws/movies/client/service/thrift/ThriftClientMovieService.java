@@ -11,6 +11,7 @@ import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.THttpClient;
+import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
@@ -20,11 +21,17 @@ import java.util.List;
 
 public class ThriftClientMovieService implements ClientMovieService {
 
-    private final static String ENDPOINT_ADDRESS_PARAMETER =
-            "ThriftClientMovieService.endpointAddress";
+    private final static String SERVER_HOST_PARAMETER =
+            "ThriftClientMovieService.serverHost";
+    private final static String SERVER_PORT_PARAMETER =
+            "ThriftClientMovieService.serverPort";
 
-    private final static String endpointAddress =
-            ConfigurationParametersManager.getParameter(ENDPOINT_ADDRESS_PARAMETER);
+    private final static String serverHost =
+            ConfigurationParametersManager.getParameter(SERVER_HOST_PARAMETER);
+
+    private final static String serverPort =
+            ConfigurationParametersManager.getParameter(SERVER_PORT_PARAMETER);
+
 
     @Override
     public Long addMovie(ClientMovieDto movie) throws InputValidationException {
@@ -168,15 +175,16 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         try {
 
-            TTransport transport = new THttpClient(endpointAddress);
+            TTransport transport = new TSocket(serverHost,Integer.parseInt(serverPort));
             TProtocol protocol = new TBinaryProtocol(transport);
 
             return new ThriftMovieService.Client(protocol);
 
-        } catch (TTransportException e) {
+        } catch (Exception e) { // In previous versions of Thrift TSocket does not throw TTransportException
             throw new RuntimeException(e);
         }
 
     }
+
 
 }

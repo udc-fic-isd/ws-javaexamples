@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>es.udc.ws.movies</groupId>
 		<artifactId>ws-movies</artifactId>
-		<version>3.5.0</version>
+		<version>3.6.0</version>
 	</parent>
-	<artifactId>ws-movies-service</artifactId>
+	<artifactId>ws-movies-service-rest</artifactId>
 	<properties>
 	   <p.type>war</p.type>
 	</properties>
 	<packaging>${p.type}</packaging>
-	<name>WS-JavaExamples Movies Service Subsystem</name>
+	<name>WS-JavaExamples Movies Service-REST Subsystem</name>
 
 	<dependencies>
 		<dependency>
@@ -21,21 +21,27 @@
 			<artifactId>ws-movies-model</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>es.udc.ws.movies</groupId>
-			<artifactId>ws-movies-thrift</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<groupId>es.udc.ws</groupId>
+			<artifactId>ws-util</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-dbcp2</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>ws-movies-service</finalName>
+		<finalName>ws-movies-service-rest</finalName>
 	</build>
 
 </project>

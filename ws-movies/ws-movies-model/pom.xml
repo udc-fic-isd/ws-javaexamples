@@ -7,7 +7,7 @@
     <parent>
         <groupId>es.udc.ws.movies</groupId>
         <artifactId>ws-movies</artifactId>
-        <version>3.5.0</version>
+        <version>3.6.0</version>
     </parent>
     <artifactId>ws-movies-model</artifactId>
     <packaging>jar</packaging>
@@ -17,6 +17,16 @@
         <dependency>
             <groupId>es.udc.ws</groupId>
             <artifactId>ws-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-dbcp2</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -25,6 +35,7 @@
         <dependency>
             <groupId>${jdbcDriver.groupId}</groupId>
             <artifactId>${jdbcDriver.artifactId}</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
