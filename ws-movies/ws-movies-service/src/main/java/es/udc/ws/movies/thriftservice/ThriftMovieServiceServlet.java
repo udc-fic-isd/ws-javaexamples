@@ -1,12 +1,12 @@
 package es.udc.ws.movies.thriftservice;
 
 import es.udc.ws.movies.thrift.ThriftMovieService;
+import es.udc.ws.util.servlet.ThriftHttpServletTemplate;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.server.TServlet;
 
-public class ThriftMovieServiceServlet extends TServlet {
+public class ThriftMovieServiceServlet extends ThriftHttpServletTemplate {
 
     public ThriftMovieServiceServlet() {
         super(createProcessor(), createProtocolFactory());
