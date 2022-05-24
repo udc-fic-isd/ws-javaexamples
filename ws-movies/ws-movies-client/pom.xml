@@ -17,11 +17,9 @@
 			<groupId>es.udc.ws</groupId>
 			<artifactId>ws-util</artifactId>
 			<exclusions>
-				<!--  To avoid scanning the classes of the package javax.servlet
-                      from multiple locations -->
 				<exclusion>
-					<groupId>org.apache.tomcat.embed</groupId>
-					<artifactId>tomcat-embed-core</artifactId>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-dbcp2</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
