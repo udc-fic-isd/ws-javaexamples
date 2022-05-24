@@ -34,6 +34,7 @@ public class ThriftMovieServer {
             TServerSocket transport = new TServerSocket(Integer.parseInt(port));
             TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(transport).
                     protocolFactory(createProtocolFactory()).processor(createProcessor()));
+            System.out.println("Server running...");
             server.serve();
 
         } catch (TTransportException e) {
