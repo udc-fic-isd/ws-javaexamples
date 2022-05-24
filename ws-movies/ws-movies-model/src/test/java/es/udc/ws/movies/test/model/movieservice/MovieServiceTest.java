@@ -18,6 +18,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
+import es.udc.ws.util.sql.DbcpBasicDataSourceCreator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -51,10 +52,10 @@ public class MovieServiceTest {
 	public static void init() {
 
 		/*
-		 * Create a simple data source and add it to "DataSourceLocator" (this
-		 * is needed to test "es.udc.ws.movies.model.movieservice.MovieService"
+		 * Create a data source and add it to "DataSourceLocator" (this
+		 * is needed to test "es.udc.ws.movies.model.movieservice.MovieService")
 		 */
-		DataSource dataSource = new SimpleDataSource();
+		DataSource dataSource = DbcpBasicDataSourceCreator.createDataSource();
 
 		/* Add "dataSource" to "DataSourceLocator". */
 		DataSourceLocator.addDataSource(MOVIE_DATA_SOURCE, dataSource);

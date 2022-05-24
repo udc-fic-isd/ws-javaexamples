@@ -18,28 +18,7 @@ public final class ConfigurationParametersManager {
     private static synchronized Map<String, String> getParameters() {
 
         if (parameters == null) {
-            Class<ConfigurationParametersManager> 
-                    configurationParametersManagerClass = 
-                    ConfigurationParametersManager.class;
-            ClassLoader classLoader = 
-                    configurationParametersManagerClass.getClassLoader();
-            InputStream inputStream = 
-                    classLoader.getResourceAsStream(CONFIGURATION_FILE);
-            Properties properties = new Properties();
-            try {
-                properties.load(inputStream);
-                inputStream.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            /*
-             * We use a "HashMap" instead of a "HashTable" because HashMap's
-             * methods are *not* synchronized (so they are faster), and the
-             * parameters are only read.
-             */
-            parameters = (Map<String, String>) new HashMap(properties);
-
+            parameters = PropertiesUtil.readProperties(CONFIGURATION_FILE);
         }
         return parameters;
 

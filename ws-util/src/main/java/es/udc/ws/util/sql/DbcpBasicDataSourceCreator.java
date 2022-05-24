@@ -1,9 +1,11 @@
 package es.udc.ws.util.sql;
 
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
+import es.udc.ws.util.configuration.PropertiesUtil;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 public class DbcpBasicDataSourceCreator {
 
@@ -20,26 +22,33 @@ public class DbcpBasicDataSourceCreator {
     private static String url;
     private static String user;
     private static String password;
-    private static int maxTotal;
-    private static int maxIdle;
-    private static int maxWait;
+    private static Integer maxTotal;
+    private static Integer maxIdle;
+    private static Integer maxWait;
     private static String validationQuery;
+
+    private static Map<String, String> parameters;
 
     private DbcpBasicDataSourceCreator() { }
 
     private static synchronized void readConfiguration() {
         if (url == null) {
             try {
+                parameters = PropertiesUtil.readProperties(CONFIGURATION_FILE);
                 /*
                  * Read configuration parameters.
                  */
-                url = ConfigurationParametersManager.getParameter(URL_PARAMETER);
-                user = ConfigurationParametersManager.getParameter(USER_PARAMETER);
-                password = ConfigurationParametersManager.getParameter(PASSWORD_PARAMETER);
-                maxTotal = Integer.parseInt(ConfigurationParametersManager.getParameter(MAX_TOTAL_PARAMETER));
-                maxIdle = Integer.parseInt(ConfigurationParametersManager.getParameter(MAX_IDLE_PARAMETER));
-                maxWait = Integer.parseInt(ConfigurationParametersManager.getParameter(MAX_WAIT_PARAMETER));
-                validationQuery = ConfigurationParametersManager.getParameter(VALIDATION_QUERY_PARAMETER);
+                url = parameters.get(URL_PARAMETER);
+                user = parameters.get(USER_PARAMETER);
+                password = parameters.get(PASSWORD_PARAMETER);
+                maxTotal = Integer.parseInt(parameters.get(MAX_TOTAL_PARAMETER));
+                String maxIdleAsString = parameters.get(MAX_IDLE_PARAMETER);
+                maxIdle = (maxIdleAsString!=null) ?
+                        Integer.parseInt(maxIdleAsString) : null;
+                String maxWaitAsString = parameters.get(MAX_IDLE_PARAMETER);
+                maxWait = (maxWaitAsString!=null) ?
+                        Integer.parseInt(maxWaitAsString) : null;
+                validationQuery = parameters.get(VALIDATION_QUERY_PARAMETER);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -54,9 +63,15 @@ public class DbcpBasicDataSourceCreator {
         dataSource.setUsername(user);
         dataSource.setPassword(password);
         dataSource.setMaxTotal(maxTotal);
-        dataSource.setMaxIdle(maxIdle);
-        dataSource.setMaxWaitMillis(maxWait);
-        dataSource.setValidationQuery(validationQuery);
+        if (maxIdle!=null) {
+            dataSource.setMaxIdle(maxIdle);
+        }
+        if (maxWait!=null) {
+            dataSource.setMaxWaitMillis(maxWait);
+        }
+        if (validationQuery!=null) {
+            dataSource.setValidationQuery(validationQuery);
+        }
 
         return dataSource;
 

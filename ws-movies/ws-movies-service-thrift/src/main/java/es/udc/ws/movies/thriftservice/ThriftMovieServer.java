@@ -16,25 +16,44 @@ import static es.udc.ws.movies.model.util.ModelConstants.MOVIE_DATA_SOURCE;
 
 public class ThriftMovieServer {
 
-    private final static String PORT_PARAMETER =
-            "ThriftMovieServer.port";
-
-    private final static String port =
-            ConfigurationParametersManager.getParameter(PORT_PARAMETER);
+    private final static int defaultPort = 5000;
 
     public static void main(String args[]) {
 
         try {
 
-            /*
-             * Create a data source and add it to "DataSourceLocator"
-             */
+            if (args.length>1) {
+                System.err.println("Use: ThriftMovieServer [port]");
+                System.exit(-1);
+            }
+
+            int port = defaultPort;
+            if (args.length==1) {
+                try {
+                    port = Integer.parseInt(args[0]);
+                } catch (NumberFormatException e) {
+                    System.err.println("Use: ThriftMovieServer [port]");
+                    System.exit(-1);
+                }
+            }
+
+
+            /* Create a data source and add it to "DataSourceLocator" */
             DataSourceLocator.addDataSource(MOVIE_DATA_SOURCE, DbcpBasicDataSourceCreator.createDataSource());
 
-            TServerSocket transport = new TServerSocket(Integer.parseInt(port));
-            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(transport).
-                    protocolFactory(createProtocolFactory()).processor(createProcessor()));
-            System.out.println("Server running...");
+            TServerSocket transport = new TServerSocket(port);
+            TServer server = new TThreadPoolServer(
+                    /*
+                     * The minimum and maximum number of threads in the thread pool can be configured using
+                     * maxWorkerThreads and minWorkerThreads. Its default values are 5 and Integer.MAX_VALUE,
+                     * respectively
+                     */
+                    new TThreadPoolServer.Args(transport).
+                            protocolFactory(createProtocolFactory()).
+                            processor(createProcessor()));
+
+            System.out.println("Server running on port " + port + " ...");
+
             server.serve();
 
         } catch (TTransportException e) {
@@ -56,22 +75,4 @@ public class ThriftMovieServer {
 
     }
 
-  /*  private static DataSource createDataSource() {
-
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost/ws?useSSL=false&serverTimezone=Europe/Madrid&allowPublicKeyRetrieval=true");
-        dataSource.setUsername("ws");
-        dataSource.setPassword("ws");
-        dataSource.setMaxTotal(4);
-        dataSource.setMaxIdle(2);
-        dataSource.setMaxWaitMillis(10000);
-        dataSource.setTimeBetweenEvictionRunsMillis(30000);
-        dataSource.setRemoveAbandonedOnMaintenance(true);
-        dataSource.setRemoveAbandonedTimeout(60);
-        dataSource.setLogAbandoned(true);
-        dataSource.setValidationQuery("SELECT 1");
-
-        return dataSource;
-
-    }*/
 }
