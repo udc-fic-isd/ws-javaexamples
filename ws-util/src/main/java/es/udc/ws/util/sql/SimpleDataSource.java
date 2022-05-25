@@ -1,11 +1,14 @@
 package es.udc.ws.util.sql;
 
 import es.udc.ws.util.configuration.ConfigurationParametersManager;
+import es.udc.ws.util.configuration.PropertiesUtil;
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
+import java.util.Map;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
 
@@ -23,6 +26,7 @@ import javax.sql.DataSource;
  */
 public class SimpleDataSource implements DataSource {
 
+    private static final String CONFIGURATION_FILE = "SimpleDataSource.properties";
     private static final String URL_PARAMETER = "SimpleDataSource.url";
     private static final String USER_PARAMETER = "SimpleDataSource.user";
     private static final String PASSWORD_PARAMETER = "SimpleDataSource.password";
@@ -33,12 +37,14 @@ public class SimpleDataSource implements DataSource {
     private synchronized void readConfiguration() {
         if (url == null) {
             try {
+                Map<String, String> parameters = PropertiesUtil.readProperties(CONFIGURATION_FILE);
+
                 /*
                  * Read configuration parameters.
                  */
-                url = ConfigurationParametersManager.getParameter(URL_PARAMETER);
-                user = ConfigurationParametersManager.getParameter(USER_PARAMETER);
-                password = ConfigurationParametersManager.getParameter(PASSWORD_PARAMETER);
+                url = parameters.get(URL_PARAMETER);
+                user = parameters.get(USER_PARAMETER);
+                password = parameters.get(PASSWORD_PARAMETER);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
