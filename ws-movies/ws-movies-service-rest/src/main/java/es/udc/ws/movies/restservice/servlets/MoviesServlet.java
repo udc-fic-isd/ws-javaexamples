@@ -5,11 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
-import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.restservice.dto.RestMovieDto;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
