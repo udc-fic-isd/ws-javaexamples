@@ -27,14 +27,12 @@ public class DbcpBasicDataSourceCreator {
     private static Integer maxWait;
     private static String validationQuery;
 
-    private static Map<String, String> parameters;
-
     private DbcpBasicDataSourceCreator() { }
 
     private static synchronized void readConfiguration() {
         if (url == null) {
             try {
-                parameters = PropertiesUtil.readProperties(CONFIGURATION_FILE);
+                Map<String, String> parameters = PropertiesUtil.readProperties(CONFIGURATION_FILE);
                 /*
                  * Read configuration parameters.
                  */
