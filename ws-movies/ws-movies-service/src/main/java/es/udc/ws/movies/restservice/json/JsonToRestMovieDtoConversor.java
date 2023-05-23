@@ -20,13 +20,11 @@ public class JsonToRestMovieDtoConversor {
 
 		ObjectNode movieObject = JsonNodeFactory.instance.objectNode();
 
-		if (movie.getMovieId() != null) {
-			movieObject.put("movieId", movie.getMovieId());
-		}
-		movieObject.put("title", movie.getTitle()).
-		    put("runtime", movie.getRuntime()).
-			put("price", movie.getPrice()).
-			put("description", movie.getDescription());
+		movieObject.put("movieId", movie.getMovieId()).
+				put("title", movie.getTitle()).
+				put("runtime", movie.getRuntime()).
+				put("price", movie.getPrice()).
+				put("description", movie.getDescription());
 
 		return movieObject;
 	}
