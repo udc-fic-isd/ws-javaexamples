@@ -154,8 +154,7 @@ public class ThriftClientMovieService implements ClientMovieService {
         } catch (ThriftInstanceNotFoundException e) {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (ThriftSaleExpirationException e) {
-            throw new ClientSaleExpirationException(e.getSaleId(), LocalDateTime.parse(e.getExpirationDate(),
-                    DateTimeFormatter.ISO_DATE_TIME));
+            throw new ClientSaleExpirationException(e.getSaleId(), LocalDateTime.parse(e.getExpirationDate()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
