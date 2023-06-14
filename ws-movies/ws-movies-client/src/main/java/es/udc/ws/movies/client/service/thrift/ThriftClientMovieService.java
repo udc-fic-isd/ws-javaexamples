@@ -30,9 +30,9 @@ public class ThriftClientMovieService implements ClientMovieService {
     public Long addMovie(ClientMovieDto movie) throws InputValidationException {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
 
@@ -42,19 +42,15 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InputValidationException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
-
     }
 
     @Override
     public void updateMovie(ClientMovieDto movie) throws InputValidationException, InstanceNotFoundException {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
             client.updateMovie(ClientMovieDtoToThriftMovieDtoConversor.toThriftMovieDto(movie));
@@ -65,8 +61,6 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
 
     }
@@ -75,9 +69,8 @@ public class ThriftClientMovieService implements ClientMovieService {
     public void removeMovie(Long movieId) throws InstanceNotFoundException, ClientMovieNotRemovableException {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
             client.removeMovie(movieId);
@@ -88,8 +81,6 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new ClientMovieNotRemovableException(e.getMovieId());
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
 
     }
@@ -98,9 +89,8 @@ public class ThriftClientMovieService implements ClientMovieService {
     public List<ClientMovieDto> findMovies(String keywords) {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
 
@@ -108,8 +98,6 @@ public class ThriftClientMovieService implements ClientMovieService {
 
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
 
     }
@@ -119,9 +107,8 @@ public class ThriftClientMovieService implements ClientMovieService {
             InputValidationException {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
 
@@ -133,8 +120,6 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new InstanceNotFoundException(e.getInstanceId(), e.getInstanceType());
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
 
     }
@@ -143,9 +128,8 @@ public class ThriftClientMovieService implements ClientMovieService {
     public String getMovieUrl(Long saleId) throws InstanceNotFoundException, ClientSaleExpirationException {
 
         ThriftMovieService.Client client = getClient();
-        TTransport transport = client.getInputProtocol().getTransport();
 
-        try  {
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
 
             transport.open();
 
@@ -157,8 +141,6 @@ public class ThriftClientMovieService implements ClientMovieService {
             throw new ClientSaleExpirationException(e.getSaleId(), LocalDateTime.parse(e.getExpirationDate()));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            transport.close();
         }
 
     }

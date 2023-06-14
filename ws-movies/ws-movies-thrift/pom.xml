@@ -6,33 +6,13 @@
 	<parent>
 		<groupId>es.udc.ws.movies</groupId>
 		<artifactId>ws-movies</artifactId>
-		<version>3.6.0</version>
+		<version>3.7.0</version>
 	</parent>
 	<artifactId>ws-movies-thrift</artifactId>
 	<packaging>jar</packaging>
 	<name>WS-JavaExamples Movies Thrift Subsystem</name>
 
 	<profiles>
-		<profile>
-			<id>thrift-0.9.2</id>
-			<dependencies>
-				<dependency>
-					<groupId>javax.annotation</groupId>
-					<artifactId>javax.annotation-api</artifactId>
-					<version>${annotationApi.version}</version>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>thrift-0.9.3</id>
-			<dependencies>
-				<dependency>
-					<groupId>javax.annotation</groupId>
-					<artifactId>javax.annotation-api</artifactId>
-					<version>${annotationApi.version}</version>
-				</dependency>
-			</dependencies>
-		</profile>
 		<profile>
 			<id>thrift-0.10.0</id>
 			<dependencies>
@@ -60,6 +40,54 @@
 					<groupId>javax.annotation</groupId>
 					<artifactId>javax.annotation-api</artifactId>
 					<version>${annotationApi.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>thrift-0.17.0</id>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+					<version>${slf4j.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>thrift-0.18.0</id>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+					<version>${slf4j.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>thrift-0.18.1</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+					<version>${annotationApi.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+					<version>${slf4j.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>

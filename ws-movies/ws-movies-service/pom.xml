@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>es.udc.ws.movies</groupId>
 		<artifactId>ws-movies</artifactId>
-		<version>3.6.0</version>
+		<version>3.7.0</version>
 	</parent>
 	<artifactId>ws-movies-service</artifactId>
 	<properties>
@@ -23,10 +23,6 @@
 		<dependency>
 			<groupId>es.udc.ws.movies</groupId>
 			<artifactId>ws-movies-thrift</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
