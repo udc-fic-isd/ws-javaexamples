@@ -18,6 +18,7 @@ import org.apache.hc.client5.http.fluent.Request;
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpStatus;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.post(getEndpointAddress() + "movies").
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.post(getEndpointAddress() + "movies").
                     bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
@@ -57,7 +58,8 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.put(getEndpointAddress() + "movies/" + movie.getMovieId()).
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.put(getEndpointAddress() +
+                            "movies/" + movie.getMovieId()).
                     bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
@@ -76,7 +78,8 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.delete(getEndpointAddress() + "movies/" + movieId).
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.delete(getEndpointAddress() +
+                            "movies/" + movieId).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
@@ -94,8 +97,8 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.get(getEndpointAddress() + "movies?keywords="
-                    + URLEncoder.encode(keywords, "UTF-8")).
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.get(getEndpointAddress() + "movies?keywords="
+                            + URLEncoder.encode(keywords, "UTF-8")).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_OK, response);
@@ -115,7 +118,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.post(getEndpointAddress() + "sales").
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.post(getEndpointAddress() + "sales").
                     bodyForm(
                             Form.form().
                                     add("movieId", Long.toString(movieId)).
@@ -143,7 +146,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            ClassicHttpResponse response = (ClassicHttpResponse)Request.get(getEndpointAddress() + "sales/" + saleId).
+            ClassicHttpResponse response = (ClassicHttpResponse) Request.get(getEndpointAddress() + "sales/" + saleId).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_OK, response);
@@ -197,26 +200,16 @@ public class RestClientMovieService implements ClientMovieService {
 
             /* Handler error. */
             switch (statusCode) {
-
-                case HttpStatus.SC_NOT_FOUND:
-                    throw JsonToClientExceptionConversor.fromNotFoundErrorCode(
-                            response.getEntity().getContent());
-
-                case HttpStatus.SC_BAD_REQUEST:
-                    throw JsonToClientExceptionConversor.fromBadRequestErrorCode(
-                            response.getEntity().getContent());
-
-                case HttpStatus.SC_FORBIDDEN:
-                    throw JsonToClientExceptionConversor.fromForbiddenErrorCode(
-                            response.getEntity().getContent());
-
-                case HttpStatus.SC_GONE:
-                    throw JsonToClientExceptionConversor.fromGoneErrorCode(
-                            response.getEntity().getContent());
-
-                default:
-                    throw new RuntimeException("HTTP error; status code = "
-                            + statusCode);
+                case HttpStatus.SC_NOT_FOUND -> throw JsonToClientExceptionConversor.fromNotFoundErrorCode(
+                        response.getEntity().getContent());
+                case HttpStatus.SC_BAD_REQUEST -> throw JsonToClientExceptionConversor.fromBadRequestErrorCode(
+                        response.getEntity().getContent());
+                case HttpStatus.SC_FORBIDDEN -> throw JsonToClientExceptionConversor.fromForbiddenErrorCode(
+                        response.getEntity().getContent());
+                case HttpStatus.SC_GONE -> throw JsonToClientExceptionConversor.fromGoneErrorCode(
+                        response.getEntity().getContent());
+                default -> throw new RuntimeException("HTTP error; status code = "
+                        + statusCode);
             }
 
         } catch (IOException e) {
