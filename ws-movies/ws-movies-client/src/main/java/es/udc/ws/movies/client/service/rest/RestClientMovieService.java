@@ -13,12 +13,11 @@ import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.json.ObjectMapperFactory;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.entity.ContentType;
-
+import org.apache.hc.client5.http.fluent.Form;
+import org.apache.hc.client5.http.fluent.Request;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpStatus;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Post(getEndpointAddress() + "movies").
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.post(getEndpointAddress() + "movies").
                     bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
@@ -58,7 +57,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Put(getEndpointAddress() + "movies/" + movie.getMovieId()).
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.put(getEndpointAddress() + "movies/" + movie.getMovieId()).
                     bodyStream(toInputStream(movie), ContentType.create("application/json")).
                     execute().returnResponse();
 
@@ -77,7 +76,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Delete(getEndpointAddress() + "movies/" + movieId).
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.delete(getEndpointAddress() + "movies/" + movieId).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
@@ -95,7 +94,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Get(getEndpointAddress() + "movies?keywords="
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.get(getEndpointAddress() + "movies?keywords="
                     + URLEncoder.encode(keywords, "UTF-8")).
                     execute().returnResponse();
 
@@ -116,7 +115,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Post(getEndpointAddress() + "sales").
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.post(getEndpointAddress() + "sales").
                     bodyForm(
                             Form.form().
                                     add("movieId", Long.toString(movieId)).
@@ -144,7 +143,7 @@ public class RestClientMovieService implements ClientMovieService {
 
         try {
 
-            HttpResponse response = Request.Get(getEndpointAddress() + "sales/" + saleId).
+            ClassicHttpResponse response = (ClassicHttpResponse)Request.get(getEndpointAddress() + "sales/" + saleId).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_OK, response);
@@ -185,11 +184,11 @@ public class RestClientMovieService implements ClientMovieService {
 
     }
 
-    private void validateStatusCode(int successCode, HttpResponse response) throws Exception {
+    private void validateStatusCode(int successCode, ClassicHttpResponse response) throws Exception {
 
         try {
 
-            int statusCode = response.getStatusLine().getStatusCode();
+            int statusCode = response.getCode();
 
             /* Success? */
             if (statusCode == successCode) {
