@@ -38,8 +38,8 @@
 		<jackson.version>2.15.2</jackson.version>
 
 		<!-- JDBC driver properties -->
-		<jdbcDriver.groupId>mysql</jdbcDriver.groupId>
-		<jdbcDriver.artifactId>mysql-connector-java</jdbcDriver.artifactId>
+		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
+		<jdbcDriver.artifactId>mysql-connector-j</jdbcDriver.artifactId>
 		<jdbcDriver.version>8.0.33</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
@@ -144,7 +144,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>thrift-0.17.0</id>
+		<id>thrift-0.17.0</id>
 			<properties>
 				<thrift.version>0.17.0</thrift.version>
 				<slf4j.version>2.0.7</slf4j.version>
