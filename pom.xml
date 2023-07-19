@@ -67,17 +67,6 @@
 	<!-- Profiles -->
 	<profiles>
 		<profile>
-			<id>thrift-0.18.1</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<thrift.version>0.18.1</thrift.version>
-				<slf4j.version>2.0.7</slf4j.version>
-				<annotationApi.version>1.3.2</annotationApi.version>
-			</properties>
-		</profile>
-		<profile>
 			<id>thrift-0.10.0</id>
 			<properties>
 				<thrift.version>0.10.0</thrift.version>
@@ -105,42 +94,36 @@
 			<id>thrift-0.13.0</id>
 			<properties>
 				<thrift.version>0.13.0</thrift.version>
-				<slf4j.version>1.7.25</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.14.0</id>
 			<properties>
 				<thrift.version>0.14.0</thrift.version>
-				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.14.1</id>
 			<properties>
 				<thrift.version>0.14.1</thrift.version>
-				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.14.2</id>
 			<properties>
 				<thrift.version>0.14.2</thrift.version>
-				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.15.0</id>
 			<properties>
 				<thrift.version>0.15.0</thrift.version>
-				<slf4j.version>1.7.28</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>thrift-0.16.0</id>
 			<properties>
 				<thrift.version>0.16.0</thrift.version>
-				<slf4j.version>1.7.35</slf4j.version>
 			</properties>
 		</profile>
 		<profile>
@@ -153,6 +136,17 @@
 		</profile>
 		<profile>
 			<id>thrift-0.18.0</id>
+			<properties>
+				<thrift.version>0.18.1</thrift.version>
+				<slf4j.version>2.0.7</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.18.1</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<thrift.version>0.18.1</thrift.version>
 				<slf4j.version>2.0.7</slf4j.version>
@@ -236,12 +230,6 @@
 						<artifactId>tomcat-embed-core</artifactId>
 					</exclusion>
 				</exclusions>
-			</dependency>
-			<!-- SLF4j (required by Thrift) -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

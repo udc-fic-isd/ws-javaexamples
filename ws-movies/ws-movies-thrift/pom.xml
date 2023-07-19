@@ -44,6 +44,24 @@
 			</dependencies>
 		</profile>
 		<profile>
+			<id>thrift-0.13.0</id>
+		</profile>
+		<profile>
+			<id>thrift-0.14.0</id>
+		</profile>
+		<profile>
+			<id>thrift-0.14.1</id>
+		</profile>
+		<profile>
+			<id>thrift-0.14.2</id>
+		</profile>
+		<profile>
+			<id>thrift-0.15.0</id>
+		</profile>
+		<profile>
+			<id>thrift-0.16.0</id>
+		</profile>
+		<profile>
 			<id>thrift-0.17.0</id>
 			<dependencies>
 				<dependency>
@@ -53,7 +71,7 @@
 				</dependency>
 				<dependency>
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
+					<artifactId>slf4j-reload4j</artifactId>
 					<version>${slf4j.version}</version>
 				</dependency>
 			</dependencies>
@@ -68,7 +86,7 @@
 				</dependency>
 				<dependency>
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
+					<artifactId>slf4j-reload4j</artifactId>
 					<version>${slf4j.version}</version>
 				</dependency>
 			</dependencies>
@@ -86,7 +104,7 @@
 				</dependency>
 				<dependency>
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
+					<artifactId>slf4j-reload4j</artifactId>
 					<version>${slf4j.version}</version>
 				</dependency>
 			</dependencies>
