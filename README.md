@@ -38,7 +38,11 @@
 Configure `ws-movies/ws-movies-client/src/main/resources/ConfigurationParameters.properties`
   to specify the client implementation (REST or Thrift) to be used and 
   the port number of the web server in the `endpointAddress` property 
-  (9090 for Jetty, 8080 for Tomcat)
+  (9090 for Jetty, 8080 for Tomcat). Remember to process the resources 
+  of the client module every time you change the configuration file 
+  (for example, executing `mvn compile`).
+
+> NOTE: In Windows use a terminal different from PowerShell
 
 	cd ws-movies/ws-movies-client
 
