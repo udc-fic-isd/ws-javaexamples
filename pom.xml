@@ -30,17 +30,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Package versions (except those defined in "profiles" section) -->
-		<commonsDbcp.version>2.9.0</commonsDbcp.version>
-		<junit.version>5.9.3</junit.version>
-		<servletApi.version>5.0.0</servletApi.version>
+		<commonsDbcp.version>2.12.0</commonsDbcp.version>
+		<junit.version>5.10.3</junit.version>
+		<servletApi.version>6.1.0</servletApi.version>
 		<httpclient.version>4.5.14</httpclient.version>
-		<httpclient5.version>5.2.1</httpclient5.version>
-		<jackson.version>2.15.2</jackson.version>
+		<httpclient5.version>5.3.1</httpclient5.version>
+		<jackson.version>2.17.2</jackson.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
 		<jdbcDriver.artifactId>mysql-connector-j</jdbcDriver.artifactId>
-		<jdbcDriver.version>8.0.33</jdbcDriver.version>
+		<jdbcDriver.version>9.0.0</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 		<!-- Data source properties -->
@@ -50,15 +50,15 @@
 		<dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
 
 		<!-- Plugin versions -->
-		<compilerMavenPlugin.version>3.11.0</compilerMavenPlugin.version>
+		<compilerMavenPlugin.version>3.13.0</compilerMavenPlugin.version>
 		<resourcesMavenPlugin.version>3.3.1</resourcesMavenPlugin.version>
-		<execMavenPlugin.version>3.1.0</execMavenPlugin.version>
+		<execMavenPlugin.version>3.3.0</execMavenPlugin.version>
 		<warMavenPlugin.version>3.4.0</warMavenPlugin.version>
-		<sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
-		<jettyMavenPlugin.version>11.0.15</jettyMavenPlugin.version>
-		<surefireMavenPlugin.version>3.1.2</surefireMavenPlugin.version>
-		<assemblyMavenPlugin.version>3.6.0</assemblyMavenPlugin.version>
-		<enforcerMavenPlugin.version>3.3.0</enforcerMavenPlugin.version>
+		<sqlMavenPlugin.version>3.0.0</sqlMavenPlugin.version>
+		<jettyMavenPlugin.version>11.0.22</jettyMavenPlugin.version>
+		<surefireMavenPlugin.version>3.3.0</surefireMavenPlugin.version>
+		<assemblyMavenPlugin.version>3.7.1</assemblyMavenPlugin.version>
+		<enforcerMavenPlugin.version>3.5.0</enforcerMavenPlugin.version>
 		<thriftMavenPlugin.version>0.10.0</thriftMavenPlugin.version>
 
 	</properties>
