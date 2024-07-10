@@ -70,7 +70,6 @@
 			<id>thrift-0.10.0</id>
 			<properties>
 				<thrift.version>0.10.0</thrift.version>
-				<slf4j.version>1.7.12</slf4j.version>
 				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
@@ -78,7 +77,6 @@
 			<id>thrift-0.11.0</id>
 			<properties>
 				<thrift.version>0.11.0</thrift.version>
-				<slf4j.version>1.7.12</slf4j.version>
 				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
@@ -86,7 +84,6 @@
 			<id>thrift-0.12.0</id>
 			<properties>
 				<thrift.version>0.12.0</thrift.version>
-				<slf4j.version>1.7.25</slf4j.version>
 				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
 		</profile>
