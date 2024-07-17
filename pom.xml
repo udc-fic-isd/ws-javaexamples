@@ -40,7 +40,7 @@
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
 		<jdbcDriver.artifactId>mysql-connector-j</jdbcDriver.artifactId>
-		<jdbcDriver.version>9.0.0</jdbcDriver.version>
+		<jdbcDriver.version>8.4.0</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 		<!-- Data source properties -->
