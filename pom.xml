@@ -6,7 +6,7 @@
 	<groupId>es.udc.ws</groupId>
 	<artifactId>ws-javaexamples</artifactId>
 	<packaging>pom</packaging>
-	<version>3.8.0</version>
+	<version>3.9.0</version>
 	<name>WS-JavaExamples Project</name>
 
 	<modules>
@@ -30,12 +30,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Package versions (except those defined in "profiles" section) -->
-		<commonsDbcp.version>2.12.0</commonsDbcp.version>
-		<junit.version>5.10.3</junit.version>
+		<commonsDbcp.version>2.13.0</commonsDbcp.version>
+		<junit.version>5.13.2</junit.version>
 		<servletApi.version>6.1.0</servletApi.version>
 		<httpclient.version>4.5.14</httpclient.version>
-		<httpclient5.version>5.3.1</httpclient5.version>
-		<jackson.version>2.17.2</jackson.version>
+		<httpclient5.version>5.5</httpclient5.version>
+		<httpcore5.version>5.3.4</httpcore5.version>
+		<jackson.version>2.19.1</jackson.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
@@ -50,13 +51,13 @@
 		<dataSource.createTablesScript>MySQLCreateTables.sql</dataSource.createTablesScript>
 
 		<!-- Plugin versions -->
-		<compilerMavenPlugin.version>3.13.0</compilerMavenPlugin.version>
+		<compilerMavenPlugin.version>3.14.0</compilerMavenPlugin.version>
 		<resourcesMavenPlugin.version>3.3.1</resourcesMavenPlugin.version>
-		<execMavenPlugin.version>3.3.0</execMavenPlugin.version>
+		<execMavenPlugin.version>3.5.1</execMavenPlugin.version>
 		<warMavenPlugin.version>3.4.0</warMavenPlugin.version>
 		<sqlMavenPlugin.version>3.0.0</sqlMavenPlugin.version>
-		<jettyMavenPlugin.version>11.0.22</jettyMavenPlugin.version>
-		<surefireMavenPlugin.version>3.3.0</surefireMavenPlugin.version>
+		<jettyMavenPlugin.version>11.0.25</jettyMavenPlugin.version>
+		<surefireMavenPlugin.version>3.5.3</surefireMavenPlugin.version>
 		<assemblyMavenPlugin.version>3.7.1</assemblyMavenPlugin.version>
 		<enforcerMavenPlugin.version>3.5.0</enforcerMavenPlugin.version>
 		<thriftMavenPlugin.version>0.10.0</thriftMavenPlugin.version>
@@ -66,27 +67,6 @@
 	<!-- ========================================================== -->
 	<!-- Profiles -->
 	<profiles>
-		<profile>
-			<id>thrift-0.10.0</id>
-			<properties>
-				<thrift.version>0.10.0</thrift.version>
-				<annotationApi.version>1.3.2</annotationApi.version>
-			</properties>
-		</profile>
-		<profile>
-			<id>thrift-0.11.0</id>
-			<properties>
-				<thrift.version>0.11.0</thrift.version>
-				<annotationApi.version>1.3.2</annotationApi.version>
-			</properties>
-		</profile>
-		<profile>
-			<id>thrift-0.12.0</id>
-			<properties>
-				<thrift.version>0.12.0</thrift.version>
-				<annotationApi.version>1.3.2</annotationApi.version>
-			</properties>
-		</profile>
 		<profile>
 			<id>thrift-0.13.0</id>
 			<properties>
@@ -157,11 +137,27 @@
 		</profile>
 		<profile>
 			<id>thrift-0.20.0</id>
+			<properties>
+				<thrift.version>0.20.0</thrift.version>
+				<slf4j.version>2.0.13</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.21.0</id>
+			<properties>
+				<thrift.version>0.21.0</thrift.version>
+				<slf4j.version>2.0.13</slf4j.version>
+				<annotationApi.version>1.3.2</annotationApi.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>thrift-0.22.0</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<thrift.version>0.20.0</thrift.version>
+				<thrift.version>0.22.0</thrift.version>
 				<slf4j.version>2.0.13</slf4j.version>
 				<annotationApi.version>1.3.2</annotationApi.version>
 			</properties>
@@ -222,6 +218,11 @@
 				<groupId>org.apache.httpcomponents.client5</groupId>
 				<artifactId>httpclient5-fluent</artifactId>
 				<version>${httpclient5.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents.core5</groupId>
+				<artifactId>httpcore5</artifactId>
+				<version>${httpcore5.version}</version>
 			</dependency>
 			<!-- Jackson -->
 			<dependency>
