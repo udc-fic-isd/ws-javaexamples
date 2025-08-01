@@ -31,12 +31,12 @@
 
 		<!-- Package versions (except those defined in "profiles" section) -->
 		<commonsDbcp.version>2.13.0</commonsDbcp.version>
-		<junit.version>5.13.2</junit.version>
+		<junit.version>5.13.4</junit.version>
 		<servletApi.version>6.1.0</servletApi.version>
 		<httpclient.version>4.5.14</httpclient.version>
 		<httpclient5.version>5.5</httpclient5.version>
 		<httpcore5.version>5.3.4</httpcore5.version>
-		<jackson.version>2.19.1</jackson.version>
+		<jackson.version>2.19.2</jackson.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
