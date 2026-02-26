@@ -22,12 +22,13 @@ public class JsonToClientExceptionConversor {
             if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
                 throw new ParsingException("Unrecognized JSON (object expected)");
             } else {
-                String errorType = rootNode.get("errorType").textValue();
-                if (errorType.equals("InputValidation")) {
-					return toInputValidationException(rootNode);
-				} else {
-					throw new ParsingException("Unrecognized error type: " + errorType);
-				}
+                JsonNode errorTypeNode = rootNode.get("errorType");
+                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                if ("InputValidation".equals(errorType)) {
+                    return toInputValidationException(rootNode);
+                } else {
+                    throw new ParsingException("Unrecognized error type: " + errorType);
+                }
             }
         } catch (ParsingException e) {
             throw e;
@@ -41,26 +42,27 @@ public class JsonToClientExceptionConversor {
         return new InputValidationException(message);
     }
 
-	public static Exception fromNotFoundErrorCode(InputStream ex) throws ParsingException {
-		try {
-			ObjectMapper objectMapper = ObjectMapperFactory.instance();
-			JsonNode rootNode = objectMapper.readTree(ex);
-			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
-				throw new ParsingException("Unrecognized JSON (object expected)");
-			} else {
-				String errorType = rootNode.get("errorType").textValue();
-				if (errorType.equals("InstanceNotFound")) {
-					return toInstanceNotFoundException(rootNode);
-				} else {
-					throw new ParsingException("Unrecognized error type: " + errorType);
-				}
-			}
-		} catch (ParsingException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new ParsingException(e);
-		}
-	}
+    public static Exception fromNotFoundErrorCode(InputStream ex) throws ParsingException {
+        try {
+            ObjectMapper objectMapper = ObjectMapperFactory.instance();
+            JsonNode rootNode = objectMapper.readTree(ex);
+            if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
+                throw new ParsingException("Unrecognized JSON (object expected)");
+            } else {
+                JsonNode errorTypeNode = rootNode.get("errorType");
+                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                if ("InstanceNotFound".equals(errorType)) {
+                    return toInstanceNotFoundException(rootNode);
+                } else {
+                    throw new ParsingException("Unrecognized error type: " + errorType);
+                }
+            }
+        } catch (ParsingException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ParsingException(e);
+        }
+    }
 
     private static InstanceNotFoundException toInstanceNotFoundException(JsonNode rootNode) {
         String instanceId = rootNode.get("instanceId").textValue();
@@ -68,60 +70,63 @@ public class JsonToClientExceptionConversor {
         return new InstanceNotFoundException(instanceId, instanceType);
     }
 
-	public static Exception fromForbiddenErrorCode(InputStream ex) throws ParsingException {
-		try {
-			ObjectMapper objectMapper = ObjectMapperFactory.instance();
-			JsonNode rootNode = objectMapper.readTree(ex);
-			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
-				throw new ParsingException("Unrecognized JSON (object expected)");
-			} else {
-				String errorType = rootNode.get("errorType").textValue();
-				if (errorType.equals("MovieNotRemovable")) {
-					return toMovieNotRemovableException(rootNode);
-				} else {
-					throw new ParsingException("Unrecognized error type: " + errorType);
-				}
-			}
-		} catch (ParsingException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new ParsingException(e);
-		}
-	}
+    public static Exception fromForbiddenErrorCode(InputStream ex) throws ParsingException {
+        try {
+            ObjectMapper objectMapper = ObjectMapperFactory.instance();
+            JsonNode rootNode = objectMapper.readTree(ex);
+            if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
+                throw new ParsingException("Unrecognized JSON (object expected)");
+            } else {
+                JsonNode errorTypeNode = rootNode.get("errorType");
+                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                if ("MovieNotRemovable".equals(errorType)) {
+                    return toMovieNotRemovableException(rootNode);
+                } else {
+                    throw new ParsingException("Unrecognized error type: " + errorType);
+                }
+            }
+        } catch (ParsingException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ParsingException(e);
+        }
+    }
     private static ClientMovieNotRemovableException toMovieNotRemovableException(JsonNode rootNode) {
         Long movieId = rootNode.get("movieId").longValue();
         return new ClientMovieNotRemovableException(movieId);
     }
 
-	public static Exception fromGoneErrorCode(InputStream ex) throws ParsingException {
-		try {
-			ObjectMapper objectMapper = ObjectMapperFactory.instance();
-			JsonNode rootNode = objectMapper.readTree(ex);
-			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
-				throw new ParsingException("Unrecognized JSON (object expected)");
-			} else {
-				String errorType = rootNode.get("errorType").textValue();
-				if (errorType.equals("SaleExpiration")) {
-					return toSaleExpirationException(rootNode);
-				} else {
-					throw new ParsingException("Unrecognized error type: " + errorType);
-				}
-			}
-		} catch (ParsingException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new ParsingException(e);
-		}
-	}
-	private static ClientSaleExpirationException toSaleExpirationException(JsonNode rootNode) {
-		Long saleId = rootNode.get("saleId").longValue();
-		String expirationDateAsString = rootNode.get("expirationDate").textValue();
-		LocalDateTime expirationDate = null;
-		if (expirationDateAsString != null) {
-			expirationDate = LocalDateTime.parse(expirationDateAsString);
-		}
-		return new ClientSaleExpirationException(saleId, expirationDate);
-	}
+    public static Exception fromGoneErrorCode(InputStream ex) throws ParsingException {
+        try {
+            ObjectMapper objectMapper = ObjectMapperFactory.instance();
+            JsonNode rootNode = objectMapper.readTree(ex);
+            if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
+                throw new ParsingException("Unrecognized JSON (object expected)");
+            } else {
+                JsonNode errorTypeNode = rootNode.get("errorType");
+                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                if ("SaleExpiration".equals(errorType)) {
+                    return toSaleExpirationException(rootNode);
+                } else {
+                    throw new ParsingException("Unrecognized error type: " + errorType);
+                }
+            }
+        } catch (ParsingException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ParsingException(e);
+        }
+    }
+
+    private static ClientSaleExpirationException toSaleExpirationException(JsonNode rootNode) {
+        Long saleId = rootNode.get("saleId").longValue();
+        String expirationDateAsString = rootNode.get("expirationDate").textValue();
+        LocalDateTime expirationDate = null;
+        if (expirationDateAsString != null) {
+            expirationDate = LocalDateTime.parse(expirationDateAsString);
+        }
+        return new ClientSaleExpirationException(saleId, expirationDate);
+    }
 
 
 }
