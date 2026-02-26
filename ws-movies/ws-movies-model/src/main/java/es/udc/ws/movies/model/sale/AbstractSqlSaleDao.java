@@ -48,7 +48,9 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             float price = resultSet.getFloat(i++);
             String movieUrl = resultSet.getString(i++);
             Timestamp saleDateAsTimestamp = resultSet.getTimestamp(i++);
-            LocalDateTime saleDate = saleDateAsTimestamp.toLocalDateTime();
+            LocalDateTime saleDate = saleDateAsTimestamp != null
+                    ? saleDateAsTimestamp.toLocalDateTime()
+                    :null;
 
             /* Return sale. */
             return new Sale(saleId, movieId, userId, expirationDate,
@@ -116,7 +118,7 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             int updatedRows = preparedStatement.executeUpdate();
 
             if (updatedRows == 0) {
-                throw new InstanceNotFoundException(sale.getMovieId(),
+                throw new InstanceNotFoundException(sale.getSaleId(),
                         Sale.class.getName());
             }
 

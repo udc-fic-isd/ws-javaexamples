@@ -50,7 +50,9 @@ public abstract class AbstractSqlMovieDao implements SqlMovieDao {
             String description = resultSet.getString(i++);
             float price = resultSet.getFloat(i++);
             Timestamp creationDateAsTimestamp = resultSet.getTimestamp(i++);
-            LocalDateTime creationDate = creationDateAsTimestamp.toLocalDateTime();
+            LocalDateTime creationDate = creationDateAsTimestamp != null
+                    ? creationDateAsTimestamp.toLocalDateTime()
+                    : null;
 
             /* Return movie. */
             return new Movie(movieId, title, runtime, description, price,
@@ -104,7 +106,9 @@ public abstract class AbstractSqlMovieDao implements SqlMovieDao {
                 String description = resultSet.getString(i++);
                 float price = resultSet.getFloat(i++);
                 Timestamp creationDateAsTimestamp = resultSet.getTimestamp(i++);
-                LocalDateTime creationDate = creationDateAsTimestamp.toLocalDateTime();
+                LocalDateTime creationDate = creationDateAsTimestamp != null
+                        ? creationDateAsTimestamp.toLocalDateTime()
+                        : null;
 
                 movies.add(new Movie(movieId, title, runtime, description,
                         price, creationDate));

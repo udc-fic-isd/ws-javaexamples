@@ -26,7 +26,8 @@ public class Jdbc3CcSqlMovieDao extends AbstractSqlMovieDao {
             preparedStatement.setShort(i++, movie.getRuntime());
             preparedStatement.setString(i++, movie.getDescription());
             preparedStatement.setFloat(i++, movie.getPrice());
-            preparedStatement.setTimestamp(i++, Timestamp.valueOf(movie.getCreationDate()));
+            Timestamp creationDate = movie.getCreationDate() != null ? Timestamp.valueOf(movie.getCreationDate()) : null;
+            preparedStatement.setTimestamp(i++, creationDate);
 
             /* Execute query. */
             preparedStatement.executeUpdate();

@@ -25,12 +25,13 @@ public class Jdbc3CcSqlSaleDao extends AbstractSqlSaleDao {
             int i = 1;
             preparedStatement.setLong(i++, sale.getMovieId());
             preparedStatement.setString(i++, sale.getUserId());
-			Timestamp date = sale.getExpirationDate() != null ? Timestamp.valueOf(sale.getExpirationDate()) : null;
-            preparedStatement.setTimestamp(i++, date);
+			Timestamp expirationDate = sale.getExpirationDate() != null ? Timestamp.valueOf(sale.getExpirationDate()) : null;
+            preparedStatement.setTimestamp(i++, expirationDate);
             preparedStatement.setString(i++, sale.getCreditCardNumber());
             preparedStatement.setFloat(i++, sale.getPrice());
             preparedStatement.setString(i++, sale.getMovieUrl());
-            preparedStatement.setTimestamp(i++, Timestamp.valueOf(sale.getSaleDate()));
+            Timestamp saleDate = sale.getSaleDate() != null ? Timestamp.valueOf(sale.getSaleDate()) : null;
+            preparedStatement.setTimestamp(i++, saleDate);
 
             /* Execute query. */
             preparedStatement.executeUpdate();
