@@ -34,8 +34,8 @@ public class MovieServiceImpl implements MovieService {
 	 */
 
 	private final DataSource dataSource;
-	private SqlMovieDao movieDao = null;
-	private SqlSaleDao saleDao = null;
+	private SqlMovieDao movieDao;
+	private SqlSaleDao saleDao;
 
 	public MovieServiceImpl() {
 		dataSource = DataSourceLocator.getDataSource(MOVIE_DATA_SOURCE);
@@ -231,11 +231,10 @@ public class MovieServiceImpl implements MovieService {
 
 			Sale sale = saleDao.find(connection, saleId);
 			LocalDateTime now = LocalDateTime.now();
-			if (sale.getExpirationDate().isAfter(now)) {
-				return sale;
-			} else {
+			if (!sale.getExpirationDate().isAfter(now)) {
 				throw new SaleExpirationException(saleId, sale.getExpirationDate());
 			}
+			return sale;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
