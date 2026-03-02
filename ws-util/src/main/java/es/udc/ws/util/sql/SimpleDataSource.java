@@ -1,6 +1,5 @@
 package es.udc.ws.util.sql;
 
-import es.udc.ws.util.configuration.ConfigurationParametersManager;
 import es.udc.ws.util.configuration.PropertiesUtil;
 
 import java.io.PrintWriter;

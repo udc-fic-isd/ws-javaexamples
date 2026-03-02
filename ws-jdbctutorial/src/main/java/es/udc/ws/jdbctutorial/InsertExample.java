@@ -8,7 +8,7 @@ public final class InsertExample {
 
     public static void main (String[] args) {
 
-    	try (Connection connection = ConnectionManager.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
 
             /* Create data for some movies. */
             String[] movieIdentifiers = new String[] {"movie-1", "movie-2",
@@ -40,14 +40,14 @@ public final class InsertExample {
                         ": problems when inserting !!!!");
                 }
 
-            }
+             }
 
-            System.out.println("Movies inserted");
+             System.out.println("Movies inserted");
 
-    	} catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
+        } catch (Exception e) {
+             e.printStackTrace(System.err);
+         }
 
-    }
+     }
 
-}
+ }

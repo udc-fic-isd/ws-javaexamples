@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
-import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
 import es.udc.ws.movies.restservice.dto.RestMovieDto;
 import es.udc.ws.movies.model.movie.Movie;
 import es.udc.ws.movies.model.movieservice.MovieServiceFactory;
@@ -75,10 +74,10 @@ public class MoviesServlet extends RestHttpServletTemplate {
 		ServletUtils.writeServiceResponse(resp, HttpServletResponse.SC_NO_CONTENT, null, null);
 	}
 
-	@Override
-	protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,
-			InputValidationException {
-		ServletUtils.checkEmptyPath(req);
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,
+            InputValidationException {
+        ServletUtils.checkEmptyPath(req);
 		String keyWords = req.getParameter("keywords");
 
 		List<Movie> movies = MovieServiceFactory.getService().findMovies(keyWords);

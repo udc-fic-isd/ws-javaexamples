@@ -8,27 +8,27 @@ public final class SelectExample {
 
     public static void main (String[] args) {
 
-    	try (Connection connection = ConnectionManager.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
 
-            /* Create "preparedStatement". */
-            String queryString = "SELECT movieId, title, runtime FROM TutMovie";
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+             /* Create "preparedStatement". */
+             String queryString = "SELECT movieId, title, runtime FROM TutMovie";
+             PreparedStatement preparedStatement = connection.prepareStatement(queryString);
 
-            /* Execute query. */
-            ResultSet resultSet = preparedStatement.executeQuery();
+             /* Execute query. */
+             ResultSet resultSet = preparedStatement.executeQuery();
 
-            /* Iterate over matched rows. */
-            while (resultSet.next()) {
-                String movieIdentifier = resultSet.getString(1);
-                String title = resultSet.getString(2);
-                short runtime = resultSet.getShort(3);
-                System.out.println("movieIdentifier = " + movieIdentifier +
-                    " | title =  " + title + " | runtime =  " + runtime);
-            }
+             /* Iterate over matched rows. */
+             while (resultSet.next()) {
+                 String movieIdentifier = resultSet.getString(1);
+                 String title = resultSet.getString(2);
+                 short runtime = resultSet.getShort(3);
+                 System.out.println("movieIdentifier = " + movieIdentifier +
+                     " | title =  " + title + " | runtime =  " + runtime);
+             }
 
-    	} catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
+        } catch (Exception e) {
+             e.printStackTrace(System.err);
+         }
 
     }
 

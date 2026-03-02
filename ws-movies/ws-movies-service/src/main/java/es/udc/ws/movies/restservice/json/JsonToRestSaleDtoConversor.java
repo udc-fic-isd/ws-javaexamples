@@ -7,18 +7,18 @@ import es.udc.ws.movies.restservice.dto.RestSaleDto;
 
 public class JsonToRestSaleDtoConversor {
 
-	public static ObjectNode toObjectNode(RestSaleDto sale) {
+    public static ObjectNode toObjectNode(RestSaleDto sale) {
 
-		ObjectNode saleNode = JsonNodeFactory.instance.objectNode();
+        ObjectNode saleNode = JsonNodeFactory.instance.objectNode();
 
         if (sale.getSaleId() != null) {
-        	saleNode.put("saleId", sale.getSaleId());
+            saleNode.put("saleId", sale.getSaleId());
         }
         saleNode.put("movieId", sale.getMovieId()).
-        	put("movieUrl", sale.getMovieUrl()).
-        	put("expirationDate", sale.getExpirationDate());
-        
+            put("movieUrl", sale.getMovieUrl()).
+            put("expirationDate", sale.getExpirationDate());
+
         return saleNode;
     }
 
-}
+ }

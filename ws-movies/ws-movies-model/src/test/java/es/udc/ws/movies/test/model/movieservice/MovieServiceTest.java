@@ -36,16 +36,16 @@ import es.udc.ws.util.sql.SimpleDataSource;
 
 public class MovieServiceTest {
 
-	private final long NON_EXISTENT_MOVIE_ID = -1;
-	private final long NON_EXISTENT_SALE_ID = -1;
-	private final String USER_ID = "ws-user";
+    private final long NON_EXISTENT_MOVIE_ID = -1;
+    private final long NON_EXISTENT_SALE_ID = -1;
+    private final String USER_ID = "ws-user";
 
-	private final String VALID_CREDIT_CARD_NUMBER = "1234567890123456";
-	private final String INVALID_CREDIT_CARD_NUMBER = "";
+    private final String VALID_CREDIT_CARD_NUMBER = "1234567890123456";
+    private final String INVALID_CREDIT_CARD_NUMBER = "";
 
-	private static MovieService movieService = null;
+    private static MovieService movieService = null;
 
-	private static SqlSaleDao saleDao = null;
+    private static SqlSaleDao saleDao = null;
 
 	@BeforeAll
 	public static void init() {

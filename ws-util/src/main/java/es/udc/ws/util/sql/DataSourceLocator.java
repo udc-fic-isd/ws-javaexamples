@@ -21,8 +21,8 @@ public class DataSourceLocator {
     public static final String JNDI_PREFIX = "java:comp/env/jdbc/";
 
     private static Map<String,DataSource> dataSources = 
-    	Collections.synchronizedMap(new HashMap<String,DataSource>());
-    
+        Collections.synchronizedMap(new HashMap<String,DataSource>());
+
     private DataSourceLocator() {}
     
     /**

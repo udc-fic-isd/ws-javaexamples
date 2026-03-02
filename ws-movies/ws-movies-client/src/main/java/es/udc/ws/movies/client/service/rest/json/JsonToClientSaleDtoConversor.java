@@ -14,31 +14,31 @@ import es.udc.ws.util.json.exceptions.ParsingException;
 
 public class JsonToClientSaleDtoConversor {
 
-	public static ClientSaleDto toClientSaleDto(InputStream jsonSale) throws ParsingException {
-		try {
+    public static ClientSaleDto toClientSaleDto(InputStream jsonSale) throws ParsingException {
+        try {
 
-			ObjectMapper objectMapper = ObjectMapperFactory.instance();
-			JsonNode rootNode = objectMapper.readTree(jsonSale);
-			if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
-				throw new ParsingException("Unrecognized JSON (object expected)");
-			} else {
-				ObjectNode movieObject = (ObjectNode) rootNode;
+            ObjectMapper objectMapper = ObjectMapperFactory.instance();
+            JsonNode rootNode = objectMapper.readTree(jsonSale);
+            if (rootNode.getNodeType() != JsonNodeType.OBJECT) {
+                throw new ParsingException("Unrecognized JSON (object expected)");
+            } else {
+                ObjectNode movieObject = (ObjectNode) rootNode;
 
-				JsonNode saleIdNode = movieObject.get("saleId");
-				Long saleId = (saleIdNode != null) ? saleIdNode.longValue() : null;
+                JsonNode saleIdNode = movieObject.get("saleId");
+                Long saleId = (saleIdNode != null) ? saleIdNode.longValue() : null;
 
-				Long movieId = movieObject.get("movieId").longValue();
-				String movieUrl = movieObject.get("movieUrl").textValue().trim();
-				String expirationDate = movieObject.get("expirationDate").textValue().trim();
-	
-				return new ClientSaleDto(saleId, movieId, LocalDateTime.parse(expirationDate), movieUrl);
+                Long movieId = movieObject.get("movieId").longValue();
+                String movieUrl = movieObject.get("movieUrl").textValue().trim();
+                String expirationDate = movieObject.get("expirationDate").textValue().trim();
 
-			}
-		} catch (ParsingException ex) {
-			throw ex;
-		} catch (Exception e) {
-			throw new ParsingException(e);
-		}
-	}
+                return new ClientSaleDto(saleId, movieId, LocalDateTime.parse(expirationDate), movieUrl);
+
+            }
+        } catch (ParsingException ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw new ParsingException(e);
+        }
+    }
 
 }

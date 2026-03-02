@@ -19,14 +19,14 @@ public class Sale {
         this.movieId = movieId;
         this.userId = userId;
         this.creditCardNumber = creditCardNumber;
-		this.expirationDate = (expirationDate != null) ? expirationDate.withNano(0) : null;
+        this.expirationDate = (expirationDate != null) ? expirationDate.withNano(0) : null;
         this.price = price;
         this.movieUrl = movieUrl;
-		this.saleDate = (saleDate != null) ? saleDate.withNano(0) : null;
+        this.saleDate = (saleDate != null) ? saleDate.withNano(0) : null;
     }
 
     public Sale(Long saleId, Long movieId, String userId,
-    		LocalDateTime expirationDate, String creditCardNumber, float price,
+            LocalDateTime expirationDate, String creditCardNumber, float price,
             String movieUrl, LocalDateTime saleDate) {
         this(movieId, userId, expirationDate, creditCardNumber, price,
                 movieUrl, saleDate);

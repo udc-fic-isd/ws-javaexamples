@@ -108,7 +108,7 @@ public abstract class AbstractSqlSaleDao implements SqlSaleDao {
             int i = 1;
             preparedStatement.setLong(i++, sale.getMovieId());
             preparedStatement.setString(i++, sale.getUserId());
-			Timestamp date = sale.getExpirationDate() != null ? Timestamp.valueOf(sale.getExpirationDate()) : null;
+            Timestamp date = sale.getExpirationDate() != null ? Timestamp.valueOf(sale.getExpirationDate()) : null;
             preparedStatement.setTimestamp(i++, date);
             preparedStatement.setString(i++, sale.getCreditCardNumber());
             preparedStatement.setFloat(i++, sale.getPrice());
