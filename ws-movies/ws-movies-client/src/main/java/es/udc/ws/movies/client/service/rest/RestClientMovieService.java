@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class RestClientMovieService implements ClientMovieService {
@@ -37,7 +38,7 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             ClassicHttpResponse response = (ClassicHttpResponse) Request.post(getEndpointAddress() + "movies").
-                    bodyStream(toInputStream(movie), ContentType.create("application/json")).
+                    bodyStream(toInputStream(movie), ContentType.APPLICATION_JSON).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_CREATED, response);
@@ -60,7 +61,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             ClassicHttpResponse response = (ClassicHttpResponse) Request.put(getEndpointAddress() +
                             "movies/" + movie.getMovieId()).
-                    bodyStream(toInputStream(movie), ContentType.create("application/json")).
+                    bodyStream(toInputStream(movie), ContentType.APPLICATION_JSON).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_NO_CONTENT, response);
@@ -98,7 +99,7 @@ public class RestClientMovieService implements ClientMovieService {
         try {
 
             ClassicHttpResponse response = (ClassicHttpResponse) Request.get(getEndpointAddress() + "movies?keywords="
-                            + URLEncoder.encode(keywords, "UTF-8")).
+                            + URLEncoder.encode(keywords, StandardCharsets.UTF_8)).
                     execute().returnResponse();
 
             validateStatusCode(HttpStatus.SC_OK, response);
