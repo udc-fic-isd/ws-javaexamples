@@ -1,6 +1,6 @@
 -- ----------------------------------------------------------------------------
 -- Movies Model
--------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------
 -- Drop tables. NOTE: before dropping a table (when re-executing the script),
@@ -8,8 +8,8 @@
 -- must be dropped first (otherwise, the corresponding checks on those tables
 -- could not be done).
 
-DROP TABLE Sale;
-DROP TABLE Movie;
+DROP TABLE IF EXISTS Sale;
+DROP TABLE IF EXISTS Movie;
 
 -- --------------------------------- Movie ------------------------------------
 CREATE TABLE Movie ( movieId BIGINT NOT NULL AUTO_INCREMENT,
