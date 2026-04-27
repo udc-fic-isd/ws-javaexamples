@@ -5,12 +5,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.JsonNodeFactory;
+import tools.jackson.databind.node.JsonNodeType;
+import tools.jackson.databind.node.ObjectNode;
 
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.util.json.ObjectMapperFactory;
@@ -81,8 +81,8 @@ public class JsonToClientMovieDtoConversor {
             JsonNode movieIdNode = movieObject.get("movieId");
             Long movieId = (movieIdNode != null) ? movieIdNode.longValue() : null;
 
-            String title = movieObject.get("title").textValue().trim();
-            String description = movieObject.get("description").textValue().trim();
+            String title = movieObject.get("title").asString().trim();
+            String description = movieObject.get("description").asString().trim();
             short runtime = movieObject.get("runtime").shortValue();
             float price = movieObject.get("price").floatValue();
 

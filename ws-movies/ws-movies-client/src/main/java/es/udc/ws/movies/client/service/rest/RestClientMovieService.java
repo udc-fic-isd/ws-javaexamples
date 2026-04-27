@@ -1,7 +1,6 @@
 package es.udc.ws.movies.client.service.rest;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import es.udc.ws.movies.client.service.ClientMovieService;
 import es.udc.ws.movies.client.service.dto.ClientMovieDto;
 import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
@@ -177,7 +176,7 @@ public class RestClientMovieService implements ClientMovieService {
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectMapper objectMapper = ObjectMapperFactory.instance();
-            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(outputStream,
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputStream,
                     JsonToClientMovieDtoConversor.toObjectNode(movie));
 
             return new ByteArrayInputStream(outputStream.toByteArray());

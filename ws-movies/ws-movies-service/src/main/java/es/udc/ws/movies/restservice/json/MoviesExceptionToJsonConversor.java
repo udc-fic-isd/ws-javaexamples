@@ -1,11 +1,9 @@
 package es.udc.ws.movies.restservice.json;
 
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.node.JsonNodeFactory;
+import tools.jackson.databind.node.ObjectNode;
 import es.udc.ws.movies.model.movieservice.exceptions.MovieNotRemovableException;
 import es.udc.ws.movies.model.movieservice.exceptions.SaleExpirationException;
-import es.udc.ws.util.exceptions.InputValidationException;
-import es.udc.ws.util.exceptions.InstanceNotFoundException;
 
 public class MoviesExceptionToJsonConversor {
 

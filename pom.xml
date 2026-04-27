@@ -30,13 +30,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Package versions (except those defined in "profiles" section) -->
-		<commonsDbcp.version>2.13.0</commonsDbcp.version>
-		<junit.version>5.13.4</junit.version>
+		<commonsDbcp.version>2.14.0</commonsDbcp.version>
+		<junit.version>6.0.3</junit.version>
 		<servletApi.version>6.1.0</servletApi.version>
 		<httpclient.version>4.5.14</httpclient.version>
-		<httpclient5.version>5.5</httpclient5.version>
-		<httpcore5.version>5.3.4</httpcore5.version>
-		<jackson.version>2.19.2</jackson.version>
+		<httpclient5.version>5.6.1</httpclient5.version>
+		<httpcore5.version>5.4.2</httpcore5.version>
+		<jackson.version>3.1.2</jackson.version>
 
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
@@ -224,10 +224,10 @@
 				<artifactId>httpcore5</artifactId>
 				<version>${httpcore5.version}</version>
 			</dependency>
-			<!-- Jackson -->
+			<!-- Jackson 3 -->
 			<dependency>
-    			<groupId>com.fasterxml.jackson.core</groupId>
-			    <artifactId>jackson-databind</artifactId>
+				<groupId>tools.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
     			<version>${jackson.version}</version>
 			</dependency>
 			<!-- Thrift -->

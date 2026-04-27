@@ -6,16 +6,13 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 import es.udc.ws.util.exceptions.InputValidationException;
 import es.udc.ws.util.json.ObjectMapperFactory;
 
 public class ServletUtils {
-
-    public static final int DEFAULT_BUFFER_SIZE = 1024 * 8;
 
     public static void writeServiceResponse(HttpServletResponse response, int responseCode, JsonNode rootNode,
                                             Map<String, String> headers) throws IOException {
@@ -24,7 +21,7 @@ public class ServletUtils {
 
         if (rootNode != null) {
             ObjectMapper objectMapper = ObjectMapperFactory.instance();
-            objectMapper.writer(new DefaultPrettyPrinter()).writeValue(response.getOutputStream(), rootNode);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(response.getOutputStream(), rootNode);
         }
     }
 

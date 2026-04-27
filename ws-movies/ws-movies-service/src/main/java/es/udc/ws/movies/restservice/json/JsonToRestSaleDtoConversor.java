@@ -1,7 +1,7 @@
 package es.udc.ws.movies.restservice.json;
 
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.node.JsonNodeFactory;
+import tools.jackson.databind.node.ObjectNode;
 
 import es.udc.ws.movies.restservice.dto.RestSaleDto;
 

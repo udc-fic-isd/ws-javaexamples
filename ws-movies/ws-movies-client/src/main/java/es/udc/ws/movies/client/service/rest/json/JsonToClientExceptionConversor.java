@@ -1,8 +1,8 @@
 package es.udc.ws.movies.client.service.rest.json;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.JsonNodeType;
 import es.udc.ws.movies.client.service.exceptions.ClientMovieNotRemovableException;
 import es.udc.ws.movies.client.service.exceptions.ClientSaleExpirationException;
 import es.udc.ws.util.exceptions.InputValidationException;
@@ -23,7 +23,7 @@ public class JsonToClientExceptionConversor {
                 throw new ParsingException("Unrecognized JSON (object expected)");
             } else {
                 JsonNode errorTypeNode = rootNode.get("errorType");
-                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                String errorType = errorTypeNode != null ? errorTypeNode.asString() : null;
                 if ("InputValidation".equals(errorType)) {
                     return toInputValidationException(rootNode);
                 } else {
@@ -38,7 +38,7 @@ public class JsonToClientExceptionConversor {
     }
 
     private static InputValidationException toInputValidationException(JsonNode rootNode) {
-        String message = rootNode.get("message").textValue();
+        String message = rootNode.get("message").asString();
         return new InputValidationException(message);
     }
 
@@ -50,7 +50,7 @@ public class JsonToClientExceptionConversor {
                 throw new ParsingException("Unrecognized JSON (object expected)");
             } else {
                 JsonNode errorTypeNode = rootNode.get("errorType");
-                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                String errorType = errorTypeNode != null ? errorTypeNode.asString() : null;
                 if ("InstanceNotFound".equals(errorType)) {
                     return toInstanceNotFoundException(rootNode);
                 } else {
@@ -65,8 +65,8 @@ public class JsonToClientExceptionConversor {
     }
 
     private static InstanceNotFoundException toInstanceNotFoundException(JsonNode rootNode) {
-        String instanceId = rootNode.get("instanceId").textValue();
-        String instanceType = rootNode.get("instanceType").textValue();
+        String instanceId = rootNode.get("instanceId").asString();
+        String instanceType = rootNode.get("instanceType").asString();
         return new InstanceNotFoundException(instanceId, instanceType);
     }
 
@@ -78,7 +78,7 @@ public class JsonToClientExceptionConversor {
                 throw new ParsingException("Unrecognized JSON (object expected)");
             } else {
                 JsonNode errorTypeNode = rootNode.get("errorType");
-                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                String errorType = errorTypeNode != null ? errorTypeNode.asString() : null;
                 if ("MovieNotRemovable".equals(errorType)) {
                     return toMovieNotRemovableException(rootNode);
                 } else {
@@ -104,7 +104,7 @@ public class JsonToClientExceptionConversor {
                 throw new ParsingException("Unrecognized JSON (object expected)");
             } else {
                 JsonNode errorTypeNode = rootNode.get("errorType");
-                String errorType = errorTypeNode != null ? errorTypeNode.textValue() : null;
+                String errorType = errorTypeNode != null ? errorTypeNode.asString() : null;
                 if ("SaleExpiration".equals(errorType)) {
                     return toSaleExpirationException(rootNode);
                 } else {
@@ -120,7 +120,7 @@ public class JsonToClientExceptionConversor {
 
     private static ClientSaleExpirationException toSaleExpirationException(JsonNode rootNode) {
         Long saleId = rootNode.get("saleId").longValue();
-        String expirationDateAsString = rootNode.get("expirationDate").textValue();
+        String expirationDateAsString = rootNode.get("expirationDate").asString();
         LocalDateTime expirationDate = null;
         if (expirationDateAsString != null) {
             expirationDate = LocalDateTime.parse(expirationDateAsString);

@@ -1,9 +1,9 @@
 package es.udc.ws.util.json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 public class ObjectMapperFactory {
-    private static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
     
     private ObjectMapperFactory() { } 
     

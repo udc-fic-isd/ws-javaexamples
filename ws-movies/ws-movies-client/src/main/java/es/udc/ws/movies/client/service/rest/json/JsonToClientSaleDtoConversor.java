@@ -3,10 +3,10 @@ package es.udc.ws.movies.client.service.rest.json;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.JsonNodeType;
+import tools.jackson.databind.node.ObjectNode;
 
 import es.udc.ws.movies.client.service.dto.ClientSaleDto;
 import es.udc.ws.util.json.ObjectMapperFactory;
@@ -28,8 +28,8 @@ public class JsonToClientSaleDtoConversor {
                 Long saleId = (saleIdNode != null) ? saleIdNode.longValue() : null;
 
                 Long movieId = movieObject.get("movieId").longValue();
-                String movieUrl = movieObject.get("movieUrl").textValue().trim();
-                String expirationDate = movieObject.get("expirationDate").textValue().trim();
+                String movieUrl = movieObject.get("movieUrl").asString().trim();
+                String expirationDate = movieObject.get("expirationDate").asString().trim();
 
                 return new ClientSaleDto(saleId, movieId, LocalDateTime.parse(expirationDate), movieUrl);
 
