@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_12_0.dtd">
 
-<Configure class="org.eclipse.jetty.webapp.WebAppContext">
-
+<Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext">
     <New id="WS-JavaExamplesDS" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg>${dataSource.jndiName}</Arg>
         <Arg>
