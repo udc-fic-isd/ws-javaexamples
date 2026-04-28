@@ -41,7 +41,7 @@
 		<!-- JDBC driver properties -->
 		<jdbcDriver.groupId>com.mysql</jdbcDriver.groupId>
 		<jdbcDriver.artifactId>mysql-connector-j</jdbcDriver.artifactId>
-		<jdbcDriver.version>8.4.0</jdbcDriver.version>
+		<jdbcDriver.version>9.7.0</jdbcDriver.version>
 		<jdbcDriver.className>com.mysql.cj.jdbc.Driver</jdbcDriver.className>
 
 		<!-- Data source properties -->
@@ -292,9 +292,9 @@
 				<configuration>
 					<verbose>true</verbose>
                     <!-- Source & target are not necessary, but intelliJ depends on it to set the Java compiler settings  -->
-                    <source>21</source>
-                    <target>21</target>
-					<release>21</release>
+                    <source>25</source>
+                    <target>25</target>
+					<release>25</release>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
