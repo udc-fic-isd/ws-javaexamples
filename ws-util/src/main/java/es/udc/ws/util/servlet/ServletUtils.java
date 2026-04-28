@@ -59,31 +59,29 @@ public class ServletUtils {
 
     public static Long getMandatoryParameterAsLong(HttpServletRequest req, String paramName)
             throws InputValidationException {
-        String paramValue;
-        Long paramValueAsLong = null;
-        if ((paramValue = getMandatoryParameter(req, paramName)) != null) {
-            try {
-                paramValueAsLong = Long.valueOf(paramValue);
-            } catch (NumberFormatException ex) {
-                throw new InputValidationException("Invalid Request: " + "parameter '" + paramName + "' is invalid '" +
-                        paramValue + "'");
-            }
+        Long paramValueAsLong;
+        String paramValue = getMandatoryParameter(req, paramName);
+        try {
+            paramValueAsLong = Long.valueOf(paramValue);
+        } catch (NumberFormatException ex) {
+            throw new InputValidationException("Invalid Request: " + "parameter '" + paramName + "' is invalid '" +
+                    paramValue + "'");
         }
         return paramValueAsLong;
     }
 
     public static void checkEmptyPath(HttpServletRequest req) throws InputValidationException {
         String path = ServletUtils.normalizePath(req.getPathInfo());
-        if (path != null && path.length() > 0) {
+        if (path != null && !path.isEmpty()) {
             throw new InputValidationException("Invalid Request: " + "invalid path " + path);
         }
     }
 
-    public static Long getIdFromPath(HttpServletRequest req, String resourceName) throws IOException,
+    public static Long getIdFromPath(HttpServletRequest req, String resourceName) throws
             InputValidationException {
-        Long id = null;
+        Long id;
         String path = ServletUtils.normalizePath(req.getPathInfo());
-        if (path == null || path.length() == 0) {
+        if (path == null || path.isEmpty()) {
             throw new InputValidationException("Invalid Request: " + "invalid " + resourceName + " id");
         }
         String idAsString = path.substring(1);

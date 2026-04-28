@@ -5,7 +5,6 @@ import es.udc.ws.util.exceptions.InstanceNotFoundException;
 import es.udc.ws.util.json.ExceptionToJsonConversor;
 import es.udc.ws.util.json.exceptions.ParsingException;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,7 +57,7 @@ public class RestHttpServletTemplate extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             processPut(req, resp);
         } catch (InstanceNotFoundException ex) {
