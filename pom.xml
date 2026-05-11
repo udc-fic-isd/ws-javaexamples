@@ -382,8 +382,6 @@
 							<url>${testDataSource.url}</url>
 							<username>${testDataSource.user}</username>
 							<password>${testDataSource.password}</password>
-							<autocommit>true</autocommit>
-							<onError>continue</onError>
 							<fileset>
 								<basedir>${basedir}</basedir>
 								<includes>
